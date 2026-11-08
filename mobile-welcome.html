@@ -596,19 +596,21 @@
           }
 
           const slotProposal = window.ArboristAI ? window.ArboristAI.detectSlotProposal(aiReply) : null;
+          const cleanText = window.ArboristAI ? window.ArboristAI.cleanReply(aiReply) : aiReply;
           const slotCardHtml = slotProposal ? window.ArboristAI.renderSlotActionCard(slotProposal) : '';
 
-          const aiTurn = document.createElement('div');
-          aiTurn.className = 'flex items-start gap-2.5 w-full pr-4 prompt-pop-in';
-          aiTurn.innerHTML = `
-            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs">
-              <span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">eco</span>
-            </div>
-            <div class="flex flex-col items-start gap-2 max-w-[88%] w-full">
-              <div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex flex-col gap-2">
-                <p>${escapeHtml(aiReply)}</p>
+          const actionLinksHtml = slotProposal ? `
+              <div class="flex flex-wrap gap-1.5 pt-0.5">
+                <a href="tel:5550192834" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all">
+                  <span class="material-symbols-outlined text-[16px] text-primary">phone_in_talk</span>
+                  <span>(555) 019-2834</span>
+                </a>
+                <button onclick="document.getElementById('m-chat-camera-input').click()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all" type="button">
+                  <span class="material-symbols-outlined text-[16px] text-primary">photo_camera</span>
+                  <span>Share photo</span>
+                </button>
               </div>
-              ${slotCardHtml}
+          ` : `
               <div class="flex flex-wrap gap-1.5 pt-0.5">
                 <button onclick="window.smoothNavigateTo('booking.html')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed/60 hover:bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-[12px] shadow-xs active:scale-95 transition-all" type="button">
                   <span class="material-symbols-outlined text-[16px] text-tertiary">event_available</span>
@@ -623,7 +625,20 @@
                   <span>Share photo</span>
                 </button>
               </div>
-              <span class="font-label-sm text-[10px] text-secondary pl-1">Aoife · Tree Care Coordinator</span>
+          `;
+
+          const aiTurn = document.createElement('div');
+          aiTurn.className = 'flex items-start gap-2.5 w-full pr-4 prompt-pop-in';
+          aiTurn.innerHTML = `
+            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs">
+              <span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+            </div>
+            <div class="flex flex-col items-start gap-2 max-w-[88%] w-full">
+              <div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex flex-col gap-2">
+                <p>${escapeHtml(cleanText)}</p>
+              </div>
+              ${slotCardHtml}
+              ${actionLinksHtml}
             </div>
           `;
           messagesBox.appendChild(aiTurn);

@@ -3760,11 +3760,13 @@
         }
 
         const slotProposal = window.ArboristAI ? window.ArboristAI.detectSlotProposal(aiReply) : null;
+        const cleanText = window.ArboristAI ? window.ArboristAI.cleanReply(aiReply) : aiReply;
         const slotCardHtml = slotProposal ? window.ArboristAI.renderSlotActionCard(slotProposal) : '';
+        const actionLinksHtml = slotProposal ? '' : '<div class="flex flex-wrap gap-1.5 pt-0.5"><button onclick="openBookingModal();" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed/60 hover:bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-[12px] shadow-xs active:scale-95 transition-all cursor-pointer" type="button"><span class="material-symbols-outlined text-[16px] text-tertiary">event_available</span><span>Book assessment</span></button><a href="tel:5550192834" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all"><span class="material-symbols-outlined text-[16px] text-primary">phone_in_talk</span><span>(555) 019-2834</span></a></div>';
 
         const aiTurn = document.createElement('div');
         aiTurn.className = 'flex items-start gap-2.5 w-full pr-4 ' + (isFirstTime ? 'first-prompt-creamy' : 'normal-msg-in');
-        aiTurn.innerHTML = '<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs"><span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: \'FILL\' 1;">eco</span></div><div class="flex flex-col items-start gap-2 max-w-[88%] w-full"><div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex flex-col gap-2"><p>' + escapeHtml(aiReply) + '</p></div>' + slotCardHtml + '<div class="flex flex-wrap gap-1.5 pt-0.5"><button onclick="openBookingModal();" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed/60 hover:bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-[12px] shadow-xs active:scale-95 transition-all cursor-pointer" type="button"><span class="material-symbols-outlined text-[16px] text-tertiary">event_available</span><span>Book assessment</span></button><a href="tel:5550192834" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all"><span class="material-symbols-outlined text-[16px] text-primary">phone_in_talk</span><span>(555) 019-2834</span></a></div><span class="font-label-sm text-[10px] text-secondary pl-1">Aoife · Tree Care Coordinator</span></div>';
+        aiTurn.innerHTML = '<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs"><span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: \'FILL\' 1;">eco</span></div><div class="flex flex-col items-start gap-2 max-w-[88%] w-full"><div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex flex-col gap-2"><p>' + escapeHtml(cleanText) + '</p></div>' + slotCardHtml + actionLinksHtml + '<span class="font-label-sm text-[10px] text-secondary pl-1">Aoife · Tree Care Coordinator</span></div>';
         mMessagesBox.appendChild(aiTurn);
         if (mChatStage) {
           mChatStage.scrollTo({ top: mChatStage.scrollHeight, behavior: 'smooth' });
@@ -3918,11 +3920,13 @@
         if (thinkingTurn && thinkingTurn.parentNode) thinkingTurn.remove();
 
         const slotProposal = window.ArboristAI ? window.ArboristAI.detectSlotProposal(aiReply) : null;
+        const cleanText = window.ArboristAI ? window.ArboristAI.cleanReply(aiReply) : aiReply;
         const slotCardHtml = slotProposal ? window.ArboristAI.renderSlotActionCard(slotProposal) : '';
+        const actionLinksHtml = slotProposal ? '' : '<div class="flex items-center gap-2 pt-0.5"><button onclick="openBookingModal();" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-tertiary-fixed/70 hover:bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-xs font-semibold shadow-xs transition-all active:scale-95 cursor-pointer"><span class="material-symbols-outlined text-[16px] text-tertiary">event_available</span><span>Book Assessment</span></button><a href="tel:5550192834" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-xs font-semibold shadow-xs transition-all active:scale-95"><span class="material-symbols-outlined text-[16px] text-primary">phone_in_talk</span><span>(555) 019-2834 (24/7)</span></a></div>';
 
         const aiTurn = document.createElement('div');
         aiTurn.className = 'flex gap-space-md pr-12 normal-msg-in';
-        aiTurn.innerHTML = '<div class="flex-shrink-0 pt-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-tertiary-fixed shadow-sm"><span class="material-symbols-outlined text-[20px] text-[#E5B869]" style="font-variation-settings: \'FILL\' 1;">eco</span></div></div><div class="flex flex-col gap-2 max-w-2xl flex-1"><div class="flex items-center gap-2"><span class="font-label-md text-label-md text-primary font-bold">Aoife</span><span class="font-label-sm text-label-sm px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded-full font-semibold">Tree Care Coordinator</span></div><div class="bg-surface-container-lowest text-on-surface rounded-xl rounded-tl-xs p-space-md shadow-sm"><p class="font-body-md text-body-md leading-relaxed text-on-surface">' + escapeHtml(aiReply) + '</p></div>' + slotCardHtml + '<div class="flex items-center gap-2 pt-0.5"><button onclick="openBookingModal();" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-tertiary-fixed/70 hover:bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-xs font-semibold shadow-xs transition-all active:scale-95 cursor-pointer"><span class="material-symbols-outlined text-[16px] text-tertiary">event_available</span><span>Book Assessment</span></button><a href="tel:5550192834" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-xs font-semibold shadow-xs transition-all active:scale-95"><span class="material-symbols-outlined text-[16px] text-primary">phone_in_talk</span><span>(555) 019-2834 (24/7)</span></a></div><span class="font-label-sm text-label-sm text-on-surface-variant/70 pl-1">Just now</span></div>';
+        aiTurn.innerHTML = '<div class="flex-shrink-0 pt-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-tertiary-fixed shadow-sm"><span class="material-symbols-outlined text-[20px] text-[#E5B869]" style="font-variation-settings: \'FILL\' 1;">eco</span></div></div><div class="flex flex-col gap-2 max-w-2xl flex-1"><div class="flex items-center gap-2"><span class="font-label-md text-label-md text-primary font-bold">Aoife</span><span class="font-label-sm text-label-sm px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded-full font-semibold">Tree Care Coordinator</span></div><div class="bg-surface-container-lowest text-on-surface rounded-xl rounded-tl-xs p-space-md shadow-sm"><p class="font-body-md text-body-md leading-relaxed text-on-surface">' + escapeHtml(cleanText) + '</p></div>' + slotCardHtml + actionLinksHtml + '<span class="font-label-sm text-label-sm text-on-surface-variant/70 pl-1">Just now</span></div>';
         dMessagesBox.appendChild(aiTurn);
         if (dScroll) dScroll.scrollTo({ top: dScroll.scrollHeight, behavior: 'smooth' });
       } catch (err) {
@@ -4547,6 +4551,33 @@
         if (targetCard) targetCard.click();
       }, 60);
     }
+
+    try {
+      const storedSlot = sessionStorage.getItem('arborist_selected_slot');
+      if (storedSlot && stepToOpen === 3) {
+        setTimeout(() => {
+          const sLower = storedSlot.toLowerCase();
+          const allDateBtns = overlay.querySelectorAll('.cal-date-btn');
+          let matchedDay = false;
+          allDateBtns.forEach(b => {
+            const wk = (b.getAttribute('data-weekday') || '').toLowerCase();
+            if (sLower.includes(wk) && !matchedDay) {
+              b.click();
+              matchedDay = true;
+            }
+          });
+          const allTimeBtns = overlay.querySelectorAll('.time-slot-btn');
+          let matchedTime = false;
+          allTimeBtns.forEach(b => {
+            const start = (b.getAttribute('data-slot') || '').toLowerCase();
+            if ((sLower.includes(start) || (sLower.includes('morning') && start.includes('10')) || (sLower.includes('afternoon') && (start.includes('14') || start.includes('2:00')))) && !matchedTime) {
+              b.click();
+              matchedTime = true;
+            }
+          });
+        }, 120);
+      }
+    } catch(e) {}
 
     overlay.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
