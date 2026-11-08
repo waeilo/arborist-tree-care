@@ -747,6 +747,47 @@
         }
       });
     }
+
+    // Auto-pickup photo transferred from Section 9 or camera/gallery
+    try {
+      const staged = sessionStorage.getItem('arborist_staged_photo');
+      if (staged) {
+        sessionStorage.removeItem('arborist_staged_photo');
+        const photoData = JSON.parse(staged);
+        if (photoData && photoData.base64) {
+          pendingPhoto = photoData;
+          if (previewThumb) previewThumb.src = photoData.previewUrl || photoData.base64;
+          if (previewName) previewName.textContent = photoData.name || 'Photo attached';
+          if (previewBar) {
+            previewBar.classList.remove('hidden');
+            previewBar.classList.add('flex');
+          }
+          if (input) {
+            input.placeholder = "Describe what is happening with this tree...";
+            setTimeout(() => {
+              input.focus();
+            }, 200);
+          }
+        }
+      }
+    } catch (err) {
+      console.error("Error reading staged photo:", err);
+    }
+
+    // Auto-pickup prefill prompt if provided
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const prefill = urlParams.get('prompt') || sessionStorage.getItem('arborist_prefill_prompt');
+      if (prefill) {
+        sessionStorage.removeItem('arborist_prefill_prompt');
+        if (input) {
+          input.value = prefill;
+          setTimeout(() => {
+            input.focus();
+          }, 200);
+        }
+      }
+    } catch (err) {}
   })();
 </script></main><nav id="welcome-smart-nav" class="fixed bottom-0 left-0 right-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_24px_rgba(23,76,60,0.06)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
   <div class="max-w-md mx-auto flex justify-around items-center h-16 px-4">
