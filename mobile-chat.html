@@ -33,9 +33,12 @@
         <span class="font-label-md text-label-md text-secondary font-medium truncate">Here to help</span>
       </div>
     </div>
-    <!-- Right Icons: Refresh + Phone Call Icon -->
-    <div class="flex items-center gap-2 flex-shrink-0">
-      <button aria-label="Start new consultation" class="w-9 h-9 rounded-full bg-surface-container-lowest flex items-center justify-center hover:bg-surface-container active:scale-95 transition-all text-secondary shadow-sm" id="refreshChatBtn" onclick="window.location.href='mobile-welcome.html'" type="button" title="New Consultation">
+    <!-- Right Icons: Three-Bar Logs + Refresh / New Session + Phone Call Icon -->
+    <div class="flex items-center gap-1.5 flex-shrink-0">
+      <button id="chatHistoryBtn" onclick="window.ArboristAI && window.ArboristAI.openHistoryModal()" aria-label="Consultation History Logs" class="w-9 h-9 rounded-full bg-surface-container-lowest flex items-center justify-center hover:bg-surface-container active:scale-95 transition-all text-secondary shadow-sm cursor-pointer" type="button" title="Chat Logs & History">
+        <span class="material-symbols-outlined text-[20px]">segment</span>
+      </button>
+      <button aria-label="Start new consultation" class="w-9 h-9 rounded-full bg-surface-container-lowest flex items-center justify-center hover:bg-surface-container active:scale-95 transition-all text-secondary shadow-sm cursor-pointer" id="refreshChatBtn" onclick="window.ArboristAI ? window.ArboristAI.startNewSession() : (window.location.href='mobile-welcome.html')" type="button" title="New Consultation">
         <span class="material-symbols-outlined text-[19px]">refresh</span>
       </button>
       <a href="tel:5550192834" aria-label="Call Certified Arborist" class="w-9 h-9 rounded-full bg-primary hover:bg-primary-container flex items-center justify-center shadow-sm active:scale-95 transition-all" title="Call Now: (555) 019-2834">
@@ -220,7 +223,8 @@
     try {
       const base64 = currentPhoto ? currentPhoto.base64 : null;
       const mime = currentPhoto ? currentPhoto.mimeType : 'image/jpeg';
-      const aiReply = await window.ArboristAI.sendMessage(text, base64, mime);
+      const preview = currentPhoto ? currentPhoto.previewUrl : null;
+      const aiReply = await window.ArboristAI.sendMessage(text, base64, mime, preview);
 
       if (indicator) {
         indicator.classList.add('hidden');
@@ -327,12 +331,73 @@
       });
     }
 
-    // Refresh button resets chat
+    function restoreSession(session) {
+      const messagesList = document.getElementById('messagesList');
+      if (!messagesList || !session) return;
+      if (session.messages && session.messages.length > 0) {
+        window.ArboristAI.renderSessionMessages(messagesList, session, {
+          onRendered: () => {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+          }
+        });
+      }
+    }
+
+    // Restore active session on load
+    if (window.ArboristAI) {
+      const active = window.ArboristAI.getActiveSession();
+      if (active && active.messages && active.messages.length > 0) {
+        restoreSession(active);
+      }
+    }
+
+    window.addEventListener('arborist:session_loaded', (e) => {
+      restoreSession(e.detail);
+    });
+
+    window.addEventListener('arborist:new_session', () => {
+      const messagesList = document.getElementById('messagesList');
+      if (messagesList) {
+        messagesList.innerHTML = `
+          <div class="flex items-start gap-2.5 w-full pr-4 animate-fade-in" id="welcomeMessage">
+            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs">
+              <span class="material-symbols-outlined text-on-primary text-[17px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+            </div>
+            <div class="flex flex-col items-start gap-2 max-w-[88%]">
+              <div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex flex-col gap-2">
+                <p>Hi there! Welcome to ARBORIST Care &amp; Removal. I'm Aoife, the clinic coordinator. How can I help you with your trees today?</p>
+              </div>
+              <div class="flex flex-wrap gap-1.5 pt-0.5">
+                <button onclick="quickPrompt('I would like to book a tree assessment')" class="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all" type="button">
+                  <span class="material-symbols-outlined text-[15px] text-primary">event_available</span>
+                  <span>Book an assessment</span>
+                </button>
+                <button onclick="document.getElementById('chatPhotoInput').click()" class="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all" type="button">
+                  <span class="material-symbols-outlined text-[15px] text-primary">photo_camera</span>
+                  <span>Share tree photo</span>
+                </button>
+                <a href="tel:5550192834" class="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed/40 hover:bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-md text-[12px] shadow-xs active:scale-95 transition-all">
+                  <span class="material-symbols-outlined text-[15px] text-tertiary">call</span>
+                  <span>Emergency hotline</span>
+                </a>
+              </div>
+              <span class="font-label-sm text-[10px] text-secondary pl-1">Aoife · Tree Care Coordinator</span>
+            </div>
+          </div>
+        `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+
+    // Refresh button resets chat / starts new session
     const refreshBtn = document.getElementById('refreshChatBtn');
     if (refreshBtn) {
       refreshBtn.onclick = () => {
-        if (window.ArboristAI) window.ArboristAI.resetHistory();
-        window.location.reload();
+        if (window.ArboristAI) {
+          window.ArboristAI.startNewSession();
+        } else {
+          window.location.reload();
+        }
       };
     }
   });

@@ -190,9 +190,12 @@
         <span class="font-label-md text-label-md text-secondary font-medium truncate">Here to help</span>
       </div>
     </div>
-    <!-- Right Icons: Reset (when active) + Phone Call Icon -->
-    <div class="flex items-center gap-2 flex-shrink-0">
-      <button id="m-reset-welcome-btn" aria-label="Start New Consultation" class="hidden w-9 h-9 rounded-full bg-surface-container-lowest text-secondary hover:text-primary active:scale-95 transition-all flex items-center justify-center shadow-sm" type="button" title="Reset Chat">
+    <!-- Right Icons: Three-Bar Logs + Reset / New Session + Phone Call Icon -->
+    <div class="flex items-center gap-1.5 flex-shrink-0">
+      <button id="m-history-btn" onclick="window.ArboristAI && window.ArboristAI.openHistoryModal()" aria-label="Consultation History Logs" class="w-9 h-9 rounded-full bg-surface-container-lowest text-secondary hover:text-primary active:scale-95 transition-all flex items-center justify-center shadow-sm cursor-pointer" type="button" title="Consultation History Logs">
+        <span class="material-symbols-outlined text-[20px]">segment</span>
+      </button>
+      <button id="m-reset-welcome-btn" onclick="window.ArboristAI && window.ArboristAI.startNewSession()" aria-label="Start New Consultation" class="hidden w-9 h-9 rounded-full bg-surface-container-lowest text-secondary hover:text-primary active:scale-95 transition-all flex items-center justify-center shadow-sm cursor-pointer" type="button" title="New Session">
         <span class="material-symbols-outlined text-[19px]">refresh</span>
       </button>
       <a href="tel:5550192834" aria-label="Call Certified Arborist" class="w-9 h-9 rounded-full bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center shadow-sm active:scale-95 transition-all" title="Call (555) 019-2834">
@@ -585,9 +588,14 @@
           chatStage.scrollTop = chatStage.scrollHeight;
         }
 
+        if (resetBtn) {
+          resetBtn.classList.remove('hidden');
+          resetBtn.classList.add('flex');
+        }
+
         try {
           const aiReply = window.ArboristAI
-            ? await window.ArboristAI.sendMessage(text, currentPhoto?.base64, currentPhoto?.mimeType)
+            ? await window.ArboristAI.sendMessage(text, currentPhoto?.base64, currentPhoto?.mimeType, currentPhoto?.previewUrl)
             : "I can help with that. Would you like to schedule an inspection with Master Arborist Declan?";
 
           if (thinkingBox) {
@@ -677,21 +685,65 @@
       });
     }
 
+    function restoreSessionInUi(session) {
+      if (!session || !session.messages || session.messages.length === 0) return;
+      inChatMode = true;
+      if (welcomeStage) welcomeStage.classList.add('hidden');
+      if (chatStage) {
+        chatStage.classList.remove('hidden');
+        chatStage.classList.add('flex');
+      }
+      if (resetBtn) {
+        resetBtn.classList.remove('hidden');
+        resetBtn.classList.add('flex');
+      }
+      if (window.ArboristAI && messagesBox) {
+        window.ArboristAI.renderSessionMessages(messagesBox, session, {
+          onRendered: () => {
+            if (chatStage) chatStage.scrollTop = chatStage.scrollHeight;
+          }
+        });
+      }
+    }
+
+    // Restore active session on page reload / reopening phone
+    if (window.ArboristAI) {
+      const active = window.ArboristAI.getActiveSession();
+      if (active && active.messages && active.messages.length > 0) {
+        restoreSessionInUi(active);
+      }
+    }
+
+    // Listen for session switch from logs modal
+    window.addEventListener('arborist:session_loaded', (e) => {
+      restoreSessionInUi(e.detail);
+    });
+
+    // Listen for new session request
+    window.addEventListener('arborist:new_session', () => {
+      inChatMode = false;
+      if (messagesBox) messagesBox.innerHTML = '';
+      if (thinkingBox) {
+        thinkingBox.classList.add('hidden');
+        thinkingBox.classList.remove('flex');
+      }
+      if (chatStage) {
+        chatStage.classList.add('hidden');
+        chatStage.classList.remove('flex');
+      }
+      if (welcomeStage) {
+        welcomeStage.classList.remove('hidden', 'milky-fade-out');
+      }
+      if (resetBtn) {
+        resetBtn.classList.add('hidden');
+        resetBtn.classList.remove('flex');
+      }
+    });
+
     if (resetBtn) {
       resetBtn.addEventListener('click', () => {
-        if (window.ArboristAI) window.ArboristAI.resetHistory();
-        inChatMode = false;
-        if (messagesBox) messagesBox.innerHTML = '';
-        if (thinkingBox) {
-          thinkingBox.classList.add('hidden');
-          thinkingBox.classList.remove('flex');
-        }
-        if (chatStage) {
-          chatStage.classList.add('hidden');
-          chatStage.classList.remove('flex');
-        }
-        if (welcomeStage) {
-          welcomeStage.classList.remove('hidden', 'milky-fade-out');
+        if (window.ArboristAI) {
+          window.ArboristAI.startNewSession();
         }
       });
     }

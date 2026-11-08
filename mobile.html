@@ -2522,11 +2522,14 @@
       </div>
 
       <div class="flex items-center gap-space-sm">
+        <button id="desktop-history-btn" onclick="window.ArboristAI && window.ArboristAI.openHistoryModal ? window.ArboristAI.openHistoryModal() : null" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-surface-container-highest text-on-surface flex items-center justify-center transition-all active:scale-95 shadow-sm cursor-pointer" title="Consultation Logs (Saved Chats)" type="button">
+          <span class="material-symbols-outlined text-[20px]">segment</span>
+        </button>
         <button id="desktop-header-call-btn" onclick="switchDesktopAiView('voice')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed-variant hover:bg-[#ebd29a] transition-all font-label-sm text-label-sm font-bold shadow-xs active:scale-95" type="button" title="Switch to AI Live Call">
           <span class="material-symbols-outlined text-[16px]">call</span>
           <span>AI Live Call</span>
         </button>
-        <button onclick="switchDesktopAiView('chat')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors font-label-sm text-label-sm font-semibold" type="button">
+        <button onclick="if(window.ArboristAI) window.ArboristAI.startNewSession(); else switchDesktopAiView('chat');" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors font-label-sm text-label-sm font-semibold cursor-pointer" type="button" title="Start New Consultation">
           <span class="material-symbols-outlined text-[16px]">add_comment</span>
           <span>New chat</span>
         </button>
@@ -3101,9 +3104,12 @@
             <span class="font-label-md text-label-md text-secondary font-medium truncate">Here to help</span>
           </div>
         </div>
-        <!-- Right Icons: Reset (when active) + Phone Call Icon (replaces flying quill & person) -->
+        <!-- Right Icons: Consultation Logs (3-bar segment) + Reset (when active) + Phone Call Icon -->
         <div class="flex items-center gap-2 flex-shrink-0">
-          <button id="m-reset-welcome-btn" aria-label="Start New Consultation" class="hidden w-9 h-9 rounded-full bg-surface-container-lowest text-secondary hover:text-primary active:scale-95 transition-all flex items-center justify-center shadow-sm cursor-pointer" type="button" title="Reset Chat">
+          <button id="m-history-btn" onclick="window.ArboristAI && window.ArboristAI.openHistoryModal ? window.ArboristAI.openHistoryModal() : null" aria-label="Consultation History Logs" class="w-9 h-9 rounded-full bg-surface-container-lowest text-on-surface hover:text-primary active:scale-95 transition-all flex items-center justify-center shadow-sm cursor-pointer" type="button" title="Consultation Logs">
+            <span class="material-symbols-outlined text-[20px] text-on-surface">segment</span>
+          </button>
+          <button id="m-reset-welcome-btn" onclick="if(window.ArboristAI) window.ArboristAI.startNewSession()" aria-label="Start New Consultation" class="hidden w-9 h-9 rounded-full bg-surface-container-lowest text-secondary hover:text-primary active:scale-95 transition-all flex items-center justify-center shadow-sm cursor-pointer" type="button" title="Reset Chat">
             <span class="material-symbols-outlined text-[19px]">refresh</span>
           </button>
           <button onclick="handleCallNow(event)" aria-label="Call Certified Arborist" class="w-9 h-9 rounded-full bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center shadow-sm active:scale-95 transition-all cursor-pointer" type="button" title="Call (555) 019-2834">
@@ -3860,22 +3866,99 @@
 
     if (mResetBtn) {
       mResetBtn.addEventListener('click', function() {
-        mResetBtn.classList.add('hidden'); mResetBtn.classList.remove('flex');
-        mInChatMode = false;
-        if (mMessagesBox) mMessagesBox.innerHTML = '';
-        if (mThinkingBox) {
-          mThinkingBox.classList.add('hidden');
-          mThinkingBox.classList.remove('flex');
-        }
-        if (mChatStage) {
-          mChatStage.classList.add('hidden');
-          mChatStage.classList.remove('flex');
-        }
-        if (mWelcomeStage) {
-          mWelcomeStage.classList.remove('hidden', 'milky-fade-out');
+        if (window.ArboristAI) {
+          window.ArboristAI.startNewSession();
+        } else {
+          mResetBtn.classList.add('hidden'); mResetBtn.classList.remove('flex');
+          mInChatMode = false;
+          if (mMessagesBox) mMessagesBox.innerHTML = '';
+          if (mThinkingBox) {
+            mThinkingBox.classList.add('hidden');
+            mThinkingBox.classList.remove('flex');
+          }
+          if (mChatStage) {
+            mChatStage.classList.add('hidden');
+            mChatStage.classList.remove('flex');
+          }
+          if (mWelcomeStage) {
+            mWelcomeStage.classList.remove('hidden', 'milky-fade-out');
+          }
         }
       });
     }
+
+    function restoreMobileSessionInUi(session) {
+      if (!session || !session.messages || session.messages.length === 0) return;
+      mInChatMode = true;
+      if (mWelcomeStage) mWelcomeStage.classList.add('hidden');
+      if (mChatStage) {
+        mChatStage.classList.remove('hidden');
+        mChatStage.classList.add('flex');
+      }
+      if (mResetBtn) {
+        mResetBtn.classList.remove('hidden');
+        mResetBtn.classList.add('flex');
+      }
+      if (window.ArboristAI && mMessagesBox) {
+        window.ArboristAI.renderSessionMessages(mMessagesBox, session, {
+          onRendered: function() {
+            if (mChatStage) mChatStage.scrollTo({ top: mChatStage.scrollHeight, behavior: 'smooth' });
+          }
+        });
+      }
+    }
+
+    function restoreDesktopSessionInUi(session) {
+      if (!session || !session.messages || session.messages.length === 0) return;
+      if (window.ArboristAI && dMessagesBox) {
+        window.ArboristAI.renderSessionMessages(dMessagesBox, session, {
+          onRendered: function() {
+            if (dScroll) dScroll.scrollTo({ top: dScroll.scrollHeight, behavior: 'smooth' });
+          }
+        });
+      }
+    }
+
+    // Auto-restore active session from browser brain storage
+    if (window.ArboristAI) {
+      const activeSession = window.ArboristAI.getActiveSession();
+      if (activeSession && activeSession.messages && activeSession.messages.length > 0) {
+        restoreMobileSessionInUi(activeSession);
+        restoreDesktopSessionInUi(activeSession);
+      }
+    }
+
+    // Listen for session switch from logs modal
+    window.addEventListener('arborist:session_loaded', function(e) {
+      const session = e.detail;
+      if (!session) return;
+      restoreMobileSessionInUi(session);
+      restoreDesktopSessionInUi(session);
+    });
+
+    // Listen for new session request
+    window.addEventListener('arborist:new_session', function() {
+      mInChatMode = false;
+      if (mMessagesBox) mMessagesBox.innerHTML = '';
+      if (mThinkingBox) {
+        mThinkingBox.classList.add('hidden');
+        mThinkingBox.classList.remove('flex');
+      }
+      if (mChatStage) {
+        mChatStage.classList.add('hidden');
+        mChatStage.classList.remove('flex');
+      }
+      if (mWelcomeStage) {
+        mWelcomeStage.classList.remove('hidden', 'milky-fade-out');
+      }
+      if (mResetBtn) {
+        mResetBtn.classList.add('hidden');
+        mResetBtn.classList.remove('flex');
+      }
+      if (dMessagesBox) {
+        dMessagesBox.innerHTML = '<div class="flex gap-space-md pr-12 normal-msg-in"><div class="flex-shrink-0 pt-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-tertiary-fixed shadow-sm"><span class="material-symbols-outlined text-[20px] text-[#E5B869]" style="font-variation-settings: \'FILL\' 1;">eco</span></div></div><div class="flex flex-col gap-2 max-w-2xl flex-1"><div class="flex items-center gap-2"><span class="font-label-md text-label-md text-primary font-bold">Aoife</span><span class="font-label-sm text-label-sm px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded-full font-semibold">Tree Care Coordinator</span></div><div class="bg-surface-container-lowest text-on-surface rounded-xl rounded-tl-xs p-space-md shadow-sm"><p class="font-body-md text-body-md leading-relaxed text-on-surface">Hello! I am Aoife, Tree Care Coordinator at Arborist. Tell me what is happening with your trees, or share your address to find a convenient assessment time with Master Arborist Declan.</p></div><span class="font-label-sm text-label-sm text-on-surface-variant/70 pl-1">Just now</span></div></div>';
+      }
+    });
 
     
     // Desktop Chat Send Logic with Sweet Creamy Flow
