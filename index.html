@@ -905,10 +905,18 @@
     body.page-fading-out {
       opacity: 0 !important;
     }
-    @keyframes fadeUpFromGround {
+    /* Ground-Up Spring Pop-Up Entrance Keyframes */
+    @keyframes textPopUpFromGround {
       0% {
         opacity: 0;
-        transform: translate3d(0, 26px, 0) scale(0.985);
+        transform: translate3d(0, 42px, 0) scale(0.94);
+      }
+      65% {
+        opacity: 1;
+        transform: translate3d(0, -5px, 0) scale(1.018);
+      }
+      85% {
+        transform: translate3d(0, 2px, 0) scale(0.995);
       }
       100% {
         opacity: 1;
@@ -917,25 +925,32 @@
     }
     .animate-ground-up {
       opacity: 0;
-      animation: fadeUpFromGround 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transform: translate3d(0, 42px, 0) scale(0.94);
       will-change: transform, opacity;
     }
-    .delay-100 { animation-delay: 0.08s; }
-    .delay-200 { animation-delay: 0.16s; }
-    .delay-300 { animation-delay: 0.24s; }
-    .delay-400 { animation-delay: 0.32s; }
+    .page-hydrated .animate-ground-up {
+      animation: textPopUpFromGround 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .page-hydrated .delay-100 { animation-delay: 0.10s; }
+    .page-hydrated .delay-200 { animation-delay: 0.22s; }
+    .page-hydrated .delay-300 { animation-delay: 0.34s; }
+    .page-hydrated .delay-400 { animation-delay: 0.46s; }
+    .page-hydrated .delay-500 { animation-delay: 0.58s; }
   </style>
   <script>
     (function() {
       function reveal() {
-        if (document.body) document.body.classList.add('page-hydrated');
+        if (!document.body) return;
+        document.body.classList.remove('page-hydrated');
+        void document.body.offsetWidth;
+        document.body.classList.add('page-hydrated');
       }
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', reveal);
       } else {
         reveal();
       }
-      setTimeout(reveal, 150);
+      setTimeout(reveal, 60);
     })();
   </script>
 </head>
@@ -3601,12 +3616,58 @@
     }
   }
 
+  window.handleTalkToAi = handleTalkToAi;
+  window.handleCallNow = handleCallNow;
+  window.openMobileAi = openMobileAi;
+  window.closeMobileAi = closeMobileAi;
+  window.openDesktopAi = openDesktopAi;
+  window.closeDesktopAi = closeDesktopAi;
+  window.switchDesktopAiView = switchDesktopAiView;
+  window.switchMobileAiView = switchMobileAiView;
+
+  window.openAiFromBooking = function(e) {
+    if (e) {
+      try { e.preventDefault(); e.stopPropagation(); } catch(err) {}
+    }
+    if (typeof closeBookingModal === 'function') {
+      closeBookingModal();
+    } else {
+      var modal = document.getElementById('booking-flow-overlay');
+      if (modal) modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    setTimeout(function() {
+      if (window.innerWidth < 768) {
+        openMobileAi('welcome');
+      } else {
+        openDesktopAi('chat');
+      }
+    }, 60);
+    return false;
+  };
+
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       closeDesktopAi();
       closeMobileAi();
     }
   });
+
+  (function() {
+    function checkAiUrlParams() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('chat') === '1' || params.has('ai')) {
+        setTimeout(function() {
+          handleTalkToAi();
+        }, 180);
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', checkAiUrlParams);
+    } else {
+      checkAiUrlParams();
+    }
+  })();
 
   document.addEventListener('DOMContentLoaded', function() {
     // Mobile Attachment Menu Toggle
@@ -4048,7 +4109,7 @@
         </button>
         <div class="flex items-center gap-2 text-xs font-body text-on-surface-variant">
           <span>Need immediate answers?</span>
-          <button type="button" onclick="closeBookingModal(); handleTalkToAi(event);" class="font-bold text-primary underline hover:text-primary-light">Ask AI Advisor</button>
+          <button type="button" onclick="return openAiFromBooking(event);" class="font-bold text-primary underline hover:text-primary-light">Ask AI Advisor</button>
           <span>or</span>
           <button type="button" onclick="closeBookingModal(); handleCallNow(event);" class="font-bold text-primary underline hover:text-primary-light">Call Dispatch</button>
         </div>
@@ -4066,7 +4127,7 @@
       </p>
       <div class="flex items-center gap-3 pt-2">
         <button onclick="closeBookingModal(event)" class="px-6 py-2.5 rounded-xl bg-primary text-white font-headline text-xs font-bold uppercase tracking-wider shadow-md hover:bg-primary-light active:scale-95 transition-all">Done</button>
-        <button onclick="closeBookingModal(); handleTalkToAi(event);" class="px-6 py-2.5 rounded-xl bg-surface-container text-primary font-headline text-xs font-bold uppercase tracking-wider hover:bg-surface-container-high transition-all flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-primary">auto_awesome</span><span>Chat with AI</span></button>
+        <button onclick="return openAiFromBooking(event);" class="px-6 py-2.5 rounded-xl bg-surface-container text-primary font-headline text-xs font-bold uppercase tracking-wider hover:bg-surface-container-high transition-all flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-primary">auto_awesome</span><span>Chat with AI</span></button>
       </div>
     </div>
   </div>
@@ -6523,7 +6584,7 @@
         <span class="material-symbols-outlined text-[17px]">home</span>
         <span>Home</span>
       </a>
-      <a class="px-3.5 py-1.5 font-label-md text-sm text-[#F8F7F2] bg-white/10 hover:bg-white/15 border border-white/15 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 shadow-sm group" onclick="closeBookingModal(); if(window.handleTalkToAi){window.handleTalkToAi(event);}else if(window.openDesktopAi){window.openDesktopAi();}else{ if(typeof openMobileAi === "function") openMobileAi("welcome"); }" href="javascript:void(0)" title="Talk to AI Assistant">
+      <a class="px-3.5 py-1.5 font-label-md text-sm text-[#F8F7F2] bg-white/10 hover:bg-white/15 border border-white/15 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 shadow-sm group" onclick="return openAiFromBooking(event)" href="javascript:void(0)" title="Talk to AI Assistant">
         <span class="material-symbols-outlined text-[16px] text-[#f0bf64] group-hover:rotate-12 transition-transform">auto_awesome</span>
         <span>Chat AI</span>
       </a>
@@ -6543,7 +6604,7 @@
 
     <!-- Right Controls: Mobile AI Quick Button + Hotline + Close -->
     <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
-      <button type="button" onclick="closeBookingModal(); if(window.handleTalkToAi){window.handleTalkToAi(event);}else if(window.openMobileAi){window.openMobileAi('welcome');}else{ if(typeof openMobileAi === "function") openMobileAi("welcome"); }" class="lg:hidden px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-[#F8F7F2] font-label-sm text-[11px] font-semibold flex items-center gap-1 cursor-pointer">
+      <button type="button" onclick="return openAiFromBooking(event)" class="lg:hidden px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-[#F8F7F2] font-label-sm text-[11px] font-semibold flex items-center gap-1 cursor-pointer" title="Ask AI Assistant">
         <span class="text-[#f0bf64] text-xs">✦</span>
         <span>Ask AI</span>
       </button>
@@ -7400,7 +7461,7 @@
             <p class="font-body-sm text-[12px] sm:text-[13.5px] text-[#4A5D53] leading-snug mt-0.5 mb-2.5 sm:mb-4">
               Have a quick question about permits or prep? Chat anytime.
             </p>
-            <a class="inline-flex items-center justify-center self-start px-4 py-1.5 sm:px-5 sm:py-2 rounded-full bg-[#174C3C] hover:bg-[#123E31] text-white text-[12.5px] sm:text-[13.5px] font-semibold transition-all shadow-xs group cursor-pointer" href="javascript:void(0)" onclick="handleTalkToAi(event)">
+            <a class="inline-flex items-center justify-center self-start px-4 py-1.5 sm:px-5 sm:py-2 rounded-full bg-[#174C3C] hover:bg-[#123E31] text-white text-[12.5px] sm:text-[13.5px] font-semibold transition-all shadow-xs group cursor-pointer" href="javascript:void(0)" onclick="return openAiFromBooking(event)">
               <span>Start Chat</span>
               <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
             </a>

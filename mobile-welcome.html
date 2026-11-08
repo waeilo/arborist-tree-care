@@ -125,25 +125,50 @@
     body { opacity: 0; transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
     body.page-hydrated { opacity: 1 !important; }
     body.page-fading-out { opacity: 0 !important; }
-    @keyframes fadeUpFromGround {
-      0% { opacity: 0; transform: translate3d(0, 26px, 0) scale(0.985); }
-      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    /* Ground-Up Spring Pop-Up Entrance Keyframes */
+    @keyframes textPopUpFromGround {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 42px, 0) scale(0.94);
+      }
+      65% {
+        opacity: 1;
+        transform: translate3d(0, -5px, 0) scale(1.018);
+      }
+      85% {
+        transform: translate3d(0, 2px, 0) scale(0.995);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
     }
     .animate-ground-up {
       opacity: 0;
-      animation: fadeUpFromGround 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transform: translate3d(0, 42px, 0) scale(0.94);
       will-change: transform, opacity;
     }
-    .delay-100 { animation-delay: 0.08s; }
-    .delay-200 { animation-delay: 0.16s; }
-    .delay-300 { animation-delay: 0.24s; }
+    .page-hydrated .animate-ground-up {
+      animation: textPopUpFromGround 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .page-hydrated .delay-100 { animation-delay: 0.10s; }
+    .page-hydrated .delay-200 { animation-delay: 0.22s; }
+    .page-hydrated .delay-300 { animation-delay: 0.34s; }
   </style>
   <script>
     (function() {
-      function reveal() { if (document.body) document.body.classList.add('page-hydrated'); }
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', reveal);
-      else reveal();
-      setTimeout(reveal, 150);
+      function reveal() {
+        if (!document.body) return;
+        document.body.classList.remove('page-hydrated');
+        void document.body.offsetWidth;
+        document.body.classList.add('page-hydrated');
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', reveal);
+      } else {
+        reveal();
+      }
+      setTimeout(reveal, 60);
     })();
   </script>
 </head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen selection:bg-secondary-container selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(23,76,60,0.05)]">

@@ -226,7 +226,7 @@
         <span class="material-symbols-outlined text-[17px]">home</span>
         <span>Home</span>
       </a>
-      <a class="px-3.5 py-1.5 font-label-md text-sm text-[#F8F7F2] bg-white/10 hover:bg-white/15 border border-white/15 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 shadow-sm group" onclick="closeBookingModal(); if(window.handleTalkToAi){window.handleTalkToAi(event);}else if(window.openDesktopAi){window.openDesktopAi();}else{window.location.href='index.html?chat=1';}" href="javascript:void(0)" title="Talk to AI Assistant">
+      <a class="px-3.5 py-1.5 font-label-md text-sm text-[#F8F7F2] bg-white/10 hover:bg-white/15 border border-white/15 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 shadow-sm group" onclick="return openAiFromBooking(event)" href="javascript:void(0)" title="Talk to AI Assistant">
         <span class="material-symbols-outlined text-[16px] text-[#f0bf64] group-hover:rotate-12 transition-transform">auto_awesome</span>
         <span>Chat AI</span>
       </a>
@@ -246,7 +246,7 @@
 
     <!-- Right Controls: Mobile AI Quick Button + Hotline + Close -->
     <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
-      <button type="button" onclick="closeBookingModal(); if(window.handleTalkToAi){window.handleTalkToAi(event);}else if(window.openMobileAi){window.openMobileAi('welcome');}else{window.location.href='mobile-welcome.html';}" class="lg:hidden px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-[#F8F7F2] font-label-sm text-[11px] font-semibold flex items-center gap-1 cursor-pointer">
+      <button type="button" onclick="return openAiFromBooking(event)" class="lg:hidden px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-[#F8F7F2] font-label-sm text-[11px] font-semibold flex items-center gap-1 cursor-pointer">
         <span class="text-[#f0bf64] text-xs">✦</span>
         <span>Ask AI</span>
       </button>
@@ -1103,7 +1103,7 @@
             <p class="font-body-sm text-[12px] sm:text-[13.5px] text-[#4A5D53] leading-snug mt-0.5 mb-2.5 sm:mb-4">
               Have a quick question about permits or prep? Chat anytime.
             </p>
-            <a class="inline-flex items-center justify-center self-start px-4 py-1.5 sm:px-5 sm:py-2 rounded-full bg-[#174C3C] hover:bg-[#123E31] text-white text-[12.5px] sm:text-[13.5px] font-semibold transition-all shadow-xs group cursor-pointer" href="desktop-chat.html" onclick="if(window.innerWidth < 768){ window.location.href='mobile-welcome.html'; return false; }">
+            <a class="inline-flex items-center justify-center self-start px-4 py-1.5 sm:px-5 sm:py-2 rounded-full bg-[#174C3C] hover:bg-[#123E31] text-white text-[12.5px] sm:text-[13.5px] font-semibold transition-all shadow-xs group cursor-pointer" href="desktop-chat.html" onclick="return openAiFromBooking(event)">
               <span>Start Chat</span>
               <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
             </a>
@@ -2113,6 +2113,18 @@
     document.title = meta.docTitle;
   });
 
+  
+  window.openAiFromBooking = function(e) {
+    if (e) {
+      try { e.preventDefault(); e.stopPropagation(); } catch(err) {}
+    }
+    if (window.innerWidth < 768) {
+      window.location.href = 'mobile-welcome.html';
+    } else {
+      window.location.href = 'index.html?chat=1';
+    }
+    return false;
+  };
   window.closeBookingModal = function(e) {
     if (e) {
       try { e.preventDefault(); e.stopPropagation(); } catch(err) {}
