@@ -2220,6 +2220,34 @@
     if (pillIcon) pillIcon.textContent = meta.icon;
     if (pillTitle) pillTitle.textContent = meta.title;
     document.title = meta.docTitle;
+
+    const slotParam = urlParams.get('slot') || (function() {
+      try { return sessionStorage.getItem('arborist_selected_slot'); } catch(e) { return null; }
+    })();
+
+    if (slotParam) {
+      setTimeout(() => {
+        const slotLower = slotParam.toLowerCase();
+        const allDateBtns = document.querySelectorAll('.cal-date-btn');
+        let matchedDay = false;
+        allDateBtns.forEach(b => {
+          const wk = (b.getAttribute('data-weekday') || '').toLowerCase();
+          if (slotLower.includes(wk) && !matchedDay) {
+            b.click();
+            matchedDay = true;
+          }
+        });
+        const allTimeBtns = document.querySelectorAll('.time-slot-btn');
+        let matchedTime = false;
+        allTimeBtns.forEach(b => {
+          const start = (b.getAttribute('data-slot') || '').toLowerCase();
+          if ((slotLower.includes(start) || (slotLower.includes('morning') && start.includes('10')) || (slotLower.includes('afternoon') && (start.includes('14') || start.includes('2:00')))) && !matchedTime) {
+            b.click();
+            matchedTime = true;
+          }
+        });
+      }, 120);
+    }
   });
 
   

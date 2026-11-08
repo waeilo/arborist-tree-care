@@ -3759,9 +3759,12 @@
           mThinkingBox.classList.remove('flex', 'first-prompt-creamy', 'normal-msg-in');
         }
 
+        const slotProposal = window.ArboristAI ? window.ArboristAI.detectSlotProposal(aiReply) : null;
+        const slotCardHtml = slotProposal ? window.ArboristAI.renderSlotActionCard(slotProposal) : '';
+
         const aiTurn = document.createElement('div');
         aiTurn.className = 'flex items-start gap-2.5 w-full pr-4 ' + (isFirstTime ? 'first-prompt-creamy' : 'normal-msg-in');
-        aiTurn.innerHTML = '<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs"><span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: \'FILL\' 1;">eco</span></div><div class="flex flex-col items-start gap-2 max-w-[88%]"><div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex flex-col gap-2"><p>' + escapeHtml(aiReply) + '</p></div><div class="flex flex-wrap gap-1.5 pt-0.5"><button onclick="openBookingModal();" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed/60 hover:bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-[12px] shadow-xs active:scale-95 transition-all cursor-pointer" type="button"><span class="material-symbols-outlined text-[16px] text-tertiary">event_available</span><span>Book assessment</span></button><a href="tel:5550192834" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all"><span class="material-symbols-outlined text-[16px] text-primary">phone_in_talk</span><span>(555) 019-2834</span></a></div><span class="font-label-sm text-[10px] text-secondary pl-1">Aoife · Tree Care Coordinator</span></div>';
+        aiTurn.innerHTML = '<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs"><span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: \'FILL\' 1;">eco</span></div><div class="flex flex-col items-start gap-2 max-w-[88%] w-full"><div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex flex-col gap-2"><p>' + escapeHtml(aiReply) + '</p></div>' + slotCardHtml + '<div class="flex flex-wrap gap-1.5 pt-0.5"><button onclick="openBookingModal();" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed/60 hover:bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-[12px] shadow-xs active:scale-95 transition-all cursor-pointer" type="button"><span class="material-symbols-outlined text-[16px] text-tertiary">event_available</span><span>Book assessment</span></button><a href="tel:5550192834" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all"><span class="material-symbols-outlined text-[16px] text-primary">phone_in_talk</span><span>(555) 019-2834</span></a></div><span class="font-label-sm text-[10px] text-secondary pl-1">Aoife · Tree Care Coordinator</span></div>';
         mMessagesBox.appendChild(aiTurn);
         if (mChatStage) {
           mChatStage.scrollTo({ top: mChatStage.scrollHeight, behavior: 'smooth' });
@@ -3914,9 +3917,12 @@
 
         if (thinkingTurn && thinkingTurn.parentNode) thinkingTurn.remove();
 
+        const slotProposal = window.ArboristAI ? window.ArboristAI.detectSlotProposal(aiReply) : null;
+        const slotCardHtml = slotProposal ? window.ArboristAI.renderSlotActionCard(slotProposal) : '';
+
         const aiTurn = document.createElement('div');
         aiTurn.className = 'flex gap-space-md pr-12 normal-msg-in';
-        aiTurn.innerHTML = '<div class="flex-shrink-0 pt-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-tertiary-fixed shadow-sm"><span class="material-symbols-outlined text-[20px] text-[#E5B869]" style="font-variation-settings: \'FILL\' 1;">eco</span></div></div><div class="flex flex-col gap-2 max-w-2xl flex-1"><div class="flex items-center gap-2"><span class="font-label-md text-label-md text-primary font-bold">Aoife</span><span class="font-label-sm text-label-sm px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded-full font-semibold">Tree Care Coordinator</span></div><div class="bg-surface-container-lowest text-on-surface rounded-xl rounded-tl-xs p-space-md shadow-sm"><p class="font-body-md text-body-md leading-relaxed text-on-surface">' + escapeHtml(aiReply) + '</p></div><div class="flex items-center gap-2 pt-0.5"><button onclick="openBookingModal();" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-tertiary-fixed/70 hover:bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-xs font-semibold shadow-xs transition-all active:scale-95 cursor-pointer"><span class="material-symbols-outlined text-[16px] text-tertiary">event_available</span><span>Book Assessment</span></button><a href="tel:5550192834" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-xs font-semibold shadow-xs transition-all active:scale-95"><span class="material-symbols-outlined text-[16px] text-primary">phone_in_talk</span><span>(555) 019-2834 (24/7)</span></a></div><span class="font-label-sm text-label-sm text-on-surface-variant/70 pl-1">Just now</span></div>';
+        aiTurn.innerHTML = '<div class="flex-shrink-0 pt-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-tertiary-fixed shadow-sm"><span class="material-symbols-outlined text-[20px] text-[#E5B869]" style="font-variation-settings: \'FILL\' 1;">eco</span></div></div><div class="flex flex-col gap-2 max-w-2xl flex-1"><div class="flex items-center gap-2"><span class="font-label-md text-label-md text-primary font-bold">Aoife</span><span class="font-label-sm text-label-sm px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded-full font-semibold">Tree Care Coordinator</span></div><div class="bg-surface-container-lowest text-on-surface rounded-xl rounded-tl-xs p-space-md shadow-sm"><p class="font-body-md text-body-md leading-relaxed text-on-surface">' + escapeHtml(aiReply) + '</p></div>' + slotCardHtml + '<div class="flex items-center gap-2 pt-0.5"><button onclick="openBookingModal();" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-tertiary-fixed/70 hover:bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-xs font-semibold shadow-xs transition-all active:scale-95 cursor-pointer"><span class="material-symbols-outlined text-[16px] text-tertiary">event_available</span><span>Book Assessment</span></button><a href="tel:5550192834" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-xs font-semibold shadow-xs transition-all active:scale-95"><span class="material-symbols-outlined text-[16px] text-primary">phone_in_talk</span><span>(555) 019-2834 (24/7)</span></a></div><span class="font-label-sm text-label-sm text-on-surface-variant/70 pl-1">Just now</span></div>';
         dMessagesBox.appendChild(aiTurn);
         if (dScroll) dScroll.scrollTo({ top: dScroll.scrollHeight, behavior: 'smooth' });
       } catch (err) {
@@ -4497,25 +4503,26 @@
   }
 
 
-  window.openBookingModal = function(preselectedService) {
+  window.openBookingModal = function(preselectedService, targetStep) {
     // Hide resume cloud if currently visible
     hideResumeBookingCloud();
 
     const overlay = document.getElementById('booking-flow-overlay');
     if (!overlay) {
-      console.warn("Booking overlay not yet mounted; retrying in 50ms"); setTimeout(() => window.openBookingModal(preselectedService), 50);
+      console.warn("Booking overlay not yet mounted; retrying in 50ms"); setTimeout(() => window.openBookingModal(preselectedService, targetStep), 50);
       return;
     }
 
+    const stepToOpen = (typeof targetStep === 'number' && targetStep >= 1 && targetStep <= 5) ? targetStep : 1;
     isTransitioning = false;
-    if (currentStep !== 1 && typeof goToStep === 'function') {
-      goToStep(1);
+    if (typeof goToStep === 'function') {
+      goToStep(stepToOpen);
     } else {
-      currentStep = 1;
+      currentStep = stepToOpen;
       for (let i = 1; i <= 5; i++) {
         const p = document.getElementById('step-panel-' + i);
         if (p) {
-          if (i === 1) {
+          if (i === stepToOpen) {
             p.classList.add('active-panel');
             p.style.display = 'block';
           } else {
@@ -4524,7 +4531,7 @@
           }
         }
       }
-      if (typeof updateStepperUI === 'function') updateStepperUI(1);
+      if (typeof updateStepperUI === 'function') updateStepperUI(stepToOpen);
     }
 
     if (preselectedService) {
@@ -4550,7 +4557,7 @@
       overlay.classList.add('opacity-100');
     });
   };
-  function openBookingModal(svc) { window.openBookingModal(svc); }
+  function openBookingModal(svc, step) { window.openBookingModal(svc, step); }
 
   window.closeBookingModal = function(e) {
     let clickX = null;
