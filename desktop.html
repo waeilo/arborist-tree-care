@@ -1817,8 +1817,10 @@
 </div>
 </div>
 </footer>
-<!-- Intelligent Scroll-Analyzing Pop-Up Bottom Navigation (Phone Only) -->
-<nav id="smart-bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 w-full z-40 pb-safe bg-[#F8F7F2]/95 backdrop-blur-xl border-t border-outline-soft/60 shadow-[0_-8px_30px_rgba(23,76,60,0.12)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-[120%] opacity-0 pointer-events-none">
+  </div>
+
+<!-- Intelligent Scroll-Analyzing Pop-Up Bottom Navigation (Mobile & Tablet Mode: < 1024px) -->
+<nav id="smart-bottom-nav" class="lg:hidden fixed bottom-0 left-0 right-0 w-full z-40 pb-safe bg-[#F8F7F2]/95 backdrop-blur-xl border-t border-outline-soft/60 shadow-[0_-8px_30px_rgba(23,76,60,0.12)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-[120%] opacity-0 pointer-events-none">
   <div class="w-9 h-1 bg-primary/20 rounded-full mx-auto mt-1.5"></div>
   <div class="max-w-md mx-auto flex justify-around items-center h-15 py-1.5 px-4">
     <button type="button" onclick="window.triggerSmartNavAction('home', event)" class="flex flex-col items-center justify-center gap-0.5 min-w-[68px] min-h-[44px] text-primary font-bold active:scale-95 transition-all cursor-pointer">
@@ -1871,7 +1873,7 @@
       hideNav();
       const root = document.getElementById('mobile-viewport-root');
       if (target === 'home') {
-        if (root) {
+        if (root && window.innerWidth < 768) {
           root.style.transition = 'opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1)';
           root.style.opacity = '0.6';
           setTimeout(() => { root.style.opacity = '1'; }, 180);
@@ -1888,7 +1890,7 @@
     };
 
     window.addEventListener('scroll', function() {
-      if (window.innerWidth >= 768) return;
+      if (window.innerWidth >= 1024) return;
       const currentY = window.scrollY || 0;
       const dy = currentY - lastScrollY;
       const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
@@ -1915,13 +1917,13 @@
     }, { passive: true });
 
     window.addEventListener('touchstart', function(e) {
-      if (window.innerWidth >= 768 || !e.touches || !e.touches[0]) return;
+      if (window.innerWidth >= 1024 || !e.touches || !e.touches[0]) return;
       touchStartY = e.touches[0].clientY;
       touchStartInBottomZone = touchStartY >= (window.innerHeight - 135);
     }, { passive: true });
 
     window.addEventListener('touchmove', function(e) {
-      if (window.innerWidth >= 768 || !e.touches || !e.touches[0]) return;
+      if (window.innerWidth >= 1024 || !e.touches || !e.touches[0]) return;
       const currentTouchY = e.touches[0].clientY;
       const swipeDy = currentTouchY - touchStartY; // negative = swipe up
 
@@ -1944,7 +1946,6 @@
     }, { passive: true });
   })();
 </script>
-  </div>
 
   <!-- ======================================================== -->
   <!-- 2. DESKTOP & TABLET VIEWPORT (>= 768px)                  -->
@@ -4374,6 +4375,8 @@
   let isResumeCloudHovered = false;
 
   function showResumeBookingCloud(clickX, clickY) {
+    // Mobile: The Pop-Up shouldn't appear again since the down navigation is already there; leave for desktop and iPad
+    if (window.innerWidth < 768) return;
     let pill = document.getElementById('booking-resume-cloud-pill');
     if (!pill) {
       pill = document.createElement('div');
@@ -6787,7 +6790,7 @@
     <!-- UNIFIED STICKY BOTTOM NAVIGATION BAR (STEP 1 OF 5) -->
     <footer class="sticky bottom-0 left-0 right-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant/25 shadow-[0_-4px_20px_rgba(23,76,60,0.06)] py-2.5 sm:py-3.5 mt-4 sm:mt-space-xl -mx-4 px-4 sm:mx-0 sm:px-6 sm:rounded-2xl">
       <div class="max-w-[1140px] mx-auto flex items-center justify-between gap-2">
-        <button onclick="closeBookingModal(event)" class="h-11 sm:h-12 px-4 sm:px-5 rounded-xl bg-surface-container hover:bg-surface-container-high text-primary font-label-lg text-[13px] sm:text-label-lg font-bold transition-colors flex items-center gap-1.5 cursor-pointer shrink-0" type="button" title="Return to Home">
+        <button onclick="closeBookingModal(event)" class="hidden sm:flex h-11 sm:h-12 px-4 sm:px-5 rounded-xl bg-surface-container hover:bg-surface-container-high text-primary font-label-lg text-[13px] sm:text-label-lg font-bold transition-colors items-center gap-1.5 cursor-pointer shrink-0" type="button" title="Return to Home">
           <span class="material-symbols-outlined text-[18px]">home</span>
           <span>Home</span>
         </button>
@@ -7560,6 +7563,135 @@
     </div>
   </div>
 </footer>
+
+<!-- Intelligent Scroll-Analyzing Pop-Up Bottom Navigation for Booking (Mobile & Tablet: < 1024px) -->
+<nav id="booking-smart-bottom-nav" class="lg:hidden fixed bottom-0 left-0 right-0 w-full z-50 pb-safe bg-[#F8F7F2]/95 backdrop-blur-xl border-t border-outline-variant/30 shadow-[0_-8px_30px_rgba(23,76,60,0.12)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-[120%] opacity-0 pointer-events-none">
+  <div class="w-9 h-1 bg-primary/20 rounded-full mx-auto mt-1.5"></div>
+  <div class="max-w-md mx-auto flex justify-around items-center h-15 py-1.5 px-4">
+    <button type="button" onclick="window.triggerBookingNavAction('home', event)" class="flex flex-col items-center justify-center gap-0.5 min-w-[68px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all cursor-pointer">
+      <span class="material-symbols-outlined text-[23px]">home</span>
+      <span class="font-headline text-[11px] font-semibold text-on-surface-variant">Home</span>
+    </button>
+    <button type="button" onclick="window.triggerBookingNavAction('ai', event)" class="flex flex-col items-center justify-center gap-0.5 min-w-[68px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all cursor-pointer">
+      <div class="relative flex items-center justify-center">
+        <span class="material-symbols-outlined text-[23px]">forum</span>
+        <span class="absolute -top-0.5 -right-1 w-2 h-2 rounded-full bg-[#E5B869] ring-2 ring-[#F8F7F2]"></span>
+      </div>
+      <span class="font-headline text-[11px] font-semibold text-on-surface-variant">AI Chat</span>
+    </button>
+    <button type="button" onclick="window.triggerBookingNavAction('book', event)" class="flex flex-col items-center justify-center gap-0.5 min-w-[68px] min-h-[44px] text-primary font-bold active:scale-95 transition-all cursor-pointer">
+      <span class="material-symbols-outlined text-[23px]" style="font-variation-settings: 'FILL' 1;">event_available</span>
+      <span class="font-headline text-[11px] font-bold text-primary">Book</span>
+    </button>
+  </div>
+</nav>
+<script>
+  (function initBookingSmartNav() {
+    const nav = document.getElementById('booking-smart-bottom-nav');
+    if (!nav) return;
+
+    let isVisible = false;
+    let lastScrollY = 0;
+    let bottomReachedOnce = false;
+    let touchStartY = 0;
+    let touchStartInBottomZone = false;
+
+    function showNav() {
+      if (isVisible) return;
+      isVisible = true;
+      nav.classList.remove('translate-y-[120%]', 'opacity-0', 'pointer-events-none');
+      nav.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+    }
+
+    function hideNav() {
+      if (!isVisible) return;
+      isVisible = false;
+      nav.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      nav.classList.add('translate-y-[120%]', 'opacity-0', 'pointer-events-none');
+    }
+
+    window.triggerBookingNavAction = function(target, e) {
+      if (e) { try { e.preventDefault(); e.stopPropagation(); } catch(err) {} }
+      hideNav();
+      if (target === 'home') {
+        const overlay = document.getElementById('booking-flow-overlay');
+        if (overlay && !overlay.classList.contains('hidden') && typeof closeBookingModal === 'function') {
+          closeBookingModal(e);
+        } else {
+          document.body.classList.add('page-fading-out');
+          setTimeout(() => { window.location.href = 'index.html'; }, 200);
+        }
+      } else if (target === 'ai') {
+        if (typeof openAiFromBooking === 'function') {
+          openAiFromBooking(e);
+        } else {
+          document.body.classList.add('page-fading-out');
+          setTimeout(() => { window.location.href = 'mobile-welcome.html'; }, 200);
+        }
+      } else if (target === 'book') {
+        const overlay = document.getElementById('booking-flow-overlay');
+        if (overlay && !overlay.classList.contains('hidden')) {
+          overlay.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+    };
+
+    function handleScroll(currentY, scrollHeight, clientHeight) {
+      if (window.innerWidth >= 1024) return;
+      const dy = currentY - lastScrollY;
+      const maxScroll = Math.max(0, scrollHeight - clientHeight);
+      const nearBottom = maxScroll > 80 && currentY >= maxScroll - 60;
+
+      if (nearBottom) {
+        if (bottomReachedOnce && dy >= -2) {
+          showNav();
+        }
+        bottomReachedOnce = true;
+      } else {
+        if (currentY < maxScroll - 200) {
+          bottomReachedOnce = false;
+        }
+        if (dy > 10 && currentY > 50) {
+          hideNav();
+        } else if (dy < -20 && currentY > 120) {
+          showNav();
+        }
+      }
+      lastScrollY = currentY;
+    }
+
+    window.addEventListener('scroll', function() {
+      handleScroll(window.scrollY || 0, document.documentElement.scrollHeight, window.innerHeight);
+    }, { passive: true });
+
+    const overlay = document.getElementById('booking-flow-overlay');
+    if (overlay) {
+      overlay.addEventListener('scroll', function() {
+        handleScroll(overlay.scrollTop || 0, overlay.scrollHeight, overlay.clientHeight);
+      }, { passive: true });
+    }
+
+    window.addEventListener('touchstart', function(e) {
+      if (window.innerWidth >= 1024 || !e.touches || !e.touches[0]) return;
+      touchStartY = e.touches[0].clientY;
+      touchStartInBottomZone = touchStartY >= (window.innerHeight - 140);
+    }, { passive: true });
+
+    window.addEventListener('touchmove', function(e) {
+      if (window.innerWidth >= 1024 || !e.touches || !e.touches[0]) return;
+      const currentTouchY = e.touches[0].clientY;
+      const swipeDy = currentTouchY - touchStartY; // negative = swipe up
+
+      if (touchStartInBottomZone && swipeDy < -14) {
+        showNav();
+      } else if (!touchStartInBottomZone && swipeDy > 20) {
+        hideNav();
+      }
+    }, { passive: true });
+  })();
+</script>
 </div>
 
 <!-- END BOOKING FLOW OVERLAY -->
