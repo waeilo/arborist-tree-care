@@ -891,16 +891,70 @@
 </style>
 
   <style>
-    /* Instant Zero-Jiggle Smooth Hydration */
+    /* Instant Zero-Jiggle Smooth Hydration & Fluid Motion */
     html {
       background-color: #f2fcf2;
     }
     body {
       opacity: 0;
-      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
     body.page-hydrated {
       opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    body.page-fading-out {
+      opacity: 0 !important;
+      transform: translateY(-8px) !important;
+    }
+
+    @keyframes fadeUpFromGround {
+      0% {
+        opacity: 0;
+        transform: translateY(28px) scale(0.98);
+      }
+      65% {
+        opacity: 0.95;
+        transform: translateY(-2px) scale(1.005);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    @keyframes popScaleFromGround {
+      0% {
+        opacity: 0;
+        transform: translateY(36px) scale(0.92);
+      }
+      70% {
+        opacity: 1;
+        transform: translateY(-2px) scale(1.015);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .animate-ground-up {
+      opacity: 0;
+      animation: fadeUpFromGround 0.82s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      will-change: transform, opacity;
+    }
+    .animate-pop-ground {
+      opacity: 0;
+      animation: popScaleFromGround 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      will-change: transform, opacity;
+    }
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; }
+    .delay-500 { animation-delay: 500ms; }
+
+    #smart-bottom-nav {
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
+      will-change: transform, opacity;
     }
   </style>
   <script>
@@ -1052,29 +1106,29 @@
 <!-- 3. HERO SECTION (Fitted, Cleanly Styled, Single-line Actions) -->
 <section class="relative w-full px-4 pb-7 max-w-md mx-auto"><!-- Edge-to-Edge Hero Image Container with Overlay -->
 <div class="relative w-full -mx-4 left-0 right-0 overflow-hidden min-h-[380px] flex flex-col justify-between p-5 mb-4 shadow-md bg-primary-dark" style="margin-left: -1rem; margin-right: -1rem; width: calc(100% + 2rem);">
-<!-- Background Image -->
-<img alt="Professional Arborist in Tree Canopy" class="absolute inset-0 w-full h-full object-cover object-center" src="./assets/tree_work.jpg">
+<!-- Background Image (Original Heritage Oak & Estate Canopy) -->
+<img alt="Professional Arborist Heritage Tree Canopy" class="absolute inset-0 w-full h-full object-cover object-center" src="./assets/case2-before.jpg">
 <!-- Smooth Deep Forest Green Gradient Overlay from Top Down -->
 <div class="absolute inset-0 bg-gradient-to-t from-[#0B2D23] via-[#0B2D23]/80 to-[#174C3C]/60"></div><div class="absolute inset-0 bg-black/25 backdrop-blur-[0.5px]"></div>
 <!-- Top Area: Pill badge aligned to the right -->
-<div class="relative z-10 flex justify-end w-full pt-2"><div class="flex flex-col items-end gap-2">
+<div class="relative z-10 flex justify-end w-full pt-2 animate-ground-up delay-100"><div class="flex flex-col items-end gap-2">
 <div class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-2xs"><span class="font-headline text-[9px] font-medium uppercase tracking-wider text-white/90 leading-tight">LICENSED &amp; CERTIFIED ARBORISTS</span></div>
 <a class="inline-flex items-center justify-center gap-1.5 px-3 py-1 bg-[#E5B869] text-[#174C3C] font-headline font-bold text-xs tracking-wide shadow-sm hover:brightness-105 active:scale-95 transition-all select-none border border-white/20 rounded-lg cursor-pointer" href="javascript:void(0)" onclick="handleCallNow(event)"><span class="material-symbols-outlined text-sm font-bold leading-none">call</span><span class="">Call Now</span><span class="material-symbols-outlined text-xs leading-none">auto_awesome</span></a>
 </div></div>
 <!-- Bottom/Middle Overlaid Content: Headline, Description & Sleek Compact Call Pill -->
 <div class="relative z-10 mt-auto pt-6 flex flex-col">
-<h1 class="font-display text-[30px] leading-[1.18] text-white mb-2 font-normal drop-shadow-sm">
+<h1 class="font-display text-[30px] leading-[1.18] text-white mb-2 font-normal drop-shadow-sm animate-ground-up delay-200">
       Professional <span class="text-[#9dd2bc] italic font-serif">Tree Care</span>, Made Simple.
     </h1>
-<p class="font-body text-xs text-white/90 leading-relaxed mb-3.5 drop-shadow-xs max-w-sm">
+<p class="font-body text-xs text-white/90 leading-relaxed mb-3.5 drop-shadow-xs max-w-sm animate-ground-up delay-300">
       Expert tree removal, precision pruning, and heritage preservation—keeping your outdoor sanctuary vibrant, balanced, and secure.
     </p>
 <!-- Sleek Compact Call Element / Pill -->
 
-<div class="mt-1 flex items-center"><a href="javascript:void(0)" onclick="handleCallNow(event)" class="inline-flex items-center gap-2 px-3 py-1 bg-white text-primary shadow-md hover:bg-white/90 active:scale-95 transition-all rounded-lg cursor-pointer"><span class="material-symbols-outlined text-sm font-bold text-primary">call</span><span class="font-headline font-extrabold text-xs text-primary">(555) 019-2834</span></a></div></div>
+<div class="mt-1 flex items-center animate-ground-up delay-400"><a href="javascript:void(0)" onclick="handleCallNow(event)" class="inline-flex items-center gap-2 px-3 py-1 bg-white text-primary shadow-md hover:bg-white/90 active:scale-95 transition-all rounded-lg cursor-pointer"><span class="material-symbols-outlined text-sm font-bold text-primary">call</span><span class="font-headline font-extrabold text-xs text-primary">(555) 019-2834</span></a></div></div>
 </div>
 <!-- Hero Actions: Scaled & Single Line Flex/Grid -->
-<div class="grid grid-cols-2 gap-2 mb-4" id="m-estimate-form">
+<div class="grid grid-cols-2 gap-2 mb-4 animate-ground-up delay-400" id="m-estimate-form">
 <a class="w-full py-2.5 px-3 rounded-xl bg-primary text-white font-headline text-xs font-bold uppercase tracking-wider shadow-sm hover:bg-primary-light active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 text-center whitespace-nowrap cursor-pointer" href="javascript:void(0)" onclick="openBookingModal()">
 <span class="">Book Estimate</span>
 <span class="material-symbols-outlined text-base">arrow_forward</span>
@@ -1085,7 +1139,7 @@
 </a>
 </div>
 <!-- Stats Bar -->
-<div class="grid grid-cols-3 gap-1 bg-sage-light/60 border border-sage/20 rounded-xl py-2.5 px-2 text-center">
+<div class="grid grid-cols-3 gap-1 bg-sage-light/60 border border-sage/20 rounded-xl py-2.5 px-2 text-center animate-ground-up delay-500">
 <div>
 <p class="font-headline font-extrabold text-base text-primary leading-tight">2,400+</p>
 <p class="font-label text-[10px] font-semibold text-on-surface-variant">Trees Preserved</p>
@@ -7533,6 +7587,103 @@
         }
       }
     });
+  })();
+</script>
+
+<!-- Intelligent Mobile Pop-Up Navigation (Home, AI Chat, Book) -->
+<nav id="smart-bottom-nav" class="fixed bottom-0 left-0 right-0 w-full z-40 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_24px_rgba(23,76,60,0.08)] translate-y-0 opacity-100 pointer-events-auto">
+  <div class="max-w-md mx-auto flex justify-around items-center h-16 px-4">
+    <a href="javascript:void(0)" onclick="smoothNavigate(event, 'mobile.html')" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-primary font-bold active:scale-95 transition-all">
+      <span class="material-symbols-outlined text-[24px]">home</span>
+      <span class="font-label-md text-xs font-bold text-primary">Home</span>
+    </a>
+    <a href="javascript:void(0)" onclick="smoothNavigate(event, 'mobile-welcome.html')" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">
+      <div class="relative flex items-center justify-center">
+        <span class="material-symbols-outlined text-[24px]">forum</span>
+        <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#E5B869] ring-2 ring-surface-container-lowest"></span>
+      </div>
+      <span class="font-label-md text-xs font-semibold">AI Chat</span>
+    </a>
+    <a href="javascript:void(0)" onclick="openBookingModal()" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all cursor-pointer">
+      <span class="material-symbols-outlined text-[24px]">event_available</span>
+      <span class="font-label-md text-xs font-semibold">Book</span>
+    </a>
+  </div>
+</nav>
+
+<script>
+  // Intelligent Scroll & Gestural Pop-up Controller
+  (function() {
+    const nav = document.getElementById('smart-bottom-nav');
+    if (!nav) return;
+
+    let isNavVisible = true;
+    let lastScrollY = window.scrollY;
+    const threshold = 10;
+    let touchStartY = 0;
+
+    function showNav() {
+      if (isNavVisible) return;
+      isNavVisible = true;
+      nav.classList.remove('translate-y-[130%]', 'opacity-0', 'pointer-events-none');
+      nav.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+    }
+
+    function hideNav() {
+      if (!isNavVisible) return;
+      isNavVisible = false;
+      nav.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      nav.classList.add('translate-y-[130%]', 'opacity-0', 'pointer-events-none');
+    }
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const diff = currentScrollY - lastScrollY;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      if (windowHeight + currentScrollY >= docHeight - 60 || currentScrollY < 50) {
+        showNav();
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      if (diff > threshold) {
+        hideNav();
+      } else if (diff < -threshold) {
+        showNav();
+      }
+
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches[0]) {
+        touchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!e.touches || !e.touches[0]) return;
+      const currentY = e.touches[0].clientY;
+      const deltaY = currentY - touchStartY;
+      const screenHeight = window.innerHeight;
+
+      if (touchStartY > screenHeight * 0.72 && deltaY < -12) {
+        showNav();
+      } else if (touchStartY < screenHeight * 0.7 && deltaY < -25) {
+        hideNav();
+      }
+    }, { passive: true });
+
+    window.smoothNavigate = function(e, url) {
+      if (e) e.preventDefault();
+      hideNav();
+      document.body.classList.add('page-fading-out');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 220);
+    };
   })();
 </script>
 

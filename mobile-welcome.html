@@ -120,8 +120,58 @@
 
 </style>  <style>
     html { background-color: #f2fcf2; }
-    body { opacity: 0; transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
-    body.page-hydrated { opacity: 1 !important; }
+    body { opacity: 0; transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+    body.page-hydrated { opacity: 1 !important; transform: translateY(0) !important; }
+    body.page-fading-out { opacity: 0 !important; transform: translateY(-8px) !important; }
+
+    @keyframes fadeUpFromGround {
+      0% {
+        opacity: 0;
+        transform: translateY(28px) scale(0.97);
+      }
+      65% {
+        opacity: 0.95;
+        transform: translateY(-2px) scale(1.005);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    @keyframes popScaleFromGround {
+      0% {
+        opacity: 0;
+        transform: translateY(35px) scale(0.92);
+      }
+      70% {
+        opacity: 1;
+        transform: translateY(-2px) scale(1.015);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .animate-ground-up {
+      opacity: 0;
+      animation: fadeUpFromGround 0.82s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      will-change: transform, opacity;
+    }
+    .animate-pop-ground {
+      opacity: 0;
+      animation: popScaleFromGround 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      will-change: transform, opacity;
+    }
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; }
+    .delay-500 { animation-delay: 500ms; }
+
+    #smart-bottom-nav {
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
+      will-change: transform, opacity;
+    }
   </style>
   <script>
     (function() {
@@ -150,14 +200,11 @@
         <span class="font-label-md text-label-md text-secondary font-medium truncate">Here to help</span>
       </div>
     </div>
-    <!-- Right Icons: Quill (history_edu) + Person -->
+    <!-- Right Action: Phone Call Button -->
     <div class="flex items-center gap-space-sm flex-shrink-0">
-      <button aria-label="Diagnostic History" class="w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:text-primary transition-colors" type="button">
-        <span class="material-symbols-outlined text-[22px]">history_edu</span>
-      </button>
-      <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm">
-        <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
-      </div>
+      <a href="tel:5550192834" aria-label="Call Arborist Service" class="w-9 h-9 rounded-full bg-primary hover:bg-primary-light text-white flex items-center justify-center shadow-sm active:scale-95 transition-all cursor-pointer" title="Call Arborist (555) 019-2834">
+        <span class="material-symbols-outlined text-[19px]">call</span>
+      </a>
     </div>
   </div>
 </header><main class="flex-1 flex flex-col relative w-full pt-16 pb-20 bg-surface"><div class="flex flex-col w-full relative min-h-full justify-between overflow-hidden">
@@ -190,24 +237,24 @@
 <!-- Central Welcome Area: 2.5D Botanical Specimen & Clean Prompt -->
 <div id="m-welcome-center-stage" class="flex-1 flex flex-col items-center justify-center px-margin text-center z-10 py-space-sm">
 <!-- Specimen 2.5D Illustration Container -->
-<div class="relative w-64 h-64 max-w-[280px] flex items-center justify-center my-space-xs">
+<div class="relative w-64 h-64 max-w-[280px] flex items-center justify-center my-space-xs animate-pop-ground delay-100">
 <!-- Ground Mound with layered tonal shading & warm parchment glow -->
 <div class="absolute bottom-6 w-52 h-14 rounded-[100%] bg-surface-container-highest/60 blur-[1px]"></div>
 <div class="absolute bottom-8 w-44 h-10 rounded-[100%] bg-secondary-container/40"></div>
-<!-- Specimen Imagery: High-end 2.5D miniature botanical estate tree -->
-<div class="relative w-56 h-56 z-10 flex items-center justify-center">
-<img class="w-full h-full object-contain filter drop-shadow-[0_16px_24px_rgba(23,76,60,0.12)] transition-transform duration-700 hover:scale-[1.02]" data-alt="Exquisite isometric 2.5D digital miniature specimen of a lush heritage oak bonsai tree on a soft ivory-parchment ground mound. Layered dense sculptural canopy in deep forest green and soft sage green tones, rich natural bark texture, miniature golden leaf highlights kissed by subtle sunbeams. Luxury architectural botanical monograph rendering style, pristine warm ivory ambient lighting, elegant and dignified, highly detailed, clean soft-focus drop shadow." src="./assets/case2-after.jpg">
+<!-- Specimen Imagery: High-end Bespoke Botanical Study of Heritage Oak Tree -->
+<div class="relative w-60 h-60 z-10 flex items-center justify-center rounded-2xl overflow-hidden p-1">
+<img class="w-full h-full object-contain filter drop-shadow-[0_16px_28px_rgba(23,76,60,0.14)] transition-transform duration-700 hover:scale-[1.03]" alt="Detailed Botanical Illustration of Heritage Oak Tree" src="./assets/botanical-tree.jpg">
 </div>
 <!-- Subtle Golden Sunlight Accents -->
 <div class="pointer-events-none absolute top-4 right-8 w-6 h-6 rounded-full bg-tertiary-fixed-dim/40 blur-md"></div>
 <div class="pointer-events-none absolute top-8 left-10 w-4 h-4 rounded-full bg-surface-bright/70 blur-sm"></div>
 </div>
 <!-- Editorial Welcome Typography -->
-<div class="max-w-[320px] flex flex-col gap-space-xs mt-space-xs">
-<h2 class="font-display-serif text-[32px] sm:text-[38px] lg:text-[44px] leading-[38px] sm:leading-[46px] text-primary tracking-tight font-medium">
+<div class="max-w-[340px] flex flex-col gap-space-xs mt-space-xs">
+<h2 class="font-display-serif text-[32px] sm:text-[38px] lg:text-[44px] leading-[38px] sm:leading-[46px] text-primary tracking-tight font-medium animate-ground-up delay-200">
         How Can I Help Today?
       </h2>
-<p class="font-body text-sm sm:text-base text-on-surface-variant font-normal leading-relaxed mt-2 max-w-sm mx-auto">
+<p class="font-body text-sm sm:text-base text-on-surface-variant font-normal leading-relaxed mt-2 max-w-sm mx-auto animate-ground-up delay-300">
         Ask about your trees, share a photo, or request an ISA-certified assessment.
       </p>
 </div>
@@ -236,7 +283,7 @@
   </div>
 </div>
 <!-- Message Composer Container (Floating Pill above navigation - Centered & Comfortable Margins) -->
-<div class="w-full max-w-[440px] mx-auto px-4 sm:px-6 pb-space-sm pt-space-xs z-30">
+<div class="w-full max-w-[440px] mx-auto px-4 sm:px-6 pb-space-sm pt-space-xs z-30 animate-ground-up delay-400">
   <div class="relative w-full">
     <!-- Popover Attachment Menu (Creamy Spring Bounce-Back: 3 Unified Options) -->
     <div aria-label="Attachment Options" class="absolute bottom-full left-0 mb-3 w-64 bg-surface-container-lowest rounded-2xl p-space-xs shadow-[0_18px_50px_-10px_rgba(23,76,60,0.25),0_4px_16px_rgba(0,0,0,0.08)] border border-outline-variant/30 origin-bottom-left will-change-transform hidden z-40" id="m-attachment-menu" role="menu">
@@ -498,24 +545,106 @@
       });
     }
   })();
-</script></main><nav class="fixed bottom-0 left-0 right-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_24px_rgba(23,76,60,0.06)]">
+</script></main>
+
+<!-- Intelligent Pop-Up Tree Navigation (Home, AI Chat, Book) -->
+<nav id="smart-bottom-nav" class="fixed bottom-0 left-0 right-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_24px_rgba(23,76,60,0.08)] translate-y-0 opacity-100 pointer-events-auto">
   <div class="max-w-md mx-auto flex justify-around items-center h-16 px-4">
-    <a href="mobile.html" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">
+    <a href="javascript:void(0)" onclick="smoothNavigate(event, 'mobile.html')" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">
       <span class="material-symbols-outlined text-[24px]">home</span>
       <span class="font-label-md text-xs font-semibold">Home</span>
     </a>
-    <a href="mobile-welcome.html" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-primary font-bold active:scale-95 transition-all">
+    <a href="javascript:void(0)" onclick="smoothNavigate(event, 'mobile-welcome.html')" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-primary font-bold active:scale-95 transition-all">
       <div class="relative flex items-center justify-center">
         <span class="material-symbols-outlined text-[24px]">forum</span>
         <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#E5B869] ring-2 ring-surface-container-lowest"></span>
       </div>
       <span class="font-label-md text-xs font-bold text-primary">AI Chat</span>
     </a>
-    <a href="booking.html" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">
+    <a href="javascript:void(0)" onclick="smoothNavigate(event, 'booking.html')" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">
       <span class="material-symbols-outlined text-[24px]">event_available</span>
       <span class="font-label-md text-xs font-semibold">Book</span>
     </a>
   </div>
 </nav>
+
+<script>
+  // Intelligent Scroll & Gestural Pop-up Controller
+  (function() {
+    const nav = document.getElementById('smart-bottom-nav');
+    if (!nav) return;
+
+    let isNavVisible = true;
+    let lastScrollY = window.scrollY;
+    const threshold = 10;
+    let touchStartY = 0;
+
+    function showNav() {
+      if (isNavVisible) return;
+      isNavVisible = true;
+      nav.classList.remove('translate-y-[130%]', 'opacity-0', 'pointer-events-none');
+      nav.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+    }
+
+    function hideNav() {
+      if (!isNavVisible) return;
+      isNavVisible = false;
+      nav.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      nav.classList.add('translate-y-[130%]', 'opacity-0', 'pointer-events-none');
+    }
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const diff = currentScrollY - lastScrollY;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      if (windowHeight + currentScrollY >= docHeight - 60 || currentScrollY < 50) {
+        showNav();
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      if (diff > threshold) {
+        hideNav();
+      } else if (diff < -threshold) {
+        showNav();
+      }
+
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+
+    // Gesture Analyzer: Detect user thumb reaching down and swiping up slightly
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches[0]) {
+        touchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!e.touches || !e.touches[0]) return;
+      const currentY = e.touches[0].clientY;
+      const deltaY = currentY - touchStartY;
+      const screenHeight = window.innerHeight;
+
+      // When thumb is at bottom 28% of screen and swipes up slightly (user intends to navigate)
+      if (touchStartY > screenHeight * 0.72 && deltaY < -12) {
+        showNav();
+      } else if (touchStartY < screenHeight * 0.7 && deltaY < -25) {
+        // Normal deep reading scroll -> hide nav
+        hideNav();
+      }
+    }, { passive: true });
+
+    window.smoothNavigate = function(e, url) {
+      if (e) e.preventDefault();
+      hideNav();
+      document.body.classList.add('page-fading-out');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 220);
+    };
+  })();
+</script>
 
 </body></html>
