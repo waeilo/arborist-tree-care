@@ -890,6 +890,32 @@
 }
 </style>
 
+  <style>
+    /* Instant Zero-Jiggle Smooth Hydration */
+    html {
+      background-color: #f2fcf2;
+    }
+    body {
+      opacity: 0;
+      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    body.page-hydrated {
+      opacity: 1 !important;
+    }
+  </style>
+  <script>
+    (function() {
+      function reveal() {
+        if (document.body) document.body.classList.add('page-hydrated');
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', reveal);
+      } else {
+        reveal();
+      }
+      setTimeout(reveal, 150);
+    })();
+  </script>
 </head>
 <body class="bg-surface antialiased">
 
@@ -2964,11 +2990,11 @@
 </div>
 <!-- Editorial Welcome Typography -->
 <div class="max-w-[320px] flex flex-col gap-space-xs mt-space-xs">
-<h2 class="font-display-lg-mobile text-display-lg-mobile text-on-surface tracking-tight font-normal">
+<h2 class="font-display-serif text-[32px] sm:text-[38px] lg:text-[44px] leading-[38px] sm:leading-[46px] text-primary tracking-tight font-medium">
         How Can I Help Today?
       </h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant font-normal leading-relaxed">
-        Ask about your trees, share a photo, or book an ISA-certified assessment.
+<p class="font-body text-sm sm:text-base text-on-surface-variant font-normal leading-relaxed mt-2 max-w-sm mx-auto">
+        Ask about your trees, share a photo, or request an ISA-certified assessment.
       </p>
 </div>
 </div>
@@ -2995,8 +3021,8 @@
     </div>
   </div>
 </div>
-<!-- Message Composer Container (Floating Pill above navigation) -->
-<div class="w-full px-margin pb-space-sm pt-space-xs z-30">
+<!-- Message Composer Container (Floating Pill above navigation - Centered & Comfortable Margins) -->
+<div class="w-full max-w-[440px] mx-auto px-4 sm:px-6 pb-space-sm pt-space-xs z-30">
   <div class="relative w-full">
     <!-- Popover Attachment Menu (Creamy Spring Bounce-Back: 3 Unified Options) -->
     <div aria-label="Attachment Options" class="absolute bottom-full left-0 mb-3 w-64 bg-surface-container-lowest rounded-2xl p-space-xs shadow-[0_18px_50px_-10px_rgba(23,76,60,0.25),0_4px_16px_rgba(0,0,0,0.08)] border border-outline-variant/30 origin-bottom-left will-change-transform hidden z-40" id="m-attachment-menu" role="menu">
@@ -3065,22 +3091,22 @@
 </div>
 
     </main>
-    <nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-4px_24px_rgba(23,76,60,0.06)]">
-      <div class="flex justify-around items-center h-16 px-margin">
-        <button onclick="closeMobileAi()" class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary transition-colors" type="button">
-          <span class="material-symbols-outlined text-[24px]">potted_plant</span>
-          <span class="font-label-md text-label-md">Home</span>
+    <nav class="fixed bottom-0 left-0 right-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_24px_rgba(23,76,60,0.06)]">
+      <div class="max-w-md mx-auto flex justify-around items-center h-16 px-4">
+        <button onclick="closeMobileAi()" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all" type="button">
+          <span class="material-symbols-outlined text-[24px]">home</span>
+          <span class="font-label-md text-xs font-semibold">Home</span>
         </button>
-        <button class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] transition-colors text-primary font-bold" type="button">
+        <button class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-primary font-bold active:scale-95 transition-all" type="button">
           <div class="relative flex items-center justify-center">
-            <span class="material-symbols-outlined text-[24px]">psychology</span>
-            <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span>
+            <span class="material-symbols-outlined text-[24px]">forum</span>
+            <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#E5B869] ring-2 ring-surface-container-lowest"></span>
           </div>
-          <span class="font-label-md text-label-md">AI Chat</span>
+          <span class="font-label-md text-xs font-bold text-primary">AI Chat</span>
         </button>
-        <button aria-disabled="true" class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] text-outline/50 pointer-events-none cursor-not-allowed" type="button">
+        <button onclick="closeMobileAi(); openBookingModal();" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all cursor-pointer" type="button">
           <span class="material-symbols-outlined text-[24px]">event_available</span>
-          <span class="font-label-md text-label-md">My Booking</span>
+          <span class="font-label-md text-xs font-semibold">Book</span>
         </button>
       </div>
     </nav>

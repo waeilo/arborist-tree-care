@@ -141,6 +141,19 @@
   }
 
   </style>
+  <style>
+    html { background-color: #f2fcf2; }
+    body { opacity: 0; transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+    body.page-hydrated { opacity: 1 !important; }
+  </style>
+  <script>
+    (function() {
+      function reveal() { if (document.body) document.body.classList.add('page-hydrated'); }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', reveal);
+      else reveal();
+      setTimeout(reveal, 150);
+    })();
+  </script>
 </head>
 <body class="bg-surface font-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-fixed">
 

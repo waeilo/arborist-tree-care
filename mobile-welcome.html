@@ -118,7 +118,20 @@
   transform-origin: bottom right;
 }
 
-</style></head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen selection:bg-secondary-container selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(23,76,60,0.05)]">
+</style>  <style>
+    html { background-color: #f2fcf2; }
+    body { opacity: 0; transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+    body.page-hydrated { opacity: 1 !important; }
+  </style>
+  <script>
+    (function() {
+      function reveal() { if (document.body) document.body.classList.add('page-hydrated'); }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', reveal);
+      else reveal();
+      setTimeout(reveal, 150);
+    })();
+  </script>
+</head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen selection:bg-secondary-container selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(23,76,60,0.05)]">
   <div class="h-16 px-margin flex items-center justify-between gap-space-sm">
     <!-- Unified Left Title: Tree Care AI Emblem + Here to help -->
     <div class="flex items-center gap-2.5 min-w-0">
@@ -191,11 +204,11 @@
 </div>
 <!-- Editorial Welcome Typography -->
 <div class="max-w-[320px] flex flex-col gap-space-xs mt-space-xs">
-<h2 class="font-display-lg-mobile text-display-lg-mobile text-on-surface tracking-tight font-normal">
+<h2 class="font-display-serif text-[32px] sm:text-[38px] lg:text-[44px] leading-[38px] sm:leading-[46px] text-primary tracking-tight font-medium">
         How Can I Help Today?
       </h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant font-normal leading-relaxed">
-        Ask about your trees, share a photo, or book an ISA-certified assessment.
+<p class="font-body text-sm sm:text-base text-on-surface-variant font-normal leading-relaxed mt-2 max-w-sm mx-auto">
+        Ask about your trees, share a photo, or request an ISA-certified assessment.
       </p>
 </div>
 </div>
@@ -222,8 +235,8 @@
     </div>
   </div>
 </div>
-<!-- Message Composer Container (Floating Pill above navigation) -->
-<div class="w-full px-margin pb-space-sm pt-space-xs z-30">
+<!-- Message Composer Container (Floating Pill above navigation - Centered & Comfortable Margins) -->
+<div class="w-full max-w-[440px] mx-auto px-4 sm:px-6 pb-space-sm pt-space-xs z-30">
   <div class="relative w-full">
     <!-- Popover Attachment Menu (Creamy Spring Bounce-Back: 3 Unified Options) -->
     <div aria-label="Attachment Options" class="absolute bottom-full left-0 mb-3 w-64 bg-surface-container-lowest rounded-2xl p-space-xs shadow-[0_18px_50px_-10px_rgba(23,76,60,0.25),0_4px_16px_rgba(0,0,0,0.08)] border border-outline-variant/30 origin-bottom-left will-change-transform hidden z-40" id="m-attachment-menu" role="menu">
@@ -485,6 +498,24 @@
       });
     }
   })();
-</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-4px_24px_rgba(23,76,60,0.06)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-16 px-margin"><a class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary transition-colors" data-path="home" href="mobile.html"><span class="material-symbols-outlined text-[24px]">potted_plant</span><span class="font-label-md text-label-md">Home</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] transition-colors text-primary font-bold" data-path="ai-tree-care-assistant" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[24px]">psychology</span><span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span></div><span class="font-label-md text-label-md">AI Chat</span></a><a aria-disabled="true" class="flex flex-col items-center justify-center gap-space-xs min-w-[64px] min-h-[44px] text-outline/50 pointer-events-none cursor-not-allowed" data-path="my-booking" href="#"><span class="material-symbols-outlined text-[24px]">event_available</span><span class="font-label-md text-label-md">My Booking</span></a></div></nav>
+</script></main><nav class="fixed bottom-0 left-0 right-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_24px_rgba(23,76,60,0.06)]">
+  <div class="max-w-md mx-auto flex justify-around items-center h-16 px-4">
+    <a href="mobile.html" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">
+      <span class="material-symbols-outlined text-[24px]">home</span>
+      <span class="font-label-md text-xs font-semibold">Home</span>
+    </a>
+    <a href="mobile-welcome.html" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-primary font-bold active:scale-95 transition-all">
+      <div class="relative flex items-center justify-center">
+        <span class="material-symbols-outlined text-[24px]">forum</span>
+        <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#E5B869] ring-2 ring-surface-container-lowest"></span>
+      </div>
+      <span class="font-label-md text-xs font-bold text-primary">AI Chat</span>
+    </a>
+    <a href="booking.html" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">
+      <span class="material-symbols-outlined text-[24px]">event_available</span>
+      <span class="font-label-md text-xs font-semibold">Book</span>
+    </a>
+  </div>
+</nav>
 
 </body></html>

@@ -116,7 +116,20 @@
       overflow-x: auto;
     }
   }
-</style></head><body class="bg-background font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 w-full z-50 pt-safe bg-[#174c3c]/95 backdrop-blur-md border-b border-white/10 shadow-md text-white">
+</style>  <style>
+    html { background-color: #f2fcf2; }
+    body { opacity: 0; transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+    body.page-hydrated { opacity: 1 !important; }
+  </style>
+  <script>
+    (function() {
+      function reveal() { if (document.body) document.body.classList.add('page-hydrated'); }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', reveal);
+      else reveal();
+      setTimeout(reveal, 150);
+    })();
+  </script>
+</head><body class="bg-background font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 w-full z-50 pt-safe bg-[#174c3c]/95 backdrop-blur-md border-b border-white/10 shadow-md text-white">
   <div class="h-16 px-4 flex items-center justify-between">
     <a href="../index.html" class="flex items-center gap-2 group cursor-pointer" title="Return to Public Site">
       <img alt="ARBORIST Logo" class="h-8 w-auto object-contain drop-shadow" src="../assets/logo.png">

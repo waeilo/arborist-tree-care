@@ -189,6 +189,19 @@
 }
 </style>
 
+  <style>
+    html { background-color: #F8F7F2; }
+    body { opacity: 0; transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+    body.page-hydrated { opacity: 1 !important; }
+  </style>
+  <script>
+    (function() {
+      function reveal() { if (document.body) document.body.classList.add('page-hydrated'); }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', reveal);
+      else reveal();
+      setTimeout(reveal, 150);
+    })();
+  </script>
 </head><body class="bg-background font-body-md text-on-surface antialiased overflow-x-hidden min-w-0"><header class="fixed top-0 left-0 right-0 z-50 bg-[#174c3c]/95 backdrop-blur-md border-b border-white/10 shadow-md">
   <div class="h-14 sm:h-20 w-full px-4 sm:px-margin md:px-margin-md lg:px-margin-lg max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
     <!-- Brand Logo & Name -->

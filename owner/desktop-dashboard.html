@@ -111,7 +111,20 @@
       overflow-x: auto;
     }
   }
-</style></head><body class="standalone-desktop bg-surface font-body-md text-on-surface antialiased"><aside id="owner-persistent-aside" class="fixed left-0 top-[76px] h-[calc(100vh-76px)] w-[230px] bg-surface-container-lowest border-r border-outline-variant z-40 flex flex-col justify-between select-none">
+</style>  <style>
+    html { background-color: #f2fcf2; }
+    body { opacity: 0; transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+    body.page-hydrated { opacity: 1 !important; }
+  </style>
+  <script>
+    (function() {
+      function reveal() { if (document.body) document.body.classList.add('page-hydrated'); }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', reveal);
+      else reveal();
+      setTimeout(reveal, 150);
+    })();
+  </script>
+</head><body class="standalone-desktop bg-surface font-body-md text-on-surface antialiased"><aside id="owner-persistent-aside" class="fixed left-0 top-[76px] h-[calc(100vh-76px)] w-[230px] bg-surface-container-lowest border-r border-outline-variant z-40 flex flex-col justify-between select-none">
     <div class="flex flex-col">
       <div class="px-space-md pt-5 pb-2">
         <span class="font-label-sm text-[10px] uppercase tracking-wider text-outline font-bold">Portal Navigation</span>
