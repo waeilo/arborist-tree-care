@@ -891,71 +891,39 @@
 </style>
 
   <style>
-    /* Instant Zero-Jiggle Smooth Hydration & Fluid Motion */
+    /* Instant Zero-Jiggle Smooth Hydration (Strictly opacity-only on body so fixed modals never break) */
     html {
       background-color: #f2fcf2;
     }
     body {
       opacity: 0;
-      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
     body.page-hydrated {
       opacity: 1 !important;
-      transform: translateY(0) !important;
     }
     body.page-fading-out {
       opacity: 0 !important;
-      transform: translateY(-8px) !important;
     }
-
     @keyframes fadeUpFromGround {
       0% {
         opacity: 0;
-        transform: translateY(28px) scale(0.98);
-      }
-      65% {
-        opacity: 0.95;
-        transform: translateY(-2px) scale(1.005);
+        transform: translate3d(0, 26px, 0) scale(0.985);
       }
       100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-    @keyframes popScaleFromGround {
-      0% {
-        opacity: 0;
-        transform: translateY(36px) scale(0.92);
-      }
-      70% {
-        opacity: 1;
-        transform: translateY(-2px) scale(1.015);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
       }
     }
     .animate-ground-up {
       opacity: 0;
-      animation: fadeUpFromGround 0.82s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeUpFromGround 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       will-change: transform, opacity;
     }
-    .animate-pop-ground {
-      opacity: 0;
-      animation: popScaleFromGround 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      will-change: transform, opacity;
-    }
-    .delay-100 { animation-delay: 100ms; }
-    .delay-200 { animation-delay: 200ms; }
-    .delay-300 { animation-delay: 300ms; }
-    .delay-400 { animation-delay: 400ms; }
-    .delay-500 { animation-delay: 500ms; }
-
-    #smart-bottom-nav {
-      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
-      will-change: transform, opacity;
-    }
+    .delay-100 { animation-delay: 0.08s; }
+    .delay-200 { animation-delay: 0.16s; }
+    .delay-300 { animation-delay: 0.24s; }
+    .delay-400 { animation-delay: 0.32s; }
   </style>
   <script>
     (function() {
@@ -1025,6 +993,7 @@
 <span class="material-symbols-outlined text-base">arrow_forward</span>
 </a>
 <div class="grid grid-cols-2 gap-2 w-full"><a class="w-full py-2.5 px-3 rounded-xl bg-surface-card border border-outline-soft text-primary font-headline text-xs font-bold uppercase tracking-wider shadow-xs hover:bg-sage-light/60 active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 text-center whitespace-nowrap" href="javascript:void(0)" onclick="closeMobileMenu(); handleTalkToAi(event);"><span class="material-symbols-outlined text-sm text-primary">auto_awesome</span><span class="">Talk to AI</span></a><a class="w-full py-2.5 px-3 rounded-xl bg-[#E5B869] text-primary font-headline text-xs font-extrabold uppercase tracking-wider shadow-sm hover:brightness-105 active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 text-center border border-white/20 whitespace-nowrap" href="javascript:void(0)" onclick="handleCallNow(event); closeMobileMenu();"><span class="material-symbols-outlined text-sm text-primary font-bold leading-none">call</span><span class="">Call Now</span><span class="material-symbols-outlined text-sm text-primary font-bold leading-none">auto_awesome</span></a></div>
+<div class="grid grid-cols-2 gap-2 w-full pt-0.5"><a class="w-full py-2 px-3 rounded-xl bg-white border border-outline-soft text-primary font-headline text-xs font-bold tracking-wide hover:bg-sage-light/50 active:scale-[0.98] transition-all flex items-center justify-center cursor-pointer" href="javascript:void(0)" onclick="closeMobileMenu(); openAuthModal('signin');">Sign In</a><a class="w-full py-2 px-3 rounded-xl bg-sage-light/70 border border-sage/30 text-primary font-headline text-xs font-bold tracking-wide hover:bg-sage-light active:scale-[0.98] transition-all flex items-center justify-center cursor-pointer" href="javascript:void(0)" onclick="closeMobileMenu(); openAuthModal('signup');">Sign Up</a></div>
 </div>
 <!-- Emergency Hotline Card Footer -->
 <div class="mt-3 bg-sage-light/70 rounded-xl p-2.5 border border-sage/20 flex items-center justify-between">
@@ -1105,30 +1074,30 @@
 <main class="w-full flex flex-col">
 <!-- 3. HERO SECTION (Fitted, Cleanly Styled, Single-line Actions) -->
 <section class="relative w-full px-4 pb-7 max-w-md mx-auto"><!-- Edge-to-Edge Hero Image Container with Overlay -->
-<div class="relative w-full -mx-4 left-0 right-0 overflow-hidden min-h-[380px] flex flex-col justify-between p-5 mb-4 shadow-md bg-primary-dark" style="margin-left: -1rem; margin-right: -1rem; width: calc(100% + 2rem);">
-<!-- Background Image (Original Heritage Oak & Estate Canopy) -->
-<img alt="Professional Arborist Heritage Tree Canopy" class="absolute inset-0 w-full h-full object-cover object-center" src="./assets/case2-before.jpg">
-<!-- Smooth Deep Forest Green Gradient Overlay from Top Down -->
-<div class="absolute inset-0 bg-gradient-to-t from-[#0B2D23] via-[#0B2D23]/80 to-[#174C3C]/60"></div><div class="absolute inset-0 bg-black/25 backdrop-blur-[0.5px]"></div>
+<div class="relative w-full -mx-4 left-0 right-0 overflow-hidden min-h-[390px] flex flex-col justify-between p-5 mb-4 shadow-md bg-primary-dark" style="margin-left: -1rem; margin-right: -1rem; width: calc(100% + 2rem);">
+<!-- Background Image: Cropped specifically for phone to frame the arborist cutting the branch -->
+<img alt="Professional Arborist in Tree Canopy" class="absolute inset-0 w-full h-full object-cover object-[52%_20%]" src="./assets/tree_work.jpg">
+<!-- Smooth Deep Forest Green Gradient Overlay from Bottom Up so the arborist in canopy is clear -->
+<div class="absolute inset-0 bg-gradient-to-t from-[#0B2D23]/95 via-[#0B2D23]/55 to-[#174C3C]/25"></div><div class="absolute inset-0 bg-black/15"></div>
 <!-- Top Area: Pill badge aligned to the right -->
-<div class="relative z-10 flex justify-end w-full pt-2 animate-ground-up delay-100"><div class="flex flex-col items-end gap-2">
+<div class="relative z-10 flex justify-end w-full pt-2 animate-ground-up"><div class="flex flex-col items-end gap-2">
 <div class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-2xs"><span class="font-headline text-[9px] font-medium uppercase tracking-wider text-white/90 leading-tight">LICENSED &amp; CERTIFIED ARBORISTS</span></div>
 <a class="inline-flex items-center justify-center gap-1.5 px-3 py-1 bg-[#E5B869] text-[#174C3C] font-headline font-bold text-xs tracking-wide shadow-sm hover:brightness-105 active:scale-95 transition-all select-none border border-white/20 rounded-lg cursor-pointer" href="javascript:void(0)" onclick="handleCallNow(event)"><span class="material-symbols-outlined text-sm font-bold leading-none">call</span><span class="">Call Now</span><span class="material-symbols-outlined text-xs leading-none">auto_awesome</span></a>
 </div></div>
 <!-- Bottom/Middle Overlaid Content: Headline, Description & Sleek Compact Call Pill -->
-<div class="relative z-10 mt-auto pt-6 flex flex-col">
-<h1 class="font-display text-[30px] leading-[1.18] text-white mb-2 font-normal drop-shadow-sm animate-ground-up delay-200">
+<div class="relative z-10 mt-auto pt-8 flex flex-col">
+<h1 class="font-display text-[30px] leading-[1.18] text-white mb-2 font-normal drop-shadow-sm animate-ground-up delay-100">
       Professional <span class="text-[#9dd2bc] italic font-serif">Tree Care</span>, Made Simple.
     </h1>
-<p class="font-body text-xs text-white/90 leading-relaxed mb-3.5 drop-shadow-xs max-w-sm animate-ground-up delay-300">
+<p class="font-body text-xs text-white/90 leading-relaxed mb-3.5 drop-shadow-xs max-w-sm animate-ground-up delay-200">
       Expert tree removal, precision pruning, and heritage preservation—keeping your outdoor sanctuary vibrant, balanced, and secure.
     </p>
 <!-- Sleek Compact Call Element / Pill -->
 
-<div class="mt-1 flex items-center animate-ground-up delay-400"><a href="javascript:void(0)" onclick="handleCallNow(event)" class="inline-flex items-center gap-2 px-3 py-1 bg-white text-primary shadow-md hover:bg-white/90 active:scale-95 transition-all rounded-lg cursor-pointer"><span class="material-symbols-outlined text-sm font-bold text-primary">call</span><span class="font-headline font-extrabold text-xs text-primary">(555) 019-2834</span></a></div></div>
+<div class="mt-1 flex items-center animate-ground-up delay-200"><a href="javascript:void(0)" onclick="handleCallNow(event)" class="inline-flex items-center gap-2 px-3 py-1 bg-white text-primary shadow-md hover:bg-white/90 active:scale-95 transition-all rounded-lg cursor-pointer"><span class="material-symbols-outlined text-sm font-bold text-primary">call</span><span class="font-headline font-extrabold text-xs text-primary">(555) 019-2834</span></a></div></div>
 </div>
 <!-- Hero Actions: Scaled & Single Line Flex/Grid -->
-<div class="grid grid-cols-2 gap-2 mb-4 animate-ground-up delay-400" id="m-estimate-form">
+<div class="grid grid-cols-2 gap-2 mb-4 animate-ground-up delay-300" id="m-estimate-form">
 <a class="w-full py-2.5 px-3 rounded-xl bg-primary text-white font-headline text-xs font-bold uppercase tracking-wider shadow-sm hover:bg-primary-light active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 text-center whitespace-nowrap cursor-pointer" href="javascript:void(0)" onclick="openBookingModal()">
 <span class="">Book Estimate</span>
 <span class="material-symbols-outlined text-base">arrow_forward</span>
@@ -1139,7 +1108,7 @@
 </a>
 </div>
 <!-- Stats Bar -->
-<div class="grid grid-cols-3 gap-1 bg-sage-light/60 border border-sage/20 rounded-xl py-2.5 px-2 text-center animate-ground-up delay-500">
+<div class="grid grid-cols-3 gap-1 bg-sage-light/60 border border-sage/20 rounded-xl py-2.5 px-2 text-center animate-ground-up delay-400">
 <div>
 <p class="font-headline font-extrabold text-base text-primary leading-tight">2,400+</p>
 <p class="font-label text-[10px] font-semibold text-on-surface-variant">Trees Preserved</p>
@@ -1833,26 +1802,153 @@
 </div>
 </div>
 </footer>
+<!-- Intelligent Scroll-Analyzing Pop-Up Bottom Navigation (Phone Only) -->
+<nav id="smart-bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 w-full z-40 pb-safe bg-[#F8F7F2]/95 backdrop-blur-xl border-t border-outline-soft/60 shadow-[0_-8px_30px_rgba(23,76,60,0.12)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-[120%] opacity-0 pointer-events-none">
+  <div class="w-9 h-1 bg-primary/20 rounded-full mx-auto mt-1.5"></div>
+  <div class="max-w-md mx-auto flex justify-around items-center h-15 py-1.5 px-4">
+    <button type="button" onclick="window.triggerSmartNavAction('home', event)" class="flex flex-col items-center justify-center gap-0.5 min-w-[68px] min-h-[44px] text-primary font-bold active:scale-95 transition-all cursor-pointer">
+      <span class="material-symbols-outlined text-[23px]">home</span>
+      <span class="font-headline text-[11px] font-bold text-primary">Home</span>
+    </button>
+    <button type="button" onclick="window.triggerSmartNavAction('ai', event)" class="flex flex-col items-center justify-center gap-0.5 min-w-[68px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all cursor-pointer">
+      <div class="relative flex items-center justify-center">
+        <span class="material-symbols-outlined text-[23px]">forum</span>
+        <span class="absolute -top-0.5 -right-1 w-2 h-2 rounded-full bg-[#E5B869] ring-2 ring-[#F8F7F2]"></span>
+      </div>
+      <span class="font-headline text-[11px] font-semibold">AI Chat</span>
+    </button>
+    <button type="button" onclick="window.triggerSmartNavAction('book', event)" class="flex flex-col items-center justify-center gap-0.5 min-w-[68px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all cursor-pointer">
+      <span class="material-symbols-outlined text-[23px]">event_available</span>
+      <span class="font-headline text-[11px] font-semibold">Book</span>
+    </button>
+  </div>
+</nav>
+<script>
+  (function initSmartBottomNav() {
+    const nav = document.getElementById('smart-bottom-nav');
+    if (!nav) return;
+
+    let isVisible = false;
+    let lastScrollY = window.scrollY || 0;
+    let bottomReachedOnce = false;
+    let touchStartY = 0;
+    let touchStartInBottomZone = false;
+
+    function showNav() {
+      if (isVisible) return;
+      isVisible = true;
+      nav.classList.remove('translate-y-[120%]', 'opacity-0', 'pointer-events-none');
+      nav.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+    }
+
+    function hideNav() {
+      if (!isVisible) return;
+      isVisible = false;
+      nav.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      nav.classList.add('translate-y-[120%]', 'opacity-0', 'pointer-events-none');
+    }
+
+    window.hideSmartBottomNav = hideNav;
+    window.showSmartBottomNav = showNav;
+
+    window.triggerSmartNavAction = function(target, e) {
+      if (e) { try { e.preventDefault(); } catch(err) {} }
+      hideNav();
+      const root = document.getElementById('mobile-viewport-root');
+      if (target === 'home') {
+        if (root) {
+          root.style.transition = 'opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1)';
+          root.style.opacity = '0.6';
+          setTimeout(() => { root.style.opacity = '1'; }, 180);
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (target === 'ai') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (typeof handleTalkToAi === 'function') handleTalkToAi(e);
+        else if (typeof openMobileAi === 'function') openMobileAi('welcome');
+      } else if (target === 'book') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (typeof openBookingModal === 'function') openBookingModal();
+      }
+    };
+
+    window.addEventListener('scroll', function() {
+      if (window.innerWidth >= 768) return;
+      const currentY = window.scrollY || 0;
+      const dy = currentY - lastScrollY;
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const nearBottom = maxScroll > 100 && currentY >= maxScroll - 60;
+
+      if (nearBottom) {
+        if (bottomReachedOnce && dy >= -2) {
+          showNav();
+        }
+        bottomReachedOnce = true;
+      } else {
+        if (currentY < maxScroll - 220) {
+          bottomReachedOnce = false;
+        }
+        if (dy > 10 && currentY > 60) {
+          // User continues scrolling down -> hide nav smoothly
+          hideNav();
+        } else if (dy < -24 && currentY > 180) {
+          // Deliberate upward scroll -> show nav
+          showNav();
+        }
+      }
+      lastScrollY = currentY;
+    }, { passive: true });
+
+    window.addEventListener('touchstart', function(e) {
+      if (window.innerWidth >= 768 || !e.touches || !e.touches[0]) return;
+      touchStartY = e.touches[0].clientY;
+      touchStartInBottomZone = touchStartY >= (window.innerHeight - 135);
+    }, { passive: true });
+
+    window.addEventListener('touchmove', function(e) {
+      if (window.innerWidth >= 768 || !e.touches || !e.touches[0]) return;
+      const currentTouchY = e.touches[0].clientY;
+      const swipeDy = currentTouchY - touchStartY; // negative = swipe up
+
+      const currentY = window.scrollY || 0;
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const nearBottom = currentY >= maxScroll - 65;
+
+      // 1. User brings hand down to bottom navigation zone and swipes up slightly -> show nav!
+      if (touchStartInBottomZone && swipeDy < -14) {
+        showNav();
+      }
+      // 2. Or at bottom of page and swipes up again -> show nav!
+      else if (nearBottom && bottomReachedOnce && swipeDy < -18) {
+        showNav();
+      }
+      // 3. If user was swiping down to scroll content further down -> hide nav
+      else if (!touchStartInBottomZone && swipeDy < -30 && currentY < maxScroll - 120) {
+        hideNav();
+      }
+    }, { passive: true });
+  })();
+</script>
   </div>
 
   <!-- ======================================================== -->
   <!-- 2. DESKTOP & TABLET VIEWPORT (>= 768px)                  -->
-  <!--    - 768px - 1024px: Clean, Balanced Tablet Layout       -->
+  <!--    - 768px - 1024px: Clean, Balanced iPad/Tablet Layout  -->
   <!--    - >= 1024px: Full Spacious Desktop Layout             -->
   <!-- ======================================================== -->
   <div id="desktop-viewport-root" class="w-full overflow-x-hidden min-h-screen bg-surface font-body-md text-body-md text-on-surface antialiased">
-<header class="fixed top-0 left-0 right-0 z-50 bg-[#174c3c]/90 backdrop-blur-md border-b border-white/10 shadow-lg"><div class="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between gap-6"><div class="flex items-center gap-3.5"><a href="javascript:void(0)" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="flex items-center gap-3 group cursor-pointer"><img alt="ARBORIST Tree Surgeon Care and Removal Services Logo" class="h-12 w-auto object-contain drop-shadow transition-transform group-hover:scale-105" src="./assets/logo.png"><div class="flex flex-col justify-center"><span class="font-headline-md text-2xl tracking-tight text-[#F8F7F2] font-extrabold leading-none uppercase">ARBORIST</span><span class="font-label-sm text-[10px] tracking-[0.2em] uppercase text-[#8EAD91] font-bold mt-1">CARE &amp; REMOVAL</span></div></a></div><nav id="desktop-nav-pill-track" class="hidden md:flex relative items-center p-1 rounded-full bg-white/10 border border-white/15 backdrop-blur-md shadow-sm">
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#174c3c]/90 backdrop-blur-md border-b border-white/10 shadow-lg"><div class="max-w-7xl mx-auto px-4 md:px-5 lg:px-8 h-20 flex items-center justify-between gap-2 md:gap-3 lg:gap-6"><div class="flex items-center gap-2.5 lg:gap-3.5 shrink-0"><a href="javascript:void(0)" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="flex items-center gap-2.5 lg:gap-3 group cursor-pointer"><img alt="ARBORIST Tree Surgeon Care and Removal Services Logo" class="h-10 lg:h-12 w-auto object-contain drop-shadow transition-transform group-hover:scale-105" src="./assets/logo.png"><div class="flex flex-col justify-center"><span class="font-headline-md text-xl lg:text-2xl tracking-tight text-[#F8F7F2] font-extrabold leading-none uppercase">ARBORIST</span><span class="font-label-sm text-[9px] lg:text-[10px] tracking-[0.18em] lg:tracking-[0.2em] uppercase text-[#8EAD91] font-bold mt-1">CARE &amp; REMOVAL</span></div></a></div><nav id="desktop-nav-pill-track" class="hidden md:flex relative items-center p-1 rounded-full bg-white/10 border border-white/15 backdrop-blur-md shadow-sm shrink-0">
   <div id="desktop-nav-indicator" class="liquid-glass-pill absolute pointer-events-none rounded-full shadow-sm z-0"></div>
-  <a class="desktop-nav-link relative z-10 px-3 lg:px-4 py-1.5 rounded-full font-label-md text-xs lg:text-sm text-[#F8F7F2] font-semibold transition-colors duration-200" href="#services" data-target="services">Services</a>
-  <a class="desktop-nav-link relative z-10 px-3 lg:px-4 py-1.5 rounded-full font-label-md text-xs lg:text-sm text-[#F8F7F2]/80 hover:text-[#F8F7F2] transition-colors duration-200" href="#our-work" data-target="our-work">Our Work</a>
-  <a class="desktop-nav-link relative z-10 px-3 lg:px-4 py-1.5 rounded-full font-label-md text-xs lg:text-sm text-[#F8F7F2]/80 hover:text-[#F8F7F2] transition-colors duration-200" href="#why-choose-us" data-target="why-choose-us">Why Us</a>
-  <a class="desktop-nav-link relative z-10 px-3 lg:px-4 py-1.5 rounded-full font-label-md text-xs lg:text-sm text-[#F8F7F2]/80 hover:text-[#F8F7F2] transition-colors duration-200" href="#reviews" data-target="reviews">Reviews</a>
-  <a class="desktop-nav-link relative z-10 px-3 lg:px-4 py-1.5 rounded-full font-label-md text-xs lg:text-sm text-[#F8F7F2]/80 hover:text-[#F8F7F2] transition-colors duration-200" href="#faqs" data-target="faqs">FAQ</a>
-</nav><div class="flex items-center gap-4"><div class="hidden lg:flex items-center p-0.5 rounded-lg bg-white/10 border border-white/15 text-sm font-label-sm text-[#F8F7F2]/80"><a class="px-3 py-1.5 rounded-md hover:text-[#F8F7F2] hover:bg-white/10 transition-all cursor-pointer" href="javascript:void(0)" onclick="openAuthModal('signin')">Sign In</a><span class="text-white/20">|</span><a class="px-3 py-1.5 rounded-md hover:text-[#F8F7F2] hover:bg-white/10 transition-all cursor-pointer" href="javascript:void(0)" onclick="openAuthModal('signup')">Sign Up</a></div><a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#b8eed8] text-[#003527] font-label-md text-sm font-bold tracking-wider uppercase shadow-md hover:bg-white transition-all transform hover:-translate-y-0.5 cursor-pointer" href="javascript:void(0)" onclick="openBookingModal()"><span class="">Book an Estimate</span><span class="material-symbols-outlined text-lg">arrow_forward</span></a></div></div></header><main class="w-full bg-surface pt-20"><!-- 1. HERO SECTION (EXPANSIVE FULL-BLEED DESKTOP) --><section class="relative w-full min-h-[85vh] lg:min-h-[88vh] flex items-center justify-center overflow-hidden bg-[#174c3c]"><div class="absolute inset-0 w-full h-full"><img alt="Expert Arborist in Tree Canopy" class="w-full h-full object-cover object-[center_35%]" src="./assets/tree_work.jpg"><div class="absolute inset-0 bg-gradient-to-r from-[#174C3C]/95 via-[#202923]/80 to-transparent"></div><div class="absolute inset-0 bg-gradient-to-t from-[#151e18] via-transparent to-[#174C3C]/40"></div><div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(0,53,39,0.85)_0%,transparent_70%)]"></div></div><div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24 w-full flex flex-col justify-between min-h-[85vh]"><div class="hidden md:flex absolute top-6 lg:top-20 right-6 lg:right-8 z-20 flex-col items-end gap-2.5"><div class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-white/15 border border-white/25 backdrop-blur-md shadow-md"><span class="font-label-sm text-[11px] lg:text-xs uppercase tracking-wider text-[#F8F7F2] font-semibold">Licensed and Certified Arborists</span></div><a href="javascript:void(0)" onclick="handleCallNow(event)" class="inline-flex items-center gap-2.5 px-6 lg:px-8 py-2.5 lg:py-3.5 rounded-full bg-[#f0bf64] hover:bg-[#d8a950] text-[#174c3c] font-label-md text-base lg:text-lg font-bold tracking-wider shadow-2xl hover:scale-105 transition-all cursor-pointer border border-[#ffdea6]/60"><span class="flex items-center gap-2"><svg class="w-5 h-5 lg:w-7 lg:h-7 text-[#174c3c] fill-current" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.44-5.15-3.75-6.59-6.59l1.97-1.57c.28-.28.37-.67.25-1.02A11.36 11.36 0 0 1 8.57 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.62c0-.55-.45-1-.99-1z"></path></svg><span class="font-extrabold">Call Now</span></span><span class="flex items-center justify-center"><svg class="w-5 h-5 lg:w-6 lg:h-6 text-[#174c3c] fill-current" viewBox="0 0 24 24"><path d="m19 9 1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z"></path></svg></span></a></div><div class="max-w-3xl flex flex-col gap-6 pt-4"><h1 class="font-display-serif text-5xl sm:text-6xl lg:text-[72px] text-[#F8F7F2] leading-[1.08] tracking-tight drop-shadow-sm">
+  <a class="desktop-nav-link relative z-10 px-2.5 lg:px-4 py-1.5 rounded-full font-label-md text-xs lg:text-sm text-[#F8F7F2] font-semibold transition-colors duration-200 whitespace-nowrap" href="#services" data-target="services">Services</a>
+  <a class="desktop-nav-link relative z-10 px-2.5 lg:px-4 py-1.5 rounded-full font-label-md text-xs lg:text-sm text-[#F8F7F2]/80 hover:text-[#F8F7F2] transition-colors duration-200 whitespace-nowrap" href="#our-work" data-target="our-work">Our Work</a>
+  <a class="desktop-nav-link relative z-10 px-2.5 lg:px-4 py-1.5 rounded-full font-label-md text-xs lg:text-sm text-[#F8F7F2]/80 hover:text-[#F8F7F2] transition-colors duration-200 whitespace-nowrap" href="#why-choose-us" data-target="why-choose-us">Why Us</a>
+  <a class="desktop-nav-link relative z-10 px-2.5 lg:px-4 py-1.5 rounded-full font-label-md text-xs lg:text-sm text-[#F8F7F2]/80 hover:text-[#F8F7F2] transition-colors duration-200 whitespace-nowrap" href="#reviews" data-target="reviews">Reviews</a>
+  <a class="desktop-nav-link relative z-10 px-2.5 lg:px-4 py-1.5 rounded-full font-label-md text-xs lg:text-sm text-[#F8F7F2]/80 hover:text-[#F8F7F2] transition-colors duration-200 whitespace-nowrap" href="#faqs" data-target="faqs">FAQ</a>
+</nav><div class="flex items-center gap-2 lg:gap-4 shrink-0"><div class="flex items-center p-0.5 rounded-lg bg-white/10 border border-white/15 text-xs lg:text-sm font-label-sm text-[#F8F7F2]/90"><a class="px-2.5 lg:px-3 py-1 lg:py-1.5 rounded-md hover:text-[#F8F7F2] hover:bg-white/10 transition-all cursor-pointer whitespace-nowrap" href="javascript:void(0)" onclick="openAuthModal('signin')">Sign In</a><span class="text-white/20">|</span><a class="px-2.5 lg:px-3 py-1 lg:py-1.5 rounded-md hover:text-[#F8F7F2] hover:bg-white/10 transition-all cursor-pointer whitespace-nowrap" href="javascript:void(0)" onclick="openAuthModal('signup')">Sign Up</a></div><a class="inline-flex items-center gap-1.5 lg:gap-2 px-3.5 lg:px-5 py-2 lg:py-2.5 rounded-lg bg-[#b8eed8] text-[#003527] font-label-md text-xs lg:text-sm font-bold tracking-wider uppercase shadow-md hover:bg-white transition-all transform hover:-translate-y-0.5 cursor-pointer whitespace-nowrap" href="javascript:void(0)" onclick="openBookingModal()"><span class="hidden lg:inline">Book an Estimate</span><span class="lg:hidden">Book Estimate</span><span class="material-symbols-outlined text-base lg:text-lg">arrow_forward</span></a></div></div></header><main class="w-full bg-surface pt-20"><!-- 1. HERO SECTION (HARMONIOUS IPAD TABLET & EXPANSIVE FULL-BLEED DESKTOP) --><section class="relative w-full min-h-[76vh] lg:min-h-[88vh] flex items-center justify-center overflow-hidden bg-[#174c3c]"><div class="absolute inset-0 w-full h-full"><img alt="Expert Arborist in Tree Canopy" class="w-full h-full object-cover object-[58%_22%] md:object-[55%_22%] lg:object-[center_24%]" src="./assets/tree_work.jpg"><div class="absolute inset-0 bg-gradient-to-r from-[#174C3C]/90 via-[#174C3C]/65 to-transparent"></div><div class="absolute inset-0 bg-gradient-to-t from-[#151e18]/90 via-transparent to-[#174C3C]/30"></div><div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(0,53,39,0.75)_0%,transparent_70%)]"></div></div><div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-12 md:py-14 lg:py-24 w-full flex flex-col justify-between min-h-[76vh] lg:min-h-[85vh]"><div class="hidden md:flex absolute top-6 lg:top-16 right-6 lg:right-8 z-20 flex-col items-end gap-2 animate-ground-up"><div class="inline-flex items-center px-3 lg:px-3.5 py-1 lg:py-1.5 rounded-full bg-white/15 border border-white/25 backdrop-blur-md shadow-md"><span class="font-label-sm text-[10px] lg:text-xs uppercase tracking-wider text-[#F8F7F2] font-semibold">Licensed and Certified Arborists</span></div><a href="javascript:void(0)" onclick="handleCallNow(event)" class="inline-flex items-center gap-2 lg:gap-2.5 px-5 lg:px-8 py-2 lg:py-3.5 rounded-full bg-[#f0bf64] hover:bg-[#d8a950] text-[#174c3c] font-label-md text-sm lg:text-lg font-bold tracking-wider shadow-2xl hover:scale-105 transition-all cursor-pointer border border-[#ffdea6]/60"><span class="flex items-center gap-2"><svg class="w-4 h-4 lg:w-7 lg:h-7 text-[#174c3c] fill-current" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.44-5.15-3.75-6.59-6.59l1.97-1.57c.28-.28.37-.67.25-1.02A11.36 11.36 0 0 1 8.57 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.62c0-.55-.45-1-.99-1z"></path></svg><span class="font-extrabold">Call Now</span></span><span class="flex items-center justify-center"><svg class="w-4 h-4 lg:w-6 lg:h-6 text-[#174c3c] fill-current" viewBox="0 0 24 24"><path d="m19 9 1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z"></path></svg></span></a></div><div class="max-w-xl lg:max-w-3xl flex flex-col gap-5 lg:gap-6 pt-12 md:pt-14 lg:pt-4"><h1 class="font-display-serif text-4xl md:text-5xl lg:text-[72px] text-[#F8F7F2] leading-[1.08] tracking-tight drop-shadow-sm animate-ground-up delay-100">
           Professional <span class="text-[#D1C6A5] italic font-normal">Tree Care</span>, Made Simple.
-        </h1><p class="font-body-lg text-lg lg:text-xl text-[#F8F7F2]/90 max-w-2xl leading-relaxed drop-shadow">
+        </h1><p class="font-body-lg text-base md:text-lg lg:text-xl text-[#F8F7F2]/90 max-w-xl lg:max-w-2xl leading-relaxed drop-shadow animate-ground-up delay-200">
           Expert tree removal, precision pruning, and heritage preservation—keeping your outdoor sanctuary vibrant, balanced, and secure.
-        </p><div class="flex flex-wrap items-center gap-4 pt-3"><a class="inline-flex items-center gap-2.5 px-7 py-4 rounded-lg bg-[#b8eed8] text-[#003527] font-label-md text-sm font-bold tracking-wider uppercase shadow-xl hover:bg-white transition-all transform hover:-translate-y-0.5 cursor-pointer" href="javascript:void(0)" onclick="openBookingModal()"><span class="">Book an Estimate</span><span class="material-symbols-outlined text-xl">arrow_forward</span></a><a class="inline-flex items-center gap-2.5 px-7 py-4 rounded-lg bg-white/15 hover:bg-white/25 text-[#F8F7F2] font-label-md text-sm font-semibold tracking-wider uppercase backdrop-blur-md border border-white/30 shadow-lg transition-all transform hover:-translate-y-0.5" href="javascript:void(0)" onclick="handleTalkToAi(event)"><span class="material-symbols-outlined text-xl text-[#f0bf64]">auto_awesome</span><span class="">Talk to AI Assistant</span></a></div></div><!-- Overlaid Bottom Elements: Quick Call Hotline + Trust Stats Bar (Refined & 60% Scale) --><div class="pt-8 sm:pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"><div class="flex flex-col gap-0.5"><span class="font-body text-[11px] uppercase tracking-wider text-[#8EAD91]/80 font-medium">Direct Consultation Desk</span><a href="javascript:void(0)" onclick="handleCallNow(event)" class="inline-flex items-center gap-2 text-white/85 hover:text-white transition-colors group cursor-pointer"><svg class="w-4 h-4 text-[#8EAD91] group-hover:text-[#b8eed8] transition-colors fill-current flex-shrink-0" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.44-5.15-3.75-6.59-6.59l1.97-1.57c.28-.28.37-.67.25-1.02A11.36 11.36 0 0 1 8.57 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.62c0-.55-.45-1-.99-1z"></path></svg><span class="font-body text-base lg:text-lg font-normal tracking-tight text-white/85 group-hover:text-white transition-colors">(555) 019-2834</span></a></div><div class="bg-white/10 backdrop-blur-md border border-white/15 px-4 sm:px-5 py-2.5 rounded-xl shadow-lg grid grid-cols-3 gap-3 sm:gap-5 text-center"><div class="border-r border-white/15 pr-3 sm:pr-4"><p class="font-display-serif text-lg sm:text-xl text-[#F8F7F2] font-bold leading-tight">2,400+</p><p class="font-label-sm text-[9px] sm:text-[10px] text-[#8EAD91] uppercase tracking-wider font-semibold mt-0.5">Trees Preserved</p></div><div class="border-r border-white/15 pr-3 sm:pr-4"><p class="font-display-serif text-lg sm:text-xl text-[#F8F7F2] font-bold leading-tight">100%</p><p class="font-label-sm text-[9px] sm:text-[10px] text-[#8EAD91] uppercase tracking-wider font-semibold mt-0.5">Safety Record</p></div><div><p class="font-display-serif text-lg sm:text-xl text-[#D1C6A5] font-bold leading-tight">4.9 ★</p><p class="font-label-sm text-[9px] sm:text-[10px] text-[#8EAD91] uppercase tracking-wider font-semibold mt-0.5">Customer Score</p></div></div></div></div></section><!-- 2. SERVICES SECTION (3x2 SPACIOUS DESKTOP GRID) --><section class="w-full bg-[#f2fcf2] py-24" id="services"><div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col gap-14"><div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-black/5 pb-8"><div class="flex flex-col gap-2 max-w-2xl"><span class="font-label-sm text-xs uppercase tracking-[0.2em] text-secondary font-bold">What We Do</span><h2 class="font-display-serif text-4xl lg:text-5xl text-on-surface">Expert Care for Every Tree</h2><p class="font-body-md text-base lg:text-lg text-on-surface-variant">
+        </p><div class="flex flex-wrap items-center gap-3.5 lg:gap-4 pt-2 lg:pt-3 animate-ground-up delay-300"><a class="inline-flex items-center gap-2.5 px-6 lg:px-7 py-3.5 lg:py-4 rounded-lg bg-[#b8eed8] text-[#003527] font-label-md text-xs lg:text-sm font-bold tracking-wider uppercase shadow-xl hover:bg-white transition-all transform hover:-translate-y-0.5 cursor-pointer" href="javascript:void(0)" onclick="openBookingModal()"><span class="">Book an Estimate</span><span class="material-symbols-outlined text-lg lg:text-xl">arrow_forward</span></a><a class="inline-flex items-center gap-2.5 px-6 lg:px-7 py-3.5 lg:py-4 rounded-lg bg-white/15 hover:bg-white/25 text-[#F8F7F2] font-label-md text-xs lg:text-sm font-semibold tracking-wider uppercase backdrop-blur-md border border-white/30 shadow-lg transition-all transform hover:-translate-y-0.5" href="javascript:void(0)" onclick="handleTalkToAi(event)"><span class="material-symbols-outlined text-lg lg:text-xl text-[#f0bf64]">auto_awesome</span><span class="">Talk to AI Assistant</span></a></div></div><!-- Overlaid Bottom Elements: Quick Call Hotline + Trust Stats Bar (Refined & 60% Scale) --><div class="pt-8 sm:pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 animate-ground-up delay-400"><div class="flex flex-col gap-0.5"><span class="font-body text-[11px] uppercase tracking-wider text-[#8EAD91]/80 font-medium">Direct Consultation Desk</span><a href="javascript:void(0)" onclick="handleCallNow(event)" class="inline-flex items-center gap-2 text-white/85 hover:text-white transition-colors group cursor-pointer"><svg class="w-4 h-4 text-[#8EAD91] group-hover:text-[#b8eed8] transition-colors fill-current flex-shrink-0" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.44-5.15-3.75-6.59-6.59l1.97-1.57c.28-.28.37-.67.25-1.02A11.36 11.36 0 0 1 8.57 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.62c0-.55-.45-1-.99-1z"></path></svg><span class="font-body text-base lg:text-lg font-normal tracking-tight text-white/85 group-hover:text-white transition-colors">(555) 019-2834</span></a></div><div class="bg-white/10 backdrop-blur-md border border-white/15 px-4 sm:px-5 py-2.5 rounded-xl shadow-lg grid grid-cols-3 gap-3 sm:gap-5 text-center"><div class="border-r border-white/15 pr-3 sm:pr-4"><p class="font-display-serif text-lg sm:text-xl text-[#F8F7F2] font-bold leading-tight">2,400+</p><p class="font-label-sm text-[9px] sm:text-[10px] text-[#8EAD91] uppercase tracking-wider font-semibold mt-0.5">Trees Preserved</p></div><div class="border-r border-white/15 pr-3 sm:pr-4"><p class="font-display-serif text-lg sm:text-xl text-[#F8F7F2] font-bold leading-tight">100%</p><p class="font-label-sm text-[9px] sm:text-[10px] text-[#8EAD91] uppercase tracking-wider font-semibold mt-0.5">Safety Record</p></div><div><p class="font-display-serif text-lg sm:text-xl text-[#D1C6A5] font-bold leading-tight">4.9 ★</p><p class="font-label-sm text-[9px] sm:text-[10px] text-[#8EAD91] uppercase tracking-wider font-semibold mt-0.5">Customer Score</p></div></div></div></div></section><!-- 2. SERVICES SECTION (3x2 SPACIOUS DESKTOP GRID) --><section class="w-full bg-[#f2fcf2] py-24" id="services"><div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col gap-14"><div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-black/5 pb-8"><div class="flex flex-col gap-2 max-w-2xl"><span class="font-label-sm text-xs uppercase tracking-[0.2em] text-secondary font-bold">What We Do</span><h2 class="font-display-serif text-4xl lg:text-5xl text-on-surface">Expert Care for Every Tree</h2><p class="font-body-md text-base lg:text-lg text-on-surface-variant">
           From routine structural pruning to hazardous rigging removals, our certified master arborists handle delicate residential properties and sprawling heritage estates.
         </p></div><a class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary-container text-on-primary font-label-md text-xs tracking-wider uppercase font-bold shadow hover:bg-primary transition-all self-start md:self-auto cursor-pointer" href="javascript:void(0)" onclick="openBookingModal()"><span class="">Book an Estimate</span><span class="material-symbols-outlined text-base">arrow_forward</span></a></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Service 1: Tree Removal --><div class="group bg-[#F8F7F2] rounded-2xl border border-black/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"><div class="flex flex-col"><div class="w-full aspect-[4/3] relative overflow-hidden bg-[#e5ede6] border-b border-black/5"><img alt="Tree Removal Service" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" src="./assets/service-tree-removal.jpg"></div><div class="p-6 pb-2"><h3 class="font-display-serif text-2xl text-on-surface tracking-wide font-semibold mb-2">Tree Removal</h3><p class="font-body-sm text-sm text-on-surface-variant leading-relaxed line-clamp-3">Safe, controlled dismantling and surgical crane extraction of hazardous, dead, or encroaching trees using non-invasive zero-impact ground rigging.</p></div></div><div class="px-6 pb-6 pt-4 mt-2 border-t border-black/5 flex items-center justify-between gap-3"><a class="flex items-center gap-1.5 text-primary font-label-md text-sm font-bold group-hover:text-primary-container transition-colors cursor-pointer" href="javascript:void(0)" onclick="openServiceModal('tree-removal')"><span class="">Learn more</span><span class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span></a><a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#174c3c] hover:bg-primary text-[#F8F7F2] font-label-md text-sm font-medium shadow-sm transition-all cursor-pointer" href="javascript:void(0)" onclick="openBookingModal('tree-removal')"><span class="material-symbols-outlined text-base">calendar_today</span><span class="">Book Estimate</span></a></div></div><!-- Service 2: Tree Trimming (Popular) --><div class="group bg-[#F8F7F2] rounded-2xl border-2 border-primary/30 shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden relative"><div class="flex flex-col"><div class="w-full aspect-[4/3] relative overflow-hidden bg-[#e5ede6] border-b border-black/5"><div class="absolute top-4 right-4 z-10"><span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-label-sm uppercase tracking-wider bg-[#174c3c] text-white font-extrabold border border-white/20 shadow-md"><span class="material-symbols-outlined text-sm text-[#f0bf64]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span><span class="">Popular</span></span></div><img alt="Tree Trimming Service" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" src="./assets/service-tree-trimming.jpg"></div><div class="p-6 pb-2"><h3 class="font-display-serif text-2xl text-on-surface tracking-wide font-semibold mb-2">Tree Trimming</h3><p class="font-body-sm text-sm text-on-surface-variant leading-relaxed line-clamp-3">Keep overgrown branches under control, enhance sunlight penetration to understory lawns, and preserve natural specimen silhouette architecture.</p></div></div><div class="px-6 pb-6 pt-4 mt-2 border-t border-black/5 flex items-center justify-between gap-3"><a class="flex items-center gap-1.5 text-primary font-label-md text-sm font-bold group-hover:text-primary-container transition-colors cursor-pointer" href="javascript:void(0)" onclick="openServiceModal('tree-trimming')"><span class="">Learn more</span><span class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span></a><a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#174c3c] hover:bg-primary text-[#F8F7F2] font-label-md text-sm font-medium shadow-sm transition-all cursor-pointer" href="javascript:void(0)" onclick="openBookingModal('tree-trimming')"><span class="material-symbols-outlined text-base">calendar_today</span><span class="">Book Estimate</span></a></div></div><!-- Service 3: Tree Pruning --><div class="group bg-[#F8F7F2] rounded-2xl border border-black/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"><div class="flex flex-col"><div class="w-full aspect-[4/3] relative overflow-hidden bg-[#e5ede6] border-b border-black/5"><img alt="Tree Pruning Service" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" src="./assets/service-tree-pruning.jpg"></div><div class="p-6 pb-2"><h3 class="font-display-serif text-2xl text-on-surface tracking-wide font-semibold mb-2">Tree Pruning</h3><p class="font-body-sm text-sm text-on-surface-variant leading-relaxed line-clamp-3">Careful crown architectural pruning to nurture botanical health, suppress fungal vector ingress, and fortify main limb union junctions.</p></div></div><div class="px-6 pb-6 pt-4 mt-2 border-t border-black/5 flex items-center justify-between gap-3"><a class="flex items-center gap-1.5 text-primary font-label-md text-sm font-bold group-hover:text-primary-container transition-colors cursor-pointer" href="javascript:void(0)" onclick="openServiceModal('tree-pruning')"><span class="">Learn more</span><span class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span></a><a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#174c3c] hover:bg-primary text-[#F8F7F2] font-label-md text-sm font-medium shadow-sm transition-all cursor-pointer" href="javascript:void(0)" onclick="openBookingModal('tree-pruning')"><span class="material-symbols-outlined text-base">calendar_today</span><span class="">Book Estimate</span></a></div></div><!-- Service 4: Stump Grinding --><div class="group bg-[#F8F7F2] rounded-2xl border border-black/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"><div class="flex flex-col"><div class="w-full aspect-[4/3] relative overflow-hidden bg-[#e5ede6] border-b border-black/5"><img alt="Stump Grinding Service" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" src="./assets/service-stump-grinding.jpg"></div><div class="p-6 pb-2"><h3 class="font-display-serif text-2xl text-on-surface tracking-wide font-semibold mb-2">Stump Grinding</h3><p class="font-body-sm text-sm text-on-surface-variant leading-relaxed line-clamp-3">Reclaim prime lawn territory and eradicate termite and wood-rot nesting zones by deep subterranean rotary grinding 18" beneath grade.</p></div></div><div class="px-6 pb-6 pt-4 mt-2 border-t border-black/5 flex items-center justify-between gap-3"><a class="flex items-center gap-1.5 text-primary font-label-md text-sm font-bold group-hover:text-primary-container transition-colors cursor-pointer" href="javascript:void(0)" onclick="openServiceModal('stump-grinding')"><span class="">Learn more</span><span class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span></a><a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#174c3c] hover:bg-primary text-[#F8F7F2] font-label-md text-sm font-medium shadow-sm transition-all cursor-pointer" href="javascript:void(0)" onclick="openBookingModal('stump-grinding')"><span class="material-symbols-outlined text-base">calendar_today</span><span class="">Book Estimate</span></a></div></div><!-- Service 5: Emergency Tree Care --><div class="group bg-[#F8F7F2] rounded-2xl border border-black/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"><div class="flex flex-col"><div class="w-full aspect-[4/3] relative overflow-hidden bg-[#e5ede6] border-b border-black/5"><img alt="Emergency Tree Care Service" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" src="./assets/service-emergency-care.jpg"></div><div class="p-6 pb-2"><h3 class="font-display-serif text-2xl text-on-surface tracking-wide font-semibold mb-2">Emergency Tree Care</h3><p class="font-body-sm text-sm text-on-surface-variant leading-relaxed line-clamp-3">24/7 rapid priority dispatch for snapped trunks, roof-crushing limbs, severed electrical clearings, and acute severe weather stabilization.</p></div></div><div class="px-6 pb-6 pt-4 mt-2 border-t border-black/5 flex items-center justify-between gap-3"><a class="flex items-center gap-1.5 text-primary font-label-md text-sm font-bold group-hover:text-primary-container transition-colors cursor-pointer" href="javascript:void(0)" onclick="openServiceModal('emergency-care')"><span class="">Learn more</span><span class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span></a><a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#174c3c] hover:bg-primary text-[#F8F7F2] font-label-md text-sm font-medium shadow-sm transition-all cursor-pointer" href="javascript:void(0)" onclick="openBookingModal('emergency-care')"><span class="material-symbols-outlined text-base">calendar_today</span><span class="">Book Estimate</span></a></div></div><!-- Service 6: Tree Assessment --><div class="group bg-[#F8F7F2] rounded-2xl border border-black/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"><div class="flex flex-col"><div class="w-full aspect-[4/3] relative overflow-hidden bg-[#e5ede6] border-b border-black/5"><img alt="Tree Assessment &amp; Diagnostics Service" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" src="./assets/service-tree-assessment.jpg"></div><div class="p-6 pb-2"><h3 class="font-display-serif text-2xl text-on-surface tracking-wide font-semibold mb-2">Tree Assessment</h3><p class="font-body-sm text-sm text-on-surface-variant leading-relaxed line-clamp-3">Non-destructive acoustic tomography, root flare micro-trench diagnostics, municipality compliance filings, and historical specimen registry.</p></div></div><div class="px-6 pb-6 pt-4 mt-2 border-t border-black/5 flex items-center justify-between gap-3"><a class="flex items-center gap-1.5 text-primary font-label-md text-sm font-bold group-hover:text-primary-container transition-colors cursor-pointer" href="javascript:void(0)" onclick="openServiceModal('tree-assessment')"><span class="">Learn more</span><span class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span></a><a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#174c3c] hover:bg-primary text-[#F8F7F2] font-label-md text-sm font-medium shadow-sm transition-all cursor-pointer" href="javascript:void(0)" onclick="openBookingModal('tree-assessment')"><span class="material-symbols-outlined text-base">calendar_today</span><span class="">Book Estimate</span></a></div></div></div></div></section><!-- 3. HOW IT WORKS SECTION (3 EQUAL COLUMNS DESKTOP) --><section class="w-full bg-[#ecf6ed] py-24"><div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col gap-16"><div class="text-center max-w-2xl mx-auto flex flex-col gap-3"><span class="font-label-sm text-xs uppercase tracking-[0.2em] text-secondary font-bold">Simple From Start to Finish</span><h2 class="font-display-serif text-4xl lg:text-5xl text-on-surface">Tree Care in Three Easy Steps</h2><p class="font-body-md text-base lg:text-lg text-on-surface-variant">We eliminate the hassle from arbor care with clear schedules, transparent pricing, and meticulous cleanup.</p></div><div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative"><!-- Desktop Connecting Dashed Line --><div class="hidden md:block absolute top-[68px] left-[16%] right-[16%] h-[2px] border-t-2 border-dashed border-[#8EAD91]/50 z-0"></div><!-- Step 1 --><div class="relative z-10 flex flex-col items-center text-center p-8 bg-[#F8F7F2] rounded-2xl border border-black/5 shadow-sm hover:shadow-md transition-all"><div class="w-16 h-16 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-display-serif text-2xl font-bold mb-6 shadow-md border-4 border-white">
           01
@@ -2988,14 +3084,14 @@
             <span class="font-label-md text-label-md text-secondary font-medium truncate">Here to help</span>
           </div>
         </div>
-        <!-- Right Icons: Flying Quill (history_edu) + Person -->
-        <div class="flex items-center gap-space-sm flex-shrink-0">
-          <button aria-label="Diagnostic History" class="w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:text-primary transition-colors" type="button">
-            <span class="material-symbols-outlined text-[22px]">history_edu</span>
+        <!-- Right Icons: Reset (when active) + Phone Call Icon (replaces flying quill & person) -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <button id="m-reset-welcome-btn" aria-label="Start New Consultation" class="hidden w-9 h-9 rounded-full bg-surface-container-lowest text-secondary hover:text-primary active:scale-95 transition-all flex items-center justify-center shadow-sm cursor-pointer" type="button" title="Reset Chat">
+            <span class="material-symbols-outlined text-[19px]">refresh</span>
           </button>
-          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm">
-            <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
-          </div>
+          <button onclick="handleCallNow(event)" aria-label="Call Certified Arborist" class="w-9 h-9 rounded-full bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center shadow-sm active:scale-95 transition-all cursor-pointer" type="button" title="Call (555) 019-2834">
+            <span class="material-symbols-outlined text-on-primary text-[18px]">call</span>
+          </button>
         </div>
       </div>
     </header>
@@ -3014,29 +3110,18 @@
 <svg class="pointer-events-none absolute bottom-40 -left-6 w-28 h-36 text-secondary/10 rotate-45" fill="currentColor" viewBox="0 0 100 140">
 <path d="M10 130 C 30 100, 45 60, 95 10 C 70 45, 60 85, 20 135 Z" opacity="0.5"></path>
 </svg>
-<!-- Compact Downside Sub-Bar: Rotating Arrow (Refresh) & Three Dots -->
-<div class="w-full px-margin pt-2 pb-1 flex items-center justify-end z-10">
-  <div class="flex items-center gap-1.5">
-    <button id="m-reset-welcome-btn" aria-label="Start New Consultation" class="hidden w-9 h-9 rounded-full bg-surface-container-lowest text-secondary hover:text-primary active:scale-95 transition-all flex items-center justify-center shadow-sm" type="button" title="Reset Chat">
-      <span class="material-symbols-outlined text-[19px]">refresh</span>
-    </button>
-    <button aria-label="Session Menu" class="w-9 h-9 rounded-full bg-surface-container-lowest text-secondary hover:text-primary active:scale-95 transition-all flex items-center justify-center shadow-sm" type="button" title="Options">
-      <span class="material-symbols-outlined text-[19px]">more_vert</span>
-    </button>
-  </div>
-</div>
 <!-- Milky Transition Veil Overlay -->
 <div id="m-milky-veil" class="pointer-events-none fixed inset-0 top-16 bottom-24 z-20 bg-[#f2fcf2]/85 backdrop-blur-md opacity-0 transition-opacity duration-300"></div>
 <!-- Central Welcome Area: 2.5D Botanical Specimen & Clean Prompt -->
 <div id="m-welcome-center-stage" class="flex-1 flex flex-col items-center justify-center px-margin text-center z-10 py-space-sm">
 <!-- Specimen 2.5D Illustration Container -->
-<div class="relative w-64 h-64 max-w-[280px] flex items-center justify-center my-space-xs">
+<div class="relative w-64 h-64 max-w-[280px] flex items-center justify-center my-space-xs animate-ground-up">
 <!-- Ground Mound with layered tonal shading & warm parchment glow -->
 <div class="absolute bottom-6 w-52 h-14 rounded-[100%] bg-surface-container-highest/60 blur-[1px]"></div>
 <div class="absolute bottom-8 w-44 h-10 rounded-[100%] bg-secondary-container/40"></div>
 <!-- Specimen Imagery: High-end 2.5D miniature botanical estate tree -->
 <div class="relative w-56 h-56 z-10 flex items-center justify-center">
-<img class="w-full h-full object-contain filter drop-shadow-[0_16px_24px_rgba(23,76,60,0.12)] transition-transform duration-700 hover:scale-[1.02]" data-alt="Exquisite isometric 2.5D digital miniature specimen of a lush heritage oak bonsai tree on a soft ivory-parchment ground mound. Layered dense sculptural canopy in deep forest green and soft sage green tones, rich natural bark texture, miniature golden leaf highlights kissed by subtle sunbeams. Luxury architectural botanical monograph rendering style, pristine warm ivory ambient lighting, elegant and dignified, highly detailed, clean soft-focus drop shadow." src="./assets/case2-after.jpg">
+<img class="w-full h-full object-contain rounded-2xl mix-blend-multiply filter drop-shadow-[0_16px_24px_rgba(23,76,60,0.12)] transition-transform duration-700 hover:scale-[1.02]" alt="Detailed Botanical Heritage Oak Tree Illustration" src="./assets/botanical-tree.jpg">
 </div>
 <!-- Subtle Golden Sunlight Accents -->
 <div class="pointer-events-none absolute top-4 right-8 w-6 h-6 rounded-full bg-tertiary-fixed-dim/40 blur-md"></div>
@@ -3044,10 +3129,10 @@
 </div>
 <!-- Editorial Welcome Typography -->
 <div class="max-w-[320px] flex flex-col gap-space-xs mt-space-xs">
-<h2 class="font-display-serif text-[32px] sm:text-[38px] lg:text-[44px] leading-[38px] sm:leading-[46px] text-primary tracking-tight font-medium">
+<h2 class="font-display-serif text-[32px] sm:text-[38px] lg:text-[44px] leading-[38px] sm:leading-[46px] text-primary tracking-tight font-medium animate-ground-up delay-100">
         How Can I Help Today?
       </h2>
-<p class="font-body text-sm sm:text-base text-on-surface-variant font-normal leading-relaxed mt-2 max-w-sm mx-auto">
+<p class="font-body text-sm sm:text-base text-on-surface-variant font-normal leading-relaxed mt-2 max-w-sm mx-auto animate-ground-up delay-200">
         Ask about your trees, share a photo, or request an ISA-certified assessment.
       </p>
 </div>
@@ -3076,7 +3161,7 @@
   </div>
 </div>
 <!-- Message Composer Container (Floating Pill above navigation - Centered & Comfortable Margins) -->
-<div class="w-full max-w-[440px] mx-auto px-4 sm:px-6 pb-space-sm pt-space-xs z-30">
+<div class="w-full max-w-[440px] mx-auto px-4 sm:px-6 pb-space-sm pt-space-xs z-30 animate-ground-up delay-300">
   <div class="relative w-full">
     <!-- Popover Attachment Menu (Creamy Spring Bounce-Back: 3 Unified Options) -->
     <div aria-label="Attachment Options" class="absolute bottom-full left-0 mb-3 w-64 bg-surface-container-lowest rounded-2xl p-space-xs shadow-[0_18px_50px_-10px_rgba(23,76,60,0.25),0_4px_16px_rgba(0,0,0,0.08)] border border-outline-variant/30 origin-bottom-left will-change-transform hidden z-40" id="m-attachment-menu" role="menu">
@@ -3145,20 +3230,20 @@
 </div>
 
     </main>
-    <nav class="fixed bottom-0 left-0 right-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_24px_rgba(23,76,60,0.06)]">
+    <nav id="m-ai-bottom-nav" class="fixed bottom-0 left-0 right-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_24px_rgba(23,76,60,0.06)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
       <div class="max-w-md mx-auto flex justify-around items-center h-16 px-4">
-        <button onclick="closeMobileAi()" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all" type="button">
+        <button onclick="this.closest('nav').style.transform='translateY(120%)'; setTimeout(() => { this.closest('nav').style.transform=''; closeMobileAi(); window.scrollTo({top: 0, behavior: 'smooth'}); }, 180);" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all cursor-pointer" type="button">
           <span class="material-symbols-outlined text-[24px]">home</span>
           <span class="font-label-md text-xs font-semibold">Home</span>
         </button>
-        <button class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-primary font-bold active:scale-95 transition-all" type="button">
+        <button class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-primary font-bold active:scale-95 transition-all cursor-pointer" type="button">
           <div class="relative flex items-center justify-center">
             <span class="material-symbols-outlined text-[24px]">forum</span>
             <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#E5B869] ring-2 ring-surface-container-lowest"></span>
           </div>
           <span class="font-label-md text-xs font-bold text-primary">AI Chat</span>
         </button>
-        <button onclick="closeMobileAi(); openBookingModal();" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all cursor-pointer" type="button">
+        <button onclick="this.closest('nav').style.transform='translateY(120%)'; setTimeout(() => { this.closest('nav').style.transform=''; closeMobileAi(); openBookingModal(); }, 180);" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all cursor-pointer" type="button">
           <span class="material-symbols-outlined text-[24px]">event_available</span>
           <span class="font-label-md text-xs font-semibold">Book</span>
         </button>
@@ -4331,8 +4416,24 @@
       return;
     }
 
-    if (typeof goToStep === 'function') {
+    isTransitioning = false;
+    if (currentStep !== 1 && typeof goToStep === 'function') {
       goToStep(1);
+    } else {
+      currentStep = 1;
+      for (let i = 1; i <= 5; i++) {
+        const p = document.getElementById('step-panel-' + i);
+        if (p) {
+          if (i === 1) {
+            p.classList.add('active-panel');
+            p.style.display = 'block';
+          } else {
+            p.classList.remove('active-panel');
+            p.style.display = 'none';
+          }
+        }
+      }
+      if (typeof updateStepperUI === 'function') updateStepperUI(1);
     }
 
     if (preselectedService) {
@@ -4357,12 +4458,6 @@
       overlay.classList.remove('opacity-0', 'pointer-events-none');
       overlay.classList.add('opacity-100');
     });
-
-    try {
-      if (window.history && window.history.pushState) {
-        window.history.pushState({ view: 'booking', step: 1 }, '', 'booking-step1.html');
-      }
-    } catch(e) {}
   };
   function openBookingModal(svc) { window.openBookingModal(svc); }
 
@@ -4382,19 +4477,13 @@
       overlay.classList.remove('opacity-100');
       overlay.classList.add('opacity-0', 'pointer-events-none');
       document.body.style.overflow = '';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.title = 'ARBORIST Care & Removal Services | Professional Tree Care';
       setTimeout(() => {
         overlay.classList.add('hidden');
       }, 280);
 
       // Trigger temporary cloud-glass resume pill right where click occurred!
       showResumeBookingCloud(clickX, clickY);
-
-      try {
-        if (window.history && window.history.replaceState) {
-          window.history.replaceState({ view: 'home' }, '', 'index.html');
-        }
-      } catch(err) {}
     } else { if (typeof goToStep === "function") goToStep(1); }
   };
   function closeBookingModal(e) { window.closeBookingModal(e); }
@@ -4462,14 +4551,14 @@
 
   // Metadata for the 5 steps: icon, title, and document title
   const STEPS_META = {
-    1: { icon: 'eco', title: 'Book an Estimate', docTitle: 'Sylva & Crown | Book an Estimate' },
-    2: { icon: 'pin_drop', title: 'Property Location', docTitle: 'Sylva & Crown | Property Location' },
-    3: { icon: 'calendar_month', title: 'Select Appointment', docTitle: 'Sylva & Crown | Select Appointment' },
-    4: { icon: 'badge', title: 'Client Details', docTitle: 'Sylva & Crown | Client Details' },
-    5: { icon: 'task_alt', title: 'Booking Confirmed', docTitle: 'Sylva & Crown | Confirmation' }
+    1: { icon: 'eco', title: 'Book an Estimate', docTitle: 'ARBORIST | Book an Estimate' },
+    2: { icon: 'pin_drop', title: 'Property Location', docTitle: 'ARBORIST | Property Location' },
+    3: { icon: 'calendar_month', title: 'Select Appointment', docTitle: 'ARBORIST | Select Appointment' },
+    4: { icon: 'badge', title: 'Client Details', docTitle: 'ARBORIST | Client Details' },
+    5: { icon: 'task_alt', title: 'Booking Confirmed', docTitle: 'ARBORIST | Booking Confirmed' }
   };
 
-  let currentStep = window.DEFAULT_INITIAL_STEP || 1;
+  let currentStep = 1;
   let isTransitioning = false;
 
   
@@ -5021,12 +5110,6 @@
     const oldStep = currentStep;
     currentStep = targetStep;
 
-    try {
-      const url = new URL(window.location);
-      url.searchParams.set('step', targetStep);
-      window.history.pushState({ step: targetStep }, '', url);
-    } catch(e) {}
-
     // 1. Update Bar 2 (Pill header icon & title)
     const pillWrapper = document.getElementById('header-pill-wrapper');
     const pillIcon = document.getElementById('header-step-icon');
@@ -5040,7 +5123,10 @@
         const meta = STEPS_META[targetStep];
         pillIcon.textContent = meta.icon;
         pillTitle.textContent = meta.title;
-        document.title = meta.docTitle;
+        const overlay = document.getElementById('booking-flow-overlay');
+        if (overlay && !overlay.classList.contains('hidden')) {
+          document.title = meta.docTitle;
+        }
         pillWrapper.classList.remove('pill-fade-out');
         pillWrapper.classList.add('pill-fade-in');
       }, 140);
@@ -5302,10 +5388,7 @@
     setupStep1Services();
     setupStep3Calendar();
 
-    // Check URL step parameter or default
-    const urlParams = new URLSearchParams(window.location.search);
-    const initialStep = parseInt(urlParams.get('step')) || (window.DEFAULT_INITIAL_STEP || 1);
-    
+    const initialStep = 1;
     currentStep = initialStep;
     for (let i = 1; i <= 5; i++) {
       const p = document.getElementById('step-panel-' + i);
@@ -5325,7 +5408,6 @@
     const pillTitle = document.getElementById('header-step-title');
     if (pillIcon) pillIcon.textContent = meta.icon;
     if (pillTitle) pillTitle.textContent = meta.title;
-    document.title = meta.docTitle;
   });
 
   // Legacy estimate modal removed
@@ -7587,103 +7669,6 @@
         }
       }
     });
-  })();
-</script>
-
-<!-- Intelligent Mobile Pop-Up Navigation (Home, AI Chat, Book) -->
-<nav id="smart-bottom-nav" class="fixed bottom-0 left-0 right-0 w-full z-40 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_24px_rgba(23,76,60,0.08)] translate-y-0 opacity-100 pointer-events-auto">
-  <div class="max-w-md mx-auto flex justify-around items-center h-16 px-4">
-    <a href="javascript:void(0)" onclick="smoothNavigate(event, 'mobile.html')" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-primary font-bold active:scale-95 transition-all">
-      <span class="material-symbols-outlined text-[24px]">home</span>
-      <span class="font-label-md text-xs font-bold text-primary">Home</span>
-    </a>
-    <a href="javascript:void(0)" onclick="smoothNavigate(event, 'mobile-welcome.html')" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">
-      <div class="relative flex items-center justify-center">
-        <span class="material-symbols-outlined text-[24px]">forum</span>
-        <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#E5B869] ring-2 ring-surface-container-lowest"></span>
-      </div>
-      <span class="font-label-md text-xs font-semibold">AI Chat</span>
-    </a>
-    <a href="javascript:void(0)" onclick="openBookingModal()" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all cursor-pointer">
-      <span class="material-symbols-outlined text-[24px]">event_available</span>
-      <span class="font-label-md text-xs font-semibold">Book</span>
-    </a>
-  </div>
-</nav>
-
-<script>
-  // Intelligent Scroll & Gestural Pop-up Controller
-  (function() {
-    const nav = document.getElementById('smart-bottom-nav');
-    if (!nav) return;
-
-    let isNavVisible = true;
-    let lastScrollY = window.scrollY;
-    const threshold = 10;
-    let touchStartY = 0;
-
-    function showNav() {
-      if (isNavVisible) return;
-      isNavVisible = true;
-      nav.classList.remove('translate-y-[130%]', 'opacity-0', 'pointer-events-none');
-      nav.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
-    }
-
-    function hideNav() {
-      if (!isNavVisible) return;
-      isNavVisible = false;
-      nav.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
-      nav.classList.add('translate-y-[130%]', 'opacity-0', 'pointer-events-none');
-    }
-
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const diff = currentScrollY - lastScrollY;
-      const windowHeight = window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
-
-      if (windowHeight + currentScrollY >= docHeight - 60 || currentScrollY < 50) {
-        showNav();
-        lastScrollY = currentScrollY;
-        return;
-      }
-
-      if (diff > threshold) {
-        hideNav();
-      } else if (diff < -threshold) {
-        showNav();
-      }
-
-      lastScrollY = currentScrollY;
-    }, { passive: true });
-
-    window.addEventListener('touchstart', (e) => {
-      if (e.touches && e.touches[0]) {
-        touchStartY = e.touches[0].clientY;
-      }
-    }, { passive: true });
-
-    window.addEventListener('touchmove', (e) => {
-      if (!e.touches || !e.touches[0]) return;
-      const currentY = e.touches[0].clientY;
-      const deltaY = currentY - touchStartY;
-      const screenHeight = window.innerHeight;
-
-      if (touchStartY > screenHeight * 0.72 && deltaY < -12) {
-        showNav();
-      } else if (touchStartY < screenHeight * 0.7 && deltaY < -25) {
-        hideNav();
-      }
-    }, { passive: true });
-
-    window.smoothNavigate = function(e, url) {
-      if (e) e.preventDefault();
-      hideNav();
-      document.body.classList.add('page-fading-out');
-      setTimeout(() => {
-        window.location.href = url;
-      }, 220);
-    };
   })();
 </script>
 

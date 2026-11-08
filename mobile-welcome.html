@@ -118,60 +118,25 @@
   transform-origin: bottom right;
 }
 
-</style>  <style>
+</style>
+  <title>ARBORIST | Tree Care AI Assistant</title>
+  <style>
     html { background-color: #f2fcf2; }
-    body { opacity: 0; transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
-    body.page-hydrated { opacity: 1 !important; transform: translateY(0) !important; }
-    body.page-fading-out { opacity: 0 !important; transform: translateY(-8px) !important; }
-
+    body { opacity: 0; transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+    body.page-hydrated { opacity: 1 !important; }
+    body.page-fading-out { opacity: 0 !important; }
     @keyframes fadeUpFromGround {
-      0% {
-        opacity: 0;
-        transform: translateY(28px) scale(0.97);
-      }
-      65% {
-        opacity: 0.95;
-        transform: translateY(-2px) scale(1.005);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-    @keyframes popScaleFromGround {
-      0% {
-        opacity: 0;
-        transform: translateY(35px) scale(0.92);
-      }
-      70% {
-        opacity: 1;
-        transform: translateY(-2px) scale(1.015);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      0% { opacity: 0; transform: translate3d(0, 26px, 0) scale(0.985); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
     }
     .animate-ground-up {
       opacity: 0;
-      animation: fadeUpFromGround 0.82s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeUpFromGround 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       will-change: transform, opacity;
     }
-    .animate-pop-ground {
-      opacity: 0;
-      animation: popScaleFromGround 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      will-change: transform, opacity;
-    }
-    .delay-100 { animation-delay: 100ms; }
-    .delay-200 { animation-delay: 200ms; }
-    .delay-300 { animation-delay: 300ms; }
-    .delay-400 { animation-delay: 400ms; }
-    .delay-500 { animation-delay: 500ms; }
-
-    #smart-bottom-nav {
-      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
-      will-change: transform, opacity;
-    }
+    .delay-100 { animation-delay: 0.08s; }
+    .delay-200 { animation-delay: 0.16s; }
+    .delay-300 { animation-delay: 0.24s; }
   </style>
   <script>
     (function() {
@@ -200,10 +165,13 @@
         <span class="font-label-md text-label-md text-secondary font-medium truncate">Here to help</span>
       </div>
     </div>
-    <!-- Right Action: Phone Call Button -->
-    <div class="flex items-center gap-space-sm flex-shrink-0">
-      <a href="tel:5550192834" aria-label="Call Arborist Service" class="w-9 h-9 rounded-full bg-primary hover:bg-primary-light text-white flex items-center justify-center shadow-sm active:scale-95 transition-all cursor-pointer" title="Call Arborist (555) 019-2834">
-        <span class="material-symbols-outlined text-[19px]">call</span>
+    <!-- Right Icons: Reset (when active) + Phone Call Icon -->
+    <div class="flex items-center gap-2 flex-shrink-0">
+      <button id="m-reset-welcome-btn" aria-label="Start New Consultation" class="hidden w-9 h-9 rounded-full bg-surface-container-lowest text-secondary hover:text-primary active:scale-95 transition-all flex items-center justify-center shadow-sm" type="button" title="Reset Chat">
+        <span class="material-symbols-outlined text-[19px]">refresh</span>
+      </button>
+      <a href="tel:5550192834" aria-label="Call Certified Arborist" class="w-9 h-9 rounded-full bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center shadow-sm active:scale-95 transition-all" title="Call (555) 019-2834">
+        <span class="material-symbols-outlined text-on-primary text-[18px]">call</span>
       </a>
     </div>
   </div>
@@ -221,40 +189,29 @@
 <svg class="pointer-events-none absolute bottom-40 -left-6 w-28 h-36 text-secondary/10 rotate-45" fill="currentColor" viewBox="0 0 100 140">
 <path d="M10 130 C 30 100, 45 60, 95 10 C 70 45, 60 85, 20 135 Z" opacity="0.5"></path>
 </svg>
-<!-- Compact Downside Sub-Bar: Rotating Arrow (Refresh) & Three Dots -->
-<div class="w-full px-margin pt-2 pb-1 flex items-center justify-end z-10">
-  <div class="flex items-center gap-1.5">
-    <button id="m-reset-welcome-btn" aria-label="Start New Consultation" class="hidden w-9 h-9 rounded-full bg-surface-container-lowest text-secondary hover:text-primary active:scale-95 transition-all flex items-center justify-center shadow-sm" type="button" title="Reset Chat">
-      <span class="material-symbols-outlined text-[19px]">refresh</span>
-    </button>
-    <button aria-label="Session Menu" class="w-9 h-9 rounded-full bg-surface-container-lowest text-secondary hover:text-primary active:scale-95 transition-all flex items-center justify-center shadow-sm" type="button" title="Options">
-      <span class="material-symbols-outlined text-[19px]">more_vert</span>
-    </button>
-  </div>
-</div>
 <!-- Milky Transition Veil Overlay -->
 <div id="m-milky-veil" class="pointer-events-none fixed inset-0 top-16 bottom-24 z-20 bg-[#f2fcf2]/85 backdrop-blur-md opacity-0 transition-opacity duration-300"></div>
 <!-- Central Welcome Area: 2.5D Botanical Specimen & Clean Prompt -->
 <div id="m-welcome-center-stage" class="flex-1 flex flex-col items-center justify-center px-margin text-center z-10 py-space-sm">
 <!-- Specimen 2.5D Illustration Container -->
-<div class="relative w-64 h-64 max-w-[280px] flex items-center justify-center my-space-xs animate-pop-ground delay-100">
+<div class="relative w-64 h-64 max-w-[280px] flex items-center justify-center my-space-xs animate-ground-up">
 <!-- Ground Mound with layered tonal shading & warm parchment glow -->
 <div class="absolute bottom-6 w-52 h-14 rounded-[100%] bg-surface-container-highest/60 blur-[1px]"></div>
 <div class="absolute bottom-8 w-44 h-10 rounded-[100%] bg-secondary-container/40"></div>
-<!-- Specimen Imagery: High-end Bespoke Botanical Study of Heritage Oak Tree -->
-<div class="relative w-60 h-60 z-10 flex items-center justify-center rounded-2xl overflow-hidden p-1">
-<img class="w-full h-full object-contain filter drop-shadow-[0_16px_28px_rgba(23,76,60,0.14)] transition-transform duration-700 hover:scale-[1.03]" alt="Detailed Botanical Illustration of Heritage Oak Tree" src="./assets/botanical-tree.jpg">
+<!-- Specimen Imagery: High-end 2.5D miniature botanical estate tree -->
+<div class="relative w-56 h-56 z-10 flex items-center justify-center">
+<img class="w-full h-full object-contain rounded-2xl mix-blend-multiply filter drop-shadow-[0_16px_24px_rgba(23,76,60,0.12)] transition-transform duration-700 hover:scale-[1.02]" alt="Detailed Botanical Heritage Oak Tree Illustration" src="./assets/botanical-tree.jpg">
 </div>
 <!-- Subtle Golden Sunlight Accents -->
 <div class="pointer-events-none absolute top-4 right-8 w-6 h-6 rounded-full bg-tertiary-fixed-dim/40 blur-md"></div>
 <div class="pointer-events-none absolute top-8 left-10 w-4 h-4 rounded-full bg-surface-bright/70 blur-sm"></div>
 </div>
 <!-- Editorial Welcome Typography -->
-<div class="max-w-[340px] flex flex-col gap-space-xs mt-space-xs">
-<h2 class="font-display-serif text-[32px] sm:text-[38px] lg:text-[44px] leading-[38px] sm:leading-[46px] text-primary tracking-tight font-medium animate-ground-up delay-200">
+<div class="max-w-[320px] flex flex-col gap-space-xs mt-space-xs">
+<h2 class="font-display-serif text-[32px] sm:text-[38px] lg:text-[44px] leading-[38px] sm:leading-[46px] text-primary tracking-tight font-medium animate-ground-up delay-100">
         How Can I Help Today?
       </h2>
-<p class="font-body text-sm sm:text-base text-on-surface-variant font-normal leading-relaxed mt-2 max-w-sm mx-auto animate-ground-up delay-300">
+<p class="font-body text-sm sm:text-base text-on-surface-variant font-normal leading-relaxed mt-2 max-w-sm mx-auto animate-ground-up delay-200">
         Ask about your trees, share a photo, or request an ISA-certified assessment.
       </p>
 </div>
@@ -283,7 +240,7 @@
   </div>
 </div>
 <!-- Message Composer Container (Floating Pill above navigation - Centered & Comfortable Margins) -->
-<div class="w-full max-w-[440px] mx-auto px-4 sm:px-6 pb-space-sm pt-space-xs z-30 animate-ground-up delay-400">
+<div class="w-full max-w-[440px] mx-auto px-4 sm:px-6 pb-space-sm pt-space-xs z-30 animate-ground-up delay-300">
   <div class="relative w-full">
     <!-- Popover Attachment Menu (Creamy Spring Bounce-Back: 3 Unified Options) -->
     <div aria-label="Attachment Options" class="absolute bottom-full left-0 mb-3 w-64 bg-surface-container-lowest rounded-2xl p-space-xs shadow-[0_18px_50px_-10px_rgba(23,76,60,0.25),0_4px_16px_rgba(0,0,0,0.08)] border border-outline-variant/30 origin-bottom-left will-change-transform hidden z-40" id="m-attachment-menu" role="menu">
@@ -545,106 +502,65 @@
       });
     }
   })();
-</script></main>
-
-<!-- Intelligent Pop-Up Tree Navigation (Home, AI Chat, Book) -->
-<nav id="smart-bottom-nav" class="fixed bottom-0 left-0 right-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_24px_rgba(23,76,60,0.08)] translate-y-0 opacity-100 pointer-events-auto">
+</script></main><nav id="welcome-smart-nav" class="fixed bottom-0 left-0 right-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_24px_rgba(23,76,60,0.06)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
   <div class="max-w-md mx-auto flex justify-around items-center h-16 px-4">
-    <a href="javascript:void(0)" onclick="smoothNavigate(event, 'mobile.html')" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">
+    <a href="mobile.html" onclick="return window.smoothNavigateTo('mobile.html', event)" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">
       <span class="material-symbols-outlined text-[24px]">home</span>
       <span class="font-label-md text-xs font-semibold">Home</span>
     </a>
-    <a href="javascript:void(0)" onclick="smoothNavigate(event, 'mobile-welcome.html')" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-primary font-bold active:scale-95 transition-all">
+    <a href="mobile-welcome.html" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-primary font-bold active:scale-95 transition-all">
       <div class="relative flex items-center justify-center">
         <span class="material-symbols-outlined text-[24px]">forum</span>
         <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#E5B869] ring-2 ring-surface-container-lowest"></span>
       </div>
       <span class="font-label-md text-xs font-bold text-primary">AI Chat</span>
     </a>
-    <a href="javascript:void(0)" onclick="smoothNavigate(event, 'booking.html')" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">
+    <a href="booking.html" onclick="return window.smoothNavigateTo('booking.html', event)" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">
       <span class="material-symbols-outlined text-[24px]">event_available</span>
       <span class="font-label-md text-xs font-semibold">Book</span>
     </a>
   </div>
 </nav>
-
 <script>
-  // Intelligent Scroll & Gestural Pop-up Controller
   (function() {
-    const nav = document.getElementById('smart-bottom-nav');
-    if (!nav) return;
-
-    let isNavVisible = true;
-    let lastScrollY = window.scrollY;
-    const threshold = 10;
+    const nav = document.getElementById('welcome-smart-nav');
+    let lastY = window.scrollY || 0;
     let touchStartY = 0;
+    let touchInBottomZone = false;
 
-    function showNav() {
-      if (isNavVisible) return;
-      isNavVisible = true;
-      nav.classList.remove('translate-y-[130%]', 'opacity-0', 'pointer-events-none');
-      nav.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
-    }
-
-    function hideNav() {
-      if (!isNavVisible) return;
-      isNavVisible = false;
-      nav.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
-      nav.classList.add('translate-y-[130%]', 'opacity-0', 'pointer-events-none');
-    }
-
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const diff = currentScrollY - lastScrollY;
-      const windowHeight = window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
-
-      if (windowHeight + currentScrollY >= docHeight - 60 || currentScrollY < 50) {
-        showNav();
-        lastScrollY = currentScrollY;
-        return;
-      }
-
-      if (diff > threshold) {
-        hideNav();
-      } else if (diff < -threshold) {
-        showNav();
-      }
-
-      lastScrollY = currentScrollY;
-    }, { passive: true });
-
-    // Gesture Analyzer: Detect user thumb reaching down and swiping up slightly
-    window.addEventListener('touchstart', (e) => {
-      if (e.touches && e.touches[0]) {
-        touchStartY = e.touches[0].clientY;
-      }
-    }, { passive: true });
-
-    window.addEventListener('touchmove', (e) => {
-      if (!e.touches || !e.touches[0]) return;
-      const currentY = e.touches[0].clientY;
-      const deltaY = currentY - touchStartY;
-      const screenHeight = window.innerHeight;
-
-      // When thumb is at bottom 28% of screen and swipes up slightly (user intends to navigate)
-      if (touchStartY > screenHeight * 0.72 && deltaY < -12) {
-        showNav();
-      } else if (touchStartY < screenHeight * 0.7 && deltaY < -25) {
-        // Normal deep reading scroll -> hide nav
-        hideNav();
-      }
-    }, { passive: true });
-
-    window.smoothNavigate = function(e, url) {
+    window.smoothNavigateTo = function(url, e) {
       if (e) e.preventDefault();
-      hideNav();
+      if (nav) nav.style.transform = 'translateY(120%)';
       document.body.classList.add('page-fading-out');
-      setTimeout(() => {
-        window.location.href = url;
-      }, 220);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(function() { window.location.href = url; }, 220);
+      return false;
     };
+
+    window.addEventListener('scroll', function() {
+      const y = window.scrollY || 0;
+      const dy = y - lastY;
+      if (dy > 8 && y > 30) {
+        if (nav) nav.style.transform = 'translateY(120%)';
+      } else if (dy < -12 || y <= 10) {
+        if (nav) nav.style.transform = 'translateY(0)';
+      }
+      lastY = y;
+    }, { passive: true });
+
+    window.addEventListener('touchstart', function(e) {
+      if (!e.touches || !e.touches[0]) return;
+      touchStartY = e.touches[0].clientY;
+      touchInBottomZone = touchStartY >= (window.innerHeight - 135);
+    }, { passive: true });
+
+    window.addEventListener('touchmove', function(e) {
+      if (!e.touches || !e.touches[0]) return;
+      const swipeDy = e.touches[0].clientY - touchStartY;
+      if (touchInBottomZone && swipeDy < -12) {
+        if (nav) nav.style.transform = 'translateY(0)';
+      }
+    }, { passive: true });
   })();
 </script>
-
 </body></html>
