@@ -13,6 +13,7 @@
       setTimeout(reveal, 150);
     })();
   </script>
+  <script src="./assets/arborist-ai.js"></script>
 </head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen selection:bg-secondary-container selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(23,76,60,0.05)]">
   <div class="h-16 px-margin flex items-center justify-between gap-space-sm">
     <!-- Unified Left Title: Tree Care AI Emblem + Here to help -->
@@ -58,190 +59,278 @@
 </svg>
 </div>
 <!-- Active Chat Stream Content -->
-<section class="flex flex-col px-margin pt-space-md pb-32 gap-space-md min-h-full">
-<!-- Timestamp Delimiter -->
-<div class="flex items-center justify-center my-space-xs">
-<div class="px-3 py-1 rounded-full bg-surface-container/70 shadow-xs flex items-center gap-1.5">
-<span class="material-symbols-outlined text-[13px] text-secondary">schedule</span>
-<span class="font-label-md text-[11px] text-secondary tracking-wide uppercase font-medium">Today · 10:42 AM</span>
-</div>
-</div>
-<!-- Turn 1: Customer (Right aligned) -->
-<div class="flex justify-end w-full pl-8">
-<div class="flex flex-col items-end gap-1 max-w-[85%]">
-<div class="bg-primary-container text-on-primary font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-br-xs shadow-sm">
-          My tree is leaning toward my garage. Can you help?
+<section id="chatContainer" class="flex flex-col px-margin pt-space-md pb-36 gap-space-md min-h-full">
+  <!-- Dynamic Messages List -->
+  <div id="messagesList" class="flex flex-col gap-3.5 w-full">
+    <!-- Initial Greeting from Aoife -->
+    <div class="flex items-start gap-2.5 w-full pr-4 animate-fade-in" id="welcomeMessage">
+      <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs">
+        <span class="material-symbols-outlined text-on-primary text-[17px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+      </div>
+      <div class="flex flex-col items-start gap-2 max-w-[88%]">
+        <div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex flex-col gap-2">
+          <p>Hi there! Welcome to ARBORIST Care &amp; Removal. I'm Aoife, the clinic coordinator. How can I help you with your trees today?</p>
         </div>
-<span class="font-label-sm text-[10px] text-on-surface-variant/70 pr-1">10:42 AM · Sent</span>
-</div>
-</div>
-<!-- Turn 2: AI Arborist (Left aligned) -->
-<div class="flex items-start gap-2.5 w-full pr-6">
-<div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs">
-<span class="material-symbols-outlined text-on-primary text-[15px]" style="font-variation-settings: 'FILL' 1;">psychology_alt</span>
-</div>
-<div class="flex flex-col items-start gap-1 max-w-[86%]">
-<div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm">
-          Of course. I can help you arrange a professional assessment. Is the tree touching your garage or any power lines?
+        <!-- Quick Starter Action Chips -->
+        <div class="flex flex-wrap gap-1.5 pt-0.5">
+          <button onclick="quickPrompt('I would like to book a tree assessment')" class="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all" type="button">
+            <span class="material-symbols-outlined text-[15px] text-primary">event_available</span>
+            <span>Book an assessment</span>
+          </button>
+          <button onclick="document.getElementById('chatPhotoInput').click()" class="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all" type="button">
+            <span class="material-symbols-outlined text-[15px] text-primary">photo_camera</span>
+            <span>Share tree photo</span>
+          </button>
+          <a href="tel:5550192834" class="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed/40 hover:bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-md text-[12px] shadow-xs active:scale-95 transition-all">
+            <span class="material-symbols-outlined text-[15px] text-tertiary">call</span>
+            <span>Emergency hotline</span>
+          </a>
         </div>
-<span class="font-label-sm text-[10px] text-secondary pl-1">Arborist AI · 10:42 AM</span>
-</div>
-</div>
-<!-- Turn 3: Customer (Right aligned) -->
-<div class="flex justify-end w-full pl-8">
-<div class="flex flex-col items-end gap-1 max-w-[85%]">
-<div class="bg-primary-container text-on-primary font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-br-xs shadow-sm">
-          No, but it looks like it might fall.
-        </div>
-<span class="font-label-sm text-[10px] text-on-surface-variant/70 pr-1">10:43 AM · Sent</span>
-</div>
-</div>
-<!-- Turn 4: AI Arborist (Left aligned with quick-action chips) -->
-<div class="flex items-start gap-2.5 w-full pr-4">
-<div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs">
-<span class="material-symbols-outlined text-on-primary text-[15px]" style="font-variation-settings: 'FILL' 1;">psychology_alt</span>
-</div>
-<div class="flex flex-col items-start gap-2.5 max-w-[88%]">
-<div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex flex-col gap-2">
-<p class="">Thanks for explaining. Please keep a safe distance if you think it may fall.</p>
-<p class="">Would you like to share a photo or request a professional assessment?</p>
-</div>
-<!-- Suggested Interactive Triage Triggers -->
-<div class="flex flex-wrap gap-1.5 pt-0.5">
-<button class="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all" type="button">
-<span class="material-symbols-outlined text-[16px] text-secondary group-hover:text-primary">photo_camera</span>
-<span class="">Upload specimen photo</span>
-</button>
-<button class="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed/40 hover:bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-md text-[12px] shadow-xs active:scale-95 transition-all" type="button">
-<span class="material-symbols-outlined text-[16px] text-tertiary">priority_high</span>
-<span class="">Book ISA rapid visit</span>
-</button>
-</div>
-<span class="font-label-sm text-[10px] text-secondary pl-1">Arborist AI · 10:43 AM</span>
-</div>
-</div>
-<!-- Turn 5: AI Typing Indicator State -->
-<div class="flex items-start gap-2.5 w-full pr-8" id="typingIndicator">
-<div class="w-7 h-7 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 mt-0.5 shadow-xs">
-<span class="material-symbols-outlined text-on-secondary text-[14px]">psychology</span>
-</div>
-<div class="bg-surface-container-lowest px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex items-center gap-1.5">
-<span class="w-2 h-2 rounded-full bg-secondary/80 animate-bounce" style="animation-delay: 0s;"></span>
-<span class="w-2 h-2 rounded-full bg-secondary/80 animate-bounce" style="animation-delay: 0.18s;"></span>
-<span class="w-2 h-2 rounded-full bg-secondary/80 animate-bounce" style="animation-delay: 0.36s;"></span>
-<span class="font-label-sm text-[11px] text-secondary font-medium ml-1">Analyzing lean vector...</span>
-</div>
-</div>
+        <span class="font-label-sm text-[10px] text-secondary pl-1">Aoife · Tree Care Coordinator</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Typing Indicator -->
+  <div class="hidden items-start gap-2.5 w-full pr-8" id="typingIndicator">
+    <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-xs">
+      <span class="material-symbols-outlined text-primary text-[15px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+    </div>
+    <div class="bg-surface-container-lowest px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex items-center gap-1.5">
+      <span class="w-2 h-2 rounded-full bg-primary/70 animate-bounce" style="animation-delay: 0s;"></span>
+      <span class="w-2 h-2 rounded-full bg-primary/70 animate-bounce" style="animation-delay: 0.18s;"></span>
+      <span class="w-2 h-2 rounded-full bg-primary/70 animate-bounce" style="animation-delay: 0.36s;"></span>
+      <span class="font-label-sm text-[11px] text-primary font-medium ml-1">Aoife is typing...</span>
+    </div>
+  </div>
 </section>
+
 <!-- Floating Intelligent Message Composer Dock -->
 <footer class="fixed bottom-16 left-0 w-full z-30 px-3 pb-2 pt-1">
-<div class="max-w-md mx-auto bg-surface-container-lowest/95 backdrop-blur-xl rounded-2xl p-1.5 shadow-[0_8px_30px_rgba(23,76,60,0.12)]">
-<form class="flex items-center gap-1.5" id="chatForm" onsubmit="return false;">
-<!-- Camera / Asset Attachment Button -->
-<button aria-label="Add image or document" class="w-9 h-9 rounded-full bg-surface-container hover:bg-secondary-container text-secondary flex items-center justify-center flex-shrink-0 transition-all active:scale-90" type="button">
-<span class="material-symbols-outlined text-[20px]">add</span>
-</button>
-<!-- Message Field -->
-<div class="relative flex-1 min-w-0">
-<input autocomplete="off" class="w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/60 font-body-md text-[14px] leading-5 py-2.5 pl-3 pr-8 rounded-xl focus:outline-none focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary/20 transition-all" id="userMessageInput" placeholder="Describe bark, lean, or roots..." type="text">
-<!-- Voice Dictation Trigger inside input -->
-<button aria-label="Use voice dictation" class="absolute right-1.5 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-secondary hover:text-primary" type="button">
-<span class="material-symbols-outlined text-[18px]">mic</span>
-</button>
-</div>
-<!-- Custom Dimensional Origami Folded-Airplane Send Button -->
-<button aria-label="Send arborist query" class="w-10 h-10 rounded-xl bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center flex-shrink-0 shadow-[0_4px_14px_rgba(0,53,39,0.3)] active:scale-90 transition-transform group" id="sendMessageBtn" type="button">
-<!-- Origami styled Send Icon -->
-<svg class="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24">
-<path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="currentColor"></path>
-</svg>
-</button>
-</form>
-<!-- Micro Quick Hints Ribbon -->
+  <div class="max-w-md mx-auto bg-surface-container-lowest/95 backdrop-blur-xl rounded-2xl p-1.5 shadow-[0_8px_30px_rgba(23,76,60,0.12)] border border-outline-variant/30">
+    <!-- Image Preview Thumbnail Bar (if photo selected) -->
+    <div id="imagePreviewBar" class="hidden items-center justify-between px-2.5 py-1.5 mb-1 bg-surface-container rounded-xl">
+      <div class="flex items-center gap-2 min-w-0">
+        <img id="imagePreviewThumb" src="" alt="Photo preview" class="w-8 h-8 rounded-lg object-cover border border-outline-variant/40">
+        <span class="text-xs text-primary font-medium truncate" id="imagePreviewName">Photo attached</span>
+      </div>
+      <button type="button" onclick="clearSelectedPhoto()" class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-secondary hover:text-error shadow-xs active:scale-95">
+        <span class="material-symbols-outlined text-[15px]">close</span>
+      </button>
+    </div>
 
-</div>
+    <form class="flex items-center gap-1.5" id="chatForm" onsubmit="return false;">
+      <!-- Hidden file input for photos -->
+      <input type="file" id="chatPhotoInput" accept="image/*" class="hidden">
+      <!-- Camera / Asset Attachment Button -->
+      <button id="chatAttachmentBtn" type="button" onclick="document.getElementById('chatPhotoInput').click()" aria-label="Add tree photo" class="w-9 h-9 rounded-full bg-surface-container hover:bg-secondary-container text-secondary flex items-center justify-center flex-shrink-0 transition-all active:scale-90" title="Upload Tree Photo">
+        <span class="material-symbols-outlined text-[20px]">add_a_photo</span>
+      </button>
+      <!-- Message Field -->
+      <div class="relative flex-1 min-w-0">
+        <input autocomplete="off" class="w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/60 font-body-md text-[14px] leading-5 py-2.5 pl-3 pr-8 rounded-xl focus:outline-none focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary/20 transition-all" id="userMessageInput" placeholder="Describe your tree concern..." type="text">
+        <button onclick="handleVoiceUnavailable(event)" aria-label="Use voice dictation" class="absolute right-1.5 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-secondary hover:text-primary" type="button" title="Voice dictation">
+          <span class="material-symbols-outlined text-[18px]">mic</span>
+        </button>
+      </div>
+      <!-- Send Button -->
+      <button aria-label="Send arborist query" class="w-10 h-10 rounded-xl bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center flex-shrink-0 shadow-[0_4px_14px_rgba(0,53,39,0.3)] active:scale-90 transition-transform group" id="sendMessageBtn" type="button">
+        <svg class="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24">
+          <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="currentColor"></path>
+        </svg>
+      </button>
+    </form>
+  </div>
 </footer>
 </div>
+
 <script>
-  (function() {
+  let pendingPhoto = null;
+
+  function clearSelectedPhoto() {
+    pendingPhoto = null;
+    const bar = document.getElementById('imagePreviewBar');
+    const input = document.getElementById('chatPhotoInput');
+    if (bar) bar.classList.add('hidden');
+    if (input) input.value = '';
+  }
+
+  function handleVoiceUnavailable(e) {
+    if (e) e.preventDefault();
+    alert("Voice dictation is connected in Live Call mode. Tap the Call button in the top right to start a live call!");
+  }
+
+  function quickPrompt(text) {
     const input = document.getElementById('userMessageInput');
-    const sendBtn = document.getElementById('sendMessageBtn');
-    const chatForm = document.getElementById('chatForm');
+    if (input) {
+      input.value = text;
+      handleSendMessage();
+    }
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    const div = document.createElement('div');
+    div.innerText = str;
+    return div.innerHTML;
+  }
+
+  async function handleSendMessage() {
+    const input = document.getElementById('userMessageInput');
+    const text = input ? input.value.trim() : '';
+    if (!text && !pendingPhoto) {
+      if (input) input.focus();
+      return;
+    }
+
+    const messagesList = document.getElementById('messagesList');
     const indicator = document.getElementById('typingIndicator');
-    const refreshBtn = document.getElementById('refreshChatBtn');
+    const currentPhoto = pendingPhoto;
 
-    function appendUserMessage(text) {
-      if (!text.trim()) return;
+    // Clear inputs immediately
+    if (input) input.value = '';
+    clearSelectedPhoto();
 
-      const userBubble = document.createElement('div');
-      userBubble.className = 'flex justify-end w-full pl-8 animate-fade-in';
-      userBubble.innerHTML = `
-        <div class="flex flex-col items-end gap-1 max-w-[85%]">
-          <div class="bg-primary-container text-on-primary font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-br-xs shadow-sm">
-            ${escapeHtml(text)}
+    // 1. Render User Bubble
+    const userBubble = document.createElement('div');
+    userBubble.className = 'flex justify-end w-full pl-8 animate-fade-in';
+    let photoHtml = '';
+    if (currentPhoto && currentPhoto.previewUrl) {
+      photoHtml = `<div class="mb-2 rounded-xl overflow-hidden max-h-48 border border-white/20 shadow-sm"><img src="${currentPhoto.previewUrl}" class="w-full h-auto object-cover" alt="Uploaded tree photo"></div>`;
+    }
+    userBubble.innerHTML = `
+      <div class="flex flex-col items-end gap-1 max-w-[85%]">
+        <div class="bg-primary-container text-on-primary font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-br-xs shadow-sm">
+          ${photoHtml}
+          ${escapeHtml(text)}
+        </div>
+        <span class="font-label-sm text-[10px] text-on-surface-variant/70 pr-1">Just now · Sent</span>
+      </div>
+    `;
+    messagesList.appendChild(userBubble);
+
+    // Show indicator and scroll
+    if (indicator) {
+      indicator.classList.remove('hidden');
+      indicator.classList.add('flex');
+    }
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+    // 2. Call Live Gemini AI
+    try {
+      const base64 = currentPhoto ? currentPhoto.base64 : null;
+      const mime = currentPhoto ? currentPhoto.mimeType : 'image/jpeg';
+      const aiReply = await window.ArboristAI.sendMessage(text, base64, mime);
+
+      if (indicator) {
+        indicator.classList.add('hidden');
+        indicator.classList.remove('flex');
+      }
+
+      // Check if reply suggests booking or emergency
+      const lower = (aiReply || '').toLowerCase();
+      let actionButtons = '';
+      if (lower.includes('book') || lower.includes('inspect') || lower.includes('schedule') || lower.includes('quote') || lower.includes('declan') || lower.includes('callum')) {
+        actionButtons = `
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            <a href="booking.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary hover:bg-primary-container text-white font-label-md text-[12px] font-semibold shadow-xs active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[15px] text-[#E5B869]" style="font-variation-settings: 'FILL' 1;">event_available</span>
+              <span>Book On-Site Inspection</span>
+            </a>
+            <a href="tel:5550192834" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-primary font-label-md text-[12px] shadow-xs active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[15px]">call</span>
+              <span>Call Dispatch</span>
+            </a>
           </div>
-          <span class="font-label-sm text-[10px] text-on-surface-variant/70 pr-1">Just now · Sent</span>
+        `;
+      }
+
+      const aiBubble = document.createElement('div');
+      aiBubble.className = 'flex items-start gap-2.5 w-full pr-4 animate-fade-in';
+      aiBubble.innerHTML = `
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs">
+          <span class="material-symbols-outlined text-on-primary text-[17px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+        </div>
+        <div class="flex flex-col items-start gap-2 max-w-[88%]">
+          <div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex flex-col gap-2">
+            <p>${escapeHtml(aiReply)}</p>
+          </div>
+          ${actionButtons}
+          <span class="font-label-sm text-[10px] text-secondary pl-1">Aoife · Tree Care Coordinator</span>
         </div>
       `;
-
-      if (indicator && indicator.parentNode) {
-        indicator.parentNode.insertBefore(userBubble, indicator);
-      }
-      
-      input.value = '';
+      messagesList.appendChild(aiBubble);
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 
-      // Simulated smart response
+    } catch (err) {
       if (indicator) {
-        indicator.classList.remove('hidden');
-        setTimeout(() => {
-          const aiResponse = document.createElement('div');
-          aiResponse.className = 'flex items-start gap-2.5 w-full pr-6';
-          aiResponse.innerHTML = `
-            <div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs">
-              <span class="material-symbols-outlined text-on-primary text-[15px]" style="font-variation-settings: 'FILL' 1;">psychology_alt</span>
-            </div>
-            <div class="flex flex-col items-start gap-1 max-w-[86%]">
-              <div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm">
-                Understood. For imminent structural hazards near buildings, we prioritize emergency bracing and canopy weight reduction. I have registered your coordinates for immediate arborist review.
-              </div>
-              <span class="font-label-sm text-[10px] text-secondary pl-1">Arborist AI · Just now</span>
-            </div>
-          `;
-          indicator.parentNode.insertBefore(aiResponse, indicator);
-          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }, 1300);
+        indicator.classList.add('hidden');
+        indicator.classList.remove('flex');
       }
+      const errBubble = document.createElement('div');
+      errBubble.className = 'flex items-start gap-2.5 w-full pr-4';
+      errBubble.innerHTML = `
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs">
+          <span class="material-symbols-outlined text-on-primary text-[17px]">eco</span>
+        </div>
+        <div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm">
+          I'm here to help. Could you describe the situation with your tree or let me know if you would like to book Master Arborist Declan to inspect it?
+        </div>
+      `;
+      messagesList.appendChild(errBubble);
+    }
+  }
+
+  // Handle Photo File Select
+  document.addEventListener('DOMContentLoaded', () => {
+    const photoInput = document.getElementById('chatPhotoInput');
+    if (photoInput) {
+      photoInput.addEventListener('change', async (e) => {
+        if (!e.target.files || !e.target.files[0]) return;
+        const file = e.target.files[0];
+        try {
+          pendingPhoto = await window.ArboristAI.fileToBase64(file);
+          const bar = document.getElementById('imagePreviewBar');
+          const thumb = document.getElementById('imagePreviewThumb');
+          const name = document.getElementById('imagePreviewName');
+          if (thumb) thumb.src = pendingPhoto.previewUrl;
+          if (name) name.textContent = file.name || 'Photo attached';
+          if (bar) {
+            bar.classList.remove('hidden');
+            bar.classList.add('flex');
+          }
+          const textInput = document.getElementById('userMessageInput');
+          if (textInput && !textInput.value) {
+            textInput.placeholder = "Add description for this photo (optional)...";
+            textInput.focus();
+          }
+        } catch (err) {
+          console.error("Failed to load photo:", err);
+        }
+      });
     }
 
-    function escapeHtml(string) {
-      const div = document.createElement('div');
-      div.innerText = string;
-      return div.innerHTML;
-    }
-
-    if (sendBtn && input) {
-      sendBtn.addEventListener('click', () => appendUserMessage(input.value));
+    const sendBtn = document.getElementById('sendMessageBtn');
+    const input = document.getElementById('userMessageInput');
+    if (sendBtn) sendBtn.addEventListener('click', handleSendMessage);
+    if (input) {
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
-          appendUserMessage(input.value);
+          handleSendMessage();
         }
       });
     }
 
+    // Refresh button resets chat
+    const refreshBtn = document.getElementById('refreshChatBtn');
     if (refreshBtn) {
-      refreshBtn.addEventListener('click', () => {
-        if (input) {
-          input.value = '';
-          input.placeholder = "New session started. Ask any tree care question...";
-          setTimeout(() => {
-            input.placeholder = "Describe bark, lean, or roots...";
-          }, 3000);
-        }
-      });
+      refreshBtn.onclick = () => {
+        if (window.ArboristAI) window.ArboristAI.resetHistory();
+        window.location.reload();
+      };
     }
-  })();
+  });
 </script></main><nav id="chat-smart-nav" class="fixed bottom-0 left-0 right-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-4px_24px_rgba(23,76,60,0.08)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
   <div class="max-w-md mx-auto flex justify-around items-center h-16 px-4">
     <a href="mobile.html" onclick="return smoothNavigate(event, 'mobile.html')" class="flex flex-col items-center justify-center gap-1 min-w-[64px] min-h-[44px] text-on-surface-variant hover:text-primary active:scale-95 transition-all">

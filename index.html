@@ -953,6 +953,7 @@
       setTimeout(reveal, 60);
     })();
   </script>
+  <script src="./assets/arborist-ai.js"></script>
 </head>
 <body class="bg-surface antialiased">
 
@@ -3727,7 +3728,7 @@
       return d.innerHTML;
     }
 
-    function appendMobileTurns(text, isFirstTime) {
+    async function appendMobileTurns(text, isFirstTime) {
       if (mResetBtn) { mResetBtn.classList.remove('hidden'); mResetBtn.classList.add('flex'); }
       if (!mMessagesBox) return;
 
@@ -3746,19 +3747,34 @@
         if (mChatStage) {
           mChatStage.scrollTo({ top: mChatStage.scrollHeight, behavior: 'smooth' });
         }
+      }
 
-        setTimeout(function() {
+      try {
+        const aiReply = window.ArboristAI 
+          ? await window.ArboristAI.sendMessage(text)
+          : "Thanks for sharing that! I can help you right away. Would you like to schedule a free checkup with Master Arborist Declan?";
+
+        if (mThinkingBox) {
           mThinkingBox.classList.add('hidden');
           mThinkingBox.classList.remove('flex', 'first-prompt-creamy', 'normal-msg-in');
+        }
 
-          const aiTurn = document.createElement('div');
-          aiTurn.className = 'flex items-start gap-2.5 w-full pr-4 ' + (isFirstTime ? 'first-prompt-creamy' : 'normal-msg-in');
-          aiTurn.innerHTML = '<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs"><span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: \'FILL\' 1;">eco</span></div><div class="flex flex-col items-start gap-2 max-w-[88%]"><div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex flex-col gap-2"><p>Thanks for sharing that! I can help you right away. Please keep a safe distance if any branches look loose or unstable.</p><p>Would you like to snap a quick photo of the tree or book a free checkup with our tree specialist?</p></div><div class="flex flex-wrap gap-1.5 pt-0.5"><button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all" type="button"><span class="material-symbols-outlined text-[16px] text-primary">photo_camera</span><span>Take a photo</span></button><button onclick="openBookingModal();" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed/50 hover:bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-md text-[12px] shadow-xs active:scale-95 transition-all cursor-pointer" type="button"><span class="material-symbols-outlined text-[16px] text-tertiary">event_available</span><span>Book free checkup</span></button></div><span class="font-label-sm text-[10px] text-secondary pl-1">Tree Care AI · Just now</span></div>';
-          mMessagesBox.appendChild(aiTurn);
-          if (mChatStage) {
-            mChatStage.scrollTo({ top: mChatStage.scrollHeight, behavior: 'smooth' });
-          }
-        }, 1100);
+        const aiTurn = document.createElement('div');
+        aiTurn.className = 'flex items-start gap-2.5 w-full pr-4 ' + (isFirstTime ? 'first-prompt-creamy' : 'normal-msg-in');
+        aiTurn.innerHTML = '<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs"><span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: \'FILL\' 1;">eco</span></div><div class="flex flex-col items-start gap-2 max-w-[88%]"><div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm flex flex-col gap-2"><p>' + escapeHtml(aiReply) + '</p></div><div class="flex flex-wrap gap-1.5 pt-0.5"><button onclick="openBookingModal();" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed/60 hover:bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-[12px] shadow-xs active:scale-95 transition-all cursor-pointer" type="button"><span class="material-symbols-outlined text-[16px] text-tertiary">event_available</span><span>Book assessment</span></button><a href="tel:5550192834" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-[12px] shadow-xs active:scale-95 transition-all"><span class="material-symbols-outlined text-[16px] text-primary">phone_in_talk</span><span>(555) 019-2834</span></a></div><span class="font-label-sm text-[10px] text-secondary pl-1">Aoife · Tree Care Coordinator</span></div>';
+        mMessagesBox.appendChild(aiTurn);
+        if (mChatStage) {
+          mChatStage.scrollTo({ top: mChatStage.scrollHeight, behavior: 'smooth' });
+        }
+      } catch (err) {
+        if (mThinkingBox) {
+          mThinkingBox.classList.add('hidden');
+          mThinkingBox.classList.remove('flex', 'first-prompt-creamy', 'normal-msg-in');
+        }
+        const errTurn = document.createElement('div');
+        errTurn.className = 'flex items-start gap-2.5 w-full pr-4 normal-msg-in';
+        errTurn.innerHTML = '<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-xs"><span class="material-symbols-outlined text-on-primary text-[16px]">eco</span></div><div class="bg-surface-container-lowest text-on-surface font-body-md text-[15px] leading-relaxed px-4 py-3 rounded-2xl rounded-tl-xs shadow-sm"><p>I am here to help. Would you like to schedule an inspection with Declan?</p></div>';
+        mMessagesBox.appendChild(errTurn);
       }
     }
 
@@ -3863,7 +3879,7 @@
     const dMessagesBox = document.getElementById('desktop-chat-messages');
     const dScroll = document.getElementById('desktop-chat-scroll');
 
-    function sendDesktopPrompt() {
+    async function sendDesktopPrompt() {
       if (!dInput) return;
       const text = dInput.value.trim();
       if (!text) {
@@ -3883,22 +3899,33 @@
 
       if (dScroll) dScroll.scrollTo({ top: dScroll.scrollHeight, behavior: 'smooth' });
 
-      // Desktop Thinking Animation (Simulate 1.2s authentic arborist evaluation)
+      // Desktop Thinking Animation
       const thinkingTurn = document.createElement('div');
       thinkingTurn.id = 'desktop-thinking-bubble';
       thinkingTurn.className = 'flex gap-space-md pr-12 normal-msg-in';
-      thinkingTurn.innerHTML = '<div class="flex-shrink-0 pt-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[18px] text-[#E5B869] animate-spin" style="animation-duration: 2.4s;">autorenew</span></div></div><div class="flex flex-col gap-1.5 max-w-2xl flex-1"><div class="bg-surface-container-lowest text-on-surface rounded-xl rounded-tl-xs p-3.5 shadow-sm flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary animate-bounce" style="animation-delay: 0ms;"></span><span class="w-2 h-2 rounded-full bg-secondary animate-bounce" style="animation-delay: 150ms;"></span><span class="w-2 h-2 rounded-full bg-secondary animate-bounce" style="animation-delay: 300ms;"></span><span class="font-label-sm text-[12px] text-secondary font-semibold ml-2">Arborist AI analyzing tree specimen...</span></div></div>';
+      thinkingTurn.innerHTML = '<div class="flex-shrink-0 pt-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[18px] text-[#E5B869] animate-spin" style="animation-duration: 2.4s;">autorenew</span></div></div><div class="flex flex-col gap-1.5 max-w-2xl flex-1"><div class="bg-surface-container-lowest text-on-surface rounded-xl rounded-tl-xs p-3.5 shadow-sm flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary animate-bounce" style="animation-delay: 0ms;"></span><span class="w-2 h-2 rounded-full bg-secondary animate-bounce" style="animation-delay: 150ms;"></span><span class="w-2 h-2 rounded-full bg-secondary animate-bounce" style="animation-delay: 300ms;"></span><span class="font-label-sm text-[12px] text-secondary font-semibold ml-2">Aoife reviewing tree details...</span></div></div>';
       dMessagesBox.appendChild(thinkingTurn);
       if (dScroll) dScroll.scrollTo({ top: dScroll.scrollHeight, behavior: 'smooth' });
 
-      setTimeout(function() {
+      try {
+        const aiReply = window.ArboristAI 
+          ? await window.ArboristAI.sendMessage(text)
+          : "Thank you for getting in touch. Would you like to schedule an on-site master arborist assessment?";
+
         if (thinkingTurn && thinkingTurn.parentNode) thinkingTurn.remove();
+
         const aiTurn = document.createElement('div');
         aiTurn.className = 'flex gap-space-md pr-12 normal-msg-in';
-        aiTurn.innerHTML = '<div class="flex-shrink-0 pt-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-tertiary-fixed shadow-sm"><span class="material-symbols-outlined text-[20px] text-[#E5B869]" style="font-variation-settings: \'FILL\' 1;">eco</span></div></div><div class="flex flex-col gap-1.5 max-w-2xl flex-1"><div class="flex items-center gap-2"><span class="font-label-md text-label-md text-primary font-bold">Arborist Core</span><span class="font-label-sm text-label-sm px-1.5 py-0.2 bg-secondary-container text-on-secondary-container rounded font-semibold">Diagnostic</span></div><div class="bg-surface-container-lowest text-on-surface rounded-xl rounded-tl-xs p-space-md shadow-sm"><p class="font-body-md text-body-md leading-relaxed text-on-surface">Thank you for providing those details. In tree health assessments, sudden changes or limb displacement require priority inspection.</p><p class="font-body-md text-body-md leading-relaxed text-on-surface mt-2 font-medium">Would you like to schedule an on-site master arborist visit or start a real-time live voice evaluation now?</p></div><span class="font-label-sm text-label-sm text-on-surface-variant/70 pl-1">Just now</span></div>';
+        aiTurn.innerHTML = '<div class="flex-shrink-0 pt-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-tertiary-fixed shadow-sm"><span class="material-symbols-outlined text-[20px] text-[#E5B869]" style="font-variation-settings: \'FILL\' 1;">eco</span></div></div><div class="flex flex-col gap-2 max-w-2xl flex-1"><div class="flex items-center gap-2"><span class="font-label-md text-label-md text-primary font-bold">Aoife</span><span class="font-label-sm text-label-sm px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded-full font-semibold">Tree Care Coordinator</span></div><div class="bg-surface-container-lowest text-on-surface rounded-xl rounded-tl-xs p-space-md shadow-sm"><p class="font-body-md text-body-md leading-relaxed text-on-surface">' + escapeHtml(aiReply) + '</p></div><div class="flex items-center gap-2 pt-0.5"><button onclick="openBookingModal();" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-tertiary-fixed/70 hover:bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-xs font-semibold shadow-xs transition-all active:scale-95 cursor-pointer"><span class="material-symbols-outlined text-[16px] text-tertiary">event_available</span><span>Book Assessment</span></button><a href="tel:5550192834" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container text-secondary font-label-md text-xs font-semibold shadow-xs transition-all active:scale-95"><span class="material-symbols-outlined text-[16px] text-primary">phone_in_talk</span><span>(555) 019-2834 (24/7)</span></a></div><span class="font-label-sm text-label-sm text-on-surface-variant/70 pl-1">Just now</span></div>';
         dMessagesBox.appendChild(aiTurn);
         if (dScroll) dScroll.scrollTo({ top: dScroll.scrollHeight, behavior: 'smooth' });
-      }, 1250);
+      } catch (err) {
+        if (thinkingTurn && thinkingTurn.parentNode) thinkingTurn.remove();
+        const errTurn = document.createElement('div');
+        errTurn.className = 'flex gap-space-md pr-12 normal-msg-in';
+        errTurn.innerHTML = '<div class="flex-shrink-0 pt-1"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-tertiary-fixed shadow-sm"><span class="material-symbols-outlined text-[20px] text-[#E5B869]">eco</span></div></div><div class="flex flex-col gap-1.5 max-w-2xl flex-1"><div class="bg-surface-container-lowest text-on-surface rounded-xl rounded-tl-xs p-space-md shadow-sm"><p class="font-body-md text-body-md leading-relaxed text-on-surface">I am here to help. Would you like to schedule an on-site master arborist assessment?</p></div></div>';
+        dMessagesBox.appendChild(errTurn);
+      }
     }
 
     if (dInput && dSend) {
