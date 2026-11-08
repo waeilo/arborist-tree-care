@@ -1,0 +1,410 @@
+<!DOCTYPE html><html lang="en" style="width: 1279px; height: 1771px; overflow: hidden; position: relative;"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Manrope:wght@200..800&amp;family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+/* Spring-physics animations for composer attachment menu */
+@keyframes springPopOpen {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.82);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translateY(-5px) scale(1.035);
+  }
+  75% {
+    transform: translateY(1.5px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes springPopClose {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    opacity: 0.85;
+    transform: translateY(-2px) scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.8);
+  }
+}
+
+.popup-spring-in {
+  animation: springPopOpen 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: bottom left;
+  pointer-events: auto;
+}
+
+.popup-spring-out {
+  animation: springPopClose 0.28s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  transform-origin: bottom left;
+  pointer-events: none;
+}
+</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-variant":"#dbe5dc","outline-variant":"#c0c9c3","primary":"#003527","on-primary-fixed":"#002117","on-secondary-container":"#4e6b53","secondary-container":"#caebcc","tertiary-container":"#593f00","error-container":"#ffdad6","on-tertiary-container":"#d8a950","primary-container":"#174c3c","error":"#ba1a1a","on-surface":"#151e18","on-tertiary-fixed":"#271900","on-background":"#151e18","on-error":"#ffffff","tertiary-fixed":"#ffdea6","surface-container-low":"#ecf6ed","inverse-on-surface":"#e9f3ea","primary-fixed":"#b8eed8","surface-bright":"#f2fcf2","background":"#f2fcf2","surface-dim":"#d3ddd3","inverse-surface":"#29332c","secondary-fixed":"#caebcc","tertiary":"#3d2a00","surface":"#f2fcf2","tertiary-fixed-dim":"#f0bf64","secondary":"#48654d","primary-fixed-dim":"#9dd2bc","on-primary":"#ffffff","surface-container-highest":"#dbe5dc","surface-container-lowest":"#ffffff","on-primary-fixed-variant":"#1b4f3f","on-surface-variant":"#404945","secondary-fixed-dim":"#afcfb1","surface-container-high":"#e1ebe1","on-error-container":"#93000a","on-tertiary-fixed-variant":"#5e4200","inverse-primary":"#9dd2bc","on-secondary":"#ffffff","surface-tint":"#356856","on-secondary-fixed":"#05210e","outline":"#707974","on-primary-container":"#87bba7","on-tertiary":"#ffffff","on-secondary-fixed-variant":"#314d36","surface-container":"#e6f1e7"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","xl":"0.75rem","2xl":"1rem","3xl":"1.5rem","full":"9999px"},spacing:{"gutter-lg":"2rem","space-sm":"0.5rem","gutter":"1.5rem","space-3xl":"6rem","space-xs":"0.25rem","space-md":"1rem","margin-lg":"4rem","margin":"1.25rem","space-xl":"2.5rem","space-lg":"1.5rem","space-2xl":"4rem","margin-md":"2.5rem"},fontFamily:{"body-lg":["DM Sans"],"label-sm":["Manrope"],"headline-lg":["Noto Serif"],"headline-sm":["Manrope"],"label-lg":["Manrope"],"display-lg-mobile":["Noto Serif"],"display-lg":["Noto Serif"],"body-sm":["DM Sans"],"headline-md":["Manrope"],"headline-lg-mobile":["Noto Serif"],"label-md":["Manrope"],"body-md":["DM Sans"]},fontSize:{"body-lg":["18px",{lineHeight:"28px",letterSpacing:"0em",fontWeight:"400"}],"label-sm":["10px",{lineHeight:"14px",letterSpacing:"0.08em",fontWeight:"700"}],"headline-lg":["40px",{lineHeight:"48px",letterSpacing:"-0.015em",fontWeight:"400"}],"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"0em",fontWeight:"600"}],"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0.04em",fontWeight:"700"}],"display-lg-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.01em",fontWeight:"400"}],"display-lg":["56px",{lineHeight:"64px",letterSpacing:"-0.02em",fontWeight:"400"}],"body-sm":["14px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"400"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"700"}],"headline-lg-mobile":["28px",{lineHeight:"36px",letterSpacing:"-0.01em",fontWeight:"400"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.05em",fontWeight:"600"}],"body-md":["16px",{lineHeight:"24px",letterSpacing:"0em",fontWeight:"400"}]}}}}</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-fixed h-screen overflow-hidden"><aside class="fixed left-0 top-0 h-screen w-60 bg-surface-container-low border-r border-outline-variant/30 z-50 flex flex-col justify-between p-space-md shadow-[0_1px_8px_rgba(0,0,0,0.02)]"><div class="flex flex-col gap-space-lg"><div class="flex items-center gap-space-sm px-space-xs py-space-xs"><img alt="logo.jpg" class="h-10 w-auto object-contain drop-shadow-xs" src="./assets/logo.png"><div class="flex flex-col"><span class="font-label-md text-label-md tracking-wider uppercase text-primary font-bold leading-tight">ARBORIST</span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Care &amp; Removal</span></div></div><nav class="flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary font-bold shadow-sm"><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="home" href="desktop.html"><span class="material-symbols-outlined text-[20px]">home</span><span class="">Home</span></a><a aria-current="page" class="flex items-center justify-between px-3 py-2.5 rounded-lg transition-colors bg-primary-container text-on-primary font-bold shadow-sm" data-path="ai-assistant" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[20px] text-tertiary-fixed">forum</span><span class="">AI Assistant</span></div></a>
+          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md cursor-pointer" data-path="ai-live-call" href="desktop-live-voice.html"><span class="material-symbols-outlined text-[20px] text-tertiary-fixed-dim">call</span><span class="flex-1">AI Live Call</span><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span></a><div class="group relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-outline cursor-not-allowed opacity-60 font-label-md text-label-md"><span class="material-symbols-outlined text-[20px]">event_available</span><span class="">My Booking</span><div class="absolute left-full ml-2 hidden group-hover:flex z-50 w-48 p-2 bg-inverse-surface text-inverse-on-surface rounded shadow-lg font-body-sm text-[11px] leading-tight pointer-events-none">Your bookings will appear here after you make an appointment</div></div></nav></div><div class="flex flex-col p-space-md rounded-xl bg-surface-container border border-outline-variant/40 gap-space-sm shadow-[0_4px_16px_-4px_rgba(23,76,60,0.06)]"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container"><span class="material-symbols-outlined text-[16px]">eco</span></div><span class="font-label-md text-label-md font-bold text-on-surface">Hi there!</span></div><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-[12px]">Thanks for caring for your trees and the world around you.</p><div class="flex items-center gap-2 pt-1"><a class="flex-1 py-1.5 px-2 rounded-lg bg-primary-container text-on-primary hover:bg-primary transition-colors text-center font-label-sm text-label-sm font-bold shadow-sm" data-path="login" href="#">Log In</a><a class="flex-1 py-1.5 px-2 rounded-lg border border-outline-variant bg-transparent text-on-surface hover:bg-surface-container-high transition-colors text-center font-label-sm text-label-sm font-bold" data-path="sign-up" href="#">Sign Up</a></div></div></aside><div class="pl-60 min-h-screen flex flex-col h-screen overflow-hidden"><header class="fixed top-0 left-60 right-0 h-16 bg-surface/85 backdrop-blur-md border-b border-outline-variant/20 z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.02)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-2"><img alt="logo.jpg" class="h-10 w-auto object-contain drop-shadow-xs" src="./assets/logo.png"><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-none">Tree Care AI Assistant</span><span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 text-[12px]">Here to help with your tree care questions</span></div></div></div><div class="absolute left-1/2 -translate-x-1/2 flex items-center gap-2"><span class="font-headline-md text-[19px] font-extrabold tracking-tight text-primary">AI Chat</span></div><div class="flex items-center gap-space-sm"><button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors font-label-sm text-label-sm font-semibold" type="button"><span class="material-symbols-outlined text-[16px]">add_comment</span><span class="">New chat</span></button><button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">more_vert</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 flex-1 bg-surface relative overflow-hidden flex flex-col"><div class="flex flex-col w-full relative pb-36 flex-1" style="overflow-y: auto; scroll-behavior: smooth;">
+<!-- Subtle Architectural Atmospheric Glow -->
+<div class="pointer-events-none fixed top-16 right-12 w-96 h-96 bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
+<div class="pointer-events-none fixed bottom-10 left-72 w-80 h-80 bg-tertiary-fixed/25 rounded-full blur-3xl -z-10"></div>
+<!-- Primary Workspace Content (Editorial Botanical Center Column) -->
+<div class="w-full max-w-4xl mx-auto px-gutter flex flex-col pt-space-lg">
+<!-- Sticky Welcoming AI Helper Bar (Remains pinned while chat scrolls underneath) -->
+<div class="sticky top-3 z-20 flex items-center justify-between mb-space-md bg-surface-container-low/95 rounded-full px-4 py-2 shadow-sm backdrop-blur-md border border-outline-variant/30">
+  <div class="flex items-center gap-3 min-w-0">
+    <span class="shrink-0 px-3 py-1 rounded-full bg-primary text-on-primary text-[11px] sm:text-label-sm uppercase tracking-wider font-bold shadow-xs border border-[#D6A84F]/70 ring-1 ring-[#D6A84F]/30 whitespace-nowrap">Your Personal AI Helper</span>
+    <span class="font-body-sm text-[12.5px] sm:text-body-sm text-on-surface font-medium truncate sm:whitespace-normal">
+      Welcome! Ask anything about your trees in simple words — we're here to help you.
+    </span>
+  </div>
+</div>
+<!-- Timestamp Separator -->
+<div class="flex items-center justify-center my-space-sm">
+<div class="px-3 py-1 rounded-full bg-surface-container-high/80 text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase shadow-sm">
+        Today · 10:42 AM
+      </div>
+</div>
+<!-- Conversation Stream -->
+<div class="flex flex-col gap-space-lg">
+<!-- 1. Customer Message -->
+<div class="flex justify-end pl-16">
+<div class="flex flex-col items-end gap-1.5 max-w-xl">
+<div class="bg-primary-container text-on-primary rounded-xl rounded-tr-xs px-space-md py-space-sm shadow-md">
+<p class="font-body-md text-body-md leading-relaxed text-inverse-on-surface">
+              My mature oak tree is leaning toward my garage after yesterday's storm. Can you help?
+            </p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant/70 pr-1">Delivered · 10:42 AM</span>
+</div>
+</div>
+<!-- 2. AI Response 1 -->
+<div class="flex gap-space-md pr-12">
+<div class="flex-shrink-0 pt-1">
+<div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-tertiary-fixed shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-[#E5B869]" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 max-w-2xl flex-1">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-primary font-bold">Arborist Core</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.2 bg-secondary-container text-on-secondary-container rounded font-semibold">Diagnostic</span>
+</div>
+<div class="bg-surface-container-lowest text-on-surface rounded-xl rounded-tl-xs p-space-md shadow-sm">
+<p class="font-body-md text-body-md leading-relaxed text-on-surface">
+              I understand how concerning that is. Storm-induced structural displacement in mature oaks requires cautious immediate triage.
+            </p>
+<p class="font-body-md text-body-md leading-relaxed text-on-surface mt-2 font-medium">
+              To ensure your safety, is the main trunk or any heavy snapped branch currently making contact with your roof, or resting near overhead utility wires?
+            </p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant/70 pl-1">10:43 AM</span>
+</div>
+</div>
+<!-- 3. Customer Reply with Media Thumbnail -->
+<div class="flex justify-end pl-16">
+<div class="flex flex-col items-end gap-2 max-w-xl">
+<div class="bg-primary-container text-on-primary rounded-xl rounded-tr-xs p-space-md shadow-md space-y-3">
+<p class="font-body-md text-body-md leading-relaxed text-inverse-on-surface">
+              It's not touching the roof yet, but it's within 4 feet and looks unstable. Here is what it looks like from the driveway right now:
+            </p>
+<!-- Attached Image Card -->
+<div class="rounded-lg overflow-hidden bg-primary/40 p-2 shadow-inner">
+<div class="relative w-full h-44 rounded-md overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="High-resolution arborist photograph of a storm-damaged mature Quercus robur English Oak with a heavy limb leaning dangerously close to a slate tile garage roof, overcast moody sky, soft natural daylight, cinematic framing, documentary botanical aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcP_BWjL4Oq3NvJlwcXaeOarI80AhCL199276kuxAfkFVqUoV98q7jdZTqOcOYXU2OPMGWUWTnarf_O6L62Nt6cyK9U29O9OCng4AA6heMkyI0AspVtoCIWDwhyP5g1z3UlsIx4GBPSK63fO3hNT1LuANK9TkZi5KJY8M_OdOG-csWKS7Tq2GxHJK8Y0QfjFNSmc7sI4Hns2ql1fW9S5QS-GfQp1IyAQ0p2eBB-fqfmmaK-zwBuSOY">
+<div class="absolute bottom-2 left-2 bg-inverse-surface/80 backdrop-blur-sm px-2 py-1 rounded text-inverse-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-tertiary-fixed">photo_camera</span>
+<span class="font-label-sm text-label-sm">IMG_9941_Driveway.heic</span>
+</div>
+</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant/70 pr-1">Delivered · 10:45 AM</span>
+</div>
+</div>
+<!-- 4. AI Response with Diagnostic Cards & Next Actions -->
+<div class="flex gap-space-md pr-4">
+<div class="flex-shrink-0 pt-1">
+<div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-tertiary-fixed shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-[#E5B869]" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+</div>
+<div class="flex flex-col gap-3.5 max-w-2xl flex-1">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-primary font-bold">Arborist Core</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.2 bg-tertiary-fixed text-on-tertiary-fixed font-bold rounded">Hazard Detected</span>
+</div>
+<!-- Primary Text Analysis -->
+<div class="bg-surface-container-lowest text-on-surface rounded-xl rounded-tl-xs p-space-md shadow-sm">
+<p class="font-body-md text-body-md leading-relaxed">
+              Based on the image telemetry, there appears to be significant torsion shear along the primary co-dominant stem. The canopy weight is actively rotating downhill toward the garage gable.
+            </p>
+</div>
+<!-- Potential Safety Alert Notice Card -->
+<div class="bg-tertiary-fixed/30 rounded-xl p-space-md flex gap-space-md shadow-sm">
+<div class="w-9 h-9 rounded-full bg-tertiary-container flex items-center justify-center flex-shrink-0 text-tertiary-fixed">
+<span class="material-symbols-outlined text-[22px]">warning</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-tertiary leading-tight">Potential Structural Hazard</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold uppercase">Immediate Caution</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Please maintain a strictly cleared safety perimeter of at least 25 feet. Do not park vehicles beneath or adjacent to the limb projection, and avoid entering the garage until stabilized.
+              </p>
+</div>
+</div>
+<!-- Split Dossier: Booking Card + Postcode Validator -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+<!-- Booking Suggestion Card (8 cols) -->
+<div class="md:col-span-7 bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between gap-space-md">
+<div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Recommended Service</span>
+<h4 class="font-headline-sm text-headline-sm text-primary mt-0.5">Emergency Hazard Evaluation</h4>
+</div>
+<span class="material-symbols-outlined text-primary text-[24px]">crisis_alert</span>
+</div>
+<div class="mt-3.5 space-y-2 bg-surface-container-low rounded-lg p-space-sm">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Location Reference:</span>
+<span class="text-on-surface font-semibold">Oak Ridge Estate (Limb 2B)</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Recommended Window:</span>
+<span class="text-primary font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">schedule</span>
+                      Today, 2:30 PM - 3:15 PM
+                    </span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Assigned Lead:</span>
+<span class="text-on-surface">ISA Certified Climber Crew #3</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Callout Fee</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">Waived <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">(With remedial booking)</span></span>
+</div>
+<button class="inline-flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-primary-container text-on-primary hover:bg-primary transition-all shadow-sm font-label-md text-label-md font-bold group" type="button">
+<span class="">View Available Times</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Compact Service-Area Check Widget (5 cols) -->
+<div class="md:col-span-5 bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-[20px] text-primary">pin_drop</span>
+<h4 class="font-label-lg text-label-lg text-primary">Service Area Verification</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+                  Confirm your estate postal code for rapid dispatch routing.
+                </p>
+<div class="mt-3 relative">
+<input class="w-full bg-surface-container-lowest text-on-surface font-headline-sm text-headline-sm py-2 px-3 rounded-lg shadow-inner focus:outline-none tracking-wide uppercase font-mono" readonly="" type="text" value="NW3 6TL">
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-secondary text-[20px]">check_circle</span>
+</div>
+</div>
+<div class="p-2 rounded bg-secondary-container/80 flex items-center gap-2 text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[16px] text-secondary">flash_on</span>
+<span class="font-label-sm text-label-sm font-bold">✓ In Service Area — Fast-Track Crew Available</span>
+</div>
+</div>
+</div>
+<!-- Quick Feedback / Enquiry Dossier Summary Card -->
+<div class="bg-surface-container-highest/60 rounded-xl p-space-md flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">assignment</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Pre-Filled Form Summary</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">1x English Oak Structural Shear · Clearance Warning · NW3 6TL</span>
+</div>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest text-primary hover:bg-surface-bright transition-colors font-label-md text-label-md font-bold shadow-sm" type="button">
+<span class="">Continue to Booking</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant/70 pl-1">10:45 AM · Generated by Arborist Diagnostic Engine</span>
+</div>
+</div>
+<!-- 5. Active Typing Indicator (Bouncing Sage Dots) -->
+<div class="flex items-center gap-space-md pr-12">
+<div class="w-9 h-9 rounded-full bg-primary-container/20 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px] animate-spin" style="animation-duration: 3s;">autorenew</span>
+</div>
+<div class="bg-surface-container-low px-4 py-3 rounded-full flex items-center gap-1.5 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary animate-bounce" style="animation-delay: 0ms;"></span>
+<span class="w-2 h-2 rounded-full bg-secondary animate-bounce" style="animation-delay: 150ms;"></span>
+<span class="w-2 h-2 rounded-full bg-secondary animate-bounce" style="animation-delay: 300ms;"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium ml-1.5">Consulting storm trajectory telemetry...</span>
+</div>
+</div>
+</div>
+</div>
+<!-- FLOATING COMPOSER UNIT (Bottom Fixed Center Anchor) -->
+<div class="fixed bottom-4 left-60 right-0 px-space-md flex justify-center z-30 pointer-events-none">
+<div class="w-full max-w-3xl pointer-events-auto relative">
+<!-- Popover Attachment Menu (Enhanced with creamy spring bounce-back animation) -->
+<div aria-label="Attachment Options" class="absolute bottom-full left-0 mb-3 w-64 bg-surface-container-lowest rounded-xl p-space-xs shadow-[0_18px_50px_-10px_rgba(23,76,60,0.22),0_4px_16px_rgba(0,0,0,0.08)] border border-outline-variant/30 origin-bottom-left will-change-transform hidden" id="attachment-menu" role="menu">
+<div class="px-3 py-2 font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold flex items-center justify-between border-b border-outline-variant/20 mb-1">
+<span class="">Add Observation</span>
+<span class="material-symbols-outlined text-[14px]">attachment</span>
+</div>
+<div class="flex flex-col gap-1">
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-container-low text-left text-on-surface transition-all duration-150 active:scale-[0.98] font-body-sm text-body-sm group/item" type="button">
+<span class="w-7 h-7 rounded-md bg-secondary-container flex items-center justify-center text-on-secondary-container transition-transform group-hover/item:scale-110">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span>
+</span>
+<div class="flex flex-col">
+<span class="font-semibold leading-tight text-on-surface">Take a Photo</span>
+<span class="text-[11px] text-on-surface-variant">Live canopy or bark scan</span>
+</div>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-container-low text-left text-on-surface transition-all duration-150 active:scale-[0.98] font-body-sm text-body-sm group/item" type="button">
+<span class="w-7 h-7 rounded-md bg-surface-container-high flex items-center justify-center text-primary transition-transform group-hover/item:scale-110">
+<span class="material-symbols-outlined text-[16px]">photo_library</span>
+</span>
+<div class="flex flex-col">
+<span class="font-semibold leading-tight text-on-surface">Add from Gallery</span>
+<span class="text-[11px] text-on-surface-variant">Estate archives, HEIC, JPG</span>
+</div>
+</button>
+<a href="desktop-live-voice.html" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-tertiary-fixed/30 text-left text-on-surface transition-all duration-150 active:scale-[0.98] font-body-sm text-body-sm group/item">
+<span class="w-7 h-7 rounded-md bg-tertiary-container flex items-center justify-center text-tertiary-fixed transition-transform group-hover/item:scale-110">
+<span class="material-symbols-outlined text-[16px]">graphic_eq</span>
+</span>
+<div class="flex flex-col">
+<span class="font-semibold leading-tight flex items-center gap-1 text-on-surface">
+                Start Live Voice
+                <span class="material-symbols-outlined text-[12px] text-tertiary-fixed-dim">auto_awesome</span>
+</span>
+<span class="text-[11px] text-on-surface-variant">Realtime arborist consult</span>
+</div>
+</a>
+</div>
+</div>
+<!-- Floating Text Bar Container (Borderless 4-line upward expanding input, kept at exact elevation) -->
+<div class="mb-5 bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl px-3 py-2 shadow-[0_12px_40px_-8px_rgba(23,76,60,0.16)] flex items-end gap-3">
+  <!-- Attachment Plus Button -->
+  <button aria-expanded="false" aria-haspopup="true" class="w-10 h-10 rounded-full bg-primary-container text-on-primary hover:bg-primary flex items-center justify-center flex-shrink-0 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] active:scale-90 shadow-sm group" id="attachment-toggle" title="Add Media" type="button">
+    <span class="material-symbols-outlined text-[20px] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] inline-block select-none" id="attachment-icon" style="transform: rotate(0deg) scale(1);">add</span>
+  </button>
+  <!-- Pure Unboxed Auto-Growing Textarea (Max 4 lines = 96px, then scrolls) -->
+  <div class="flex-1 min-w-0 py-1">
+    <textarea id="desktop-prompt-textarea" class="w-full resize-none border-0 outline-none focus:ring-0 focus:border-0 focus:outline-none shadow-none bg-transparent p-0 font-body-md text-[16px] leading-[24px] text-on-surface placeholder:text-on-surface-variant/60 overflow-y-hidden" placeholder="Ask about your trees, describe visible damage, or book care..." rows="1" style="height: 24px; max-height: 96px; border: none !important; box-shadow: none !important; outline: none !important;" oninput="this.style.height='24px'; const sh = this.scrollHeight; this.style.height = Math.min(sh, 96) + 'px'; this.style.overflowY = sh > 96 ? 'auto' : 'hidden';"></textarea>
+  </div>
+  <!-- Controls: Audio + Submit -->
+  <div class="flex items-center gap-1.5 flex-shrink-0">
+    <div class="relative group/mic">
+      <a href="desktop-live-voice.html" class="w-9 h-9 rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors flex items-center justify-center active:scale-95" title="Start AI Live Voice Call"><span class="material-symbols-outlined text-[20px] text-primary">mic</span></a>
+      <div class="absolute bottom-full mb-2 right-0 hidden group-hover/mic:flex px-2 py-1 bg-inverse-surface text-inverse-on-surface rounded font-label-sm text-label-sm whitespace-nowrap shadow-lg">
+        Hold to dictate tree condition
+      </div>
+    </div>
+    <button id="desktop-send-btn" class="w-10 h-10 rounded-full bg-primary text-tertiary-fixed hover:bg-primary-container hover:text-on-primary flex items-center justify-center flex-shrink-0 transition-all shadow-md active:scale-95 group" title="Send Question" type="button">
+      <span class="material-symbols-outlined text-[20px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" style="font-variation-settings: 'FILL' 1;">send</span>
+    </button>
+  </div>
+</div>
+</div>
+</div>
+<!-- Interactive script for composer toggling with creamy spring bounce physics -->
+<script>
+    (function() {
+      const toggleBtn = document.getElementById('attachment-toggle');
+      const icon = document.getElementById('attachment-icon');
+      const menu = document.getElementById('attachment-menu');
+      let isOpen = false;
+      let isAnimating = false;
+
+      function openMenu() {
+        if (isAnimating) return;
+        isOpen = true;
+        isAnimating = true;
+
+        menu.classList.remove('hidden', 'popup-spring-out');
+        menu.classList.add('popup-spring-in');
+
+        // Button morphs with tactile spring rotation
+        if (icon) {
+          icon.style.transform = 'rotate(45deg) scale(1.08)';
+        }
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        toggleBtn.classList.add('bg-primary', 'shadow-md');
+
+        setTimeout(() => {
+          if (icon) icon.style.transform = 'rotate(45deg) scale(1)';
+          isAnimating = false;
+        }, 420);
+      }
+
+      function closeMenu() {
+        if (!isOpen || isAnimating) return;
+        isOpen = false;
+        isAnimating = true;
+
+        menu.classList.remove('popup-spring-in');
+        menu.classList.add('popup-spring-out');
+
+        if (icon) {
+          icon.style.transform = 'rotate(0deg) scale(0.92)';
+        }
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.classList.remove('bg-primary', 'shadow-md');
+
+        setTimeout(() => {
+          menu.classList.add('hidden');
+          menu.classList.remove('popup-spring-out');
+          if (icon) icon.style.transform = 'rotate(0deg) scale(1)';
+          isAnimating = false;
+        }, 280);
+      }
+
+      if (toggleBtn && menu) {
+        toggleBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (isOpen) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+
+        // Close on clicking outside
+        document.addEventListener('click', function(e) {
+          if (isOpen && !menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+            closeMenu();
+          }
+        });
+
+        // Close smoothly when choosing any item
+        menu.querySelectorAll('button').forEach(item => {
+          item.addEventListener('click', function() {
+            setTimeout(closeMenu, 120);
+          });
+        });
+
+        // Escape key support
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && isOpen) {
+            closeMenu();
+          }
+        });
+      }
+    })();
+  </script>
+</div></main></div>
+<div aria-hidden="true" data-snapdom-sandbox="true" id="snapdom-sandbox" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div>
+
+</body></html>

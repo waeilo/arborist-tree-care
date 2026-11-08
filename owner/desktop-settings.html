@@ -1,0 +1,892 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Manrope:wght@200..800&amp;family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary-container":"#87bba7","secondary-fixed-dim":"#afcfb1","error-container":"#ffdad6","tertiary-fixed-dim":"#f0bf64","surface-container-high":"#e1ebe1","on-primary-fixed-variant":"#1b4f3f","on-tertiary-container":"#d8a950","on-primary":"#ffffff","inverse-on-surface":"#e9f3ea","surface-container-highest":"#dbe5dc","background":"#f2fcf2","tertiary-fixed":"#ffdea6","on-tertiary-fixed":"#271900","outline":"#707974","secondary-fixed":"#caebcc","tertiary-container":"#593f00","on-primary-fixed":"#002117","surface":"#f2fcf2","on-surface-variant":"#404945","on-tertiary":"#ffffff","on-tertiary-fixed-variant":"#5e4200","surface-container-lowest":"#ffffff","primary-fixed-dim":"#9dd2bc","on-secondary-fixed":"#05210e","inverse-primary":"#9dd2bc","on-secondary-fixed-variant":"#314d36","surface-container-low":"#ecf6ed","tertiary":"#3d2a00","error":"#ba1a1a","on-secondary":"#ffffff","outline-variant":"#c0c9c3","surface-bright":"#f2fcf2","surface-dim":"#d3ddd3","on-surface":"#151e18","on-error-container":"#93000a","secondary-container":"#caebcc","secondary":"#48654d","on-secondary-container":"#4e6b53","surface-tint":"#356856","primary":"#003527","on-error":"#ffffff","inverse-surface":"#29332c","on-background":"#151e18","surface-variant":"#dbe5dc","primary-fixed":"#b8eed8","primary-container":"#174c3c","surface-container":"#e6f1e7"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-md":"2.5rem","margin-lg":"4rem","space-lg":"1.5rem","space-3xl":"6rem","gutter":"1.5rem","space-2xl":"4rem","space-xs":"0.25rem","gutter-lg":"2rem","space-sm":"0.5rem","space-md":"1rem","space-xl":"2.5rem","margin":"1.25rem"},"fontFamily":{"headline-lg-mobile":["Noto Serif"],"label-sm":["Manrope"],"body-lg":["DM Sans"],"body-sm":["DM Sans"],"display-lg":["Noto Serif"],"headline-lg":["Noto Serif"],"headline-sm":["Manrope"],"display-lg-mobile":["Noto Serif"],"headline-md":["Manrope"],"body-md":["DM Sans"],"label-md":["Manrope"],"label-lg":["Manrope"]},"fontSize":{"headline-lg-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"400"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","letterSpacing":"0em","fontWeight":"400"}],"body-sm":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"400"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"400"}],"headline-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.015em","fontWeight":"400"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"0em","fontWeight":"600"}],"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.01em","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.04em","fontWeight":"700"}]}}}};</script><style>
+  /* ==========================================================================
+     VISIBLE LUXURY SCROLLBAR + PROPORTIONAL TABLET/DESKTOP + ZERO-FLICKER SHELL
+     ========================================================================== */
+  html {
+    overflow-y: scroll !important;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #8da396 #f2fcf2;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-y: visible !important;
+    overscroll-behavior: auto !important;
+  }
+
+  /* Visible luxury custom scrollbar for desktop & mouse drag */
+  ::-webkit-scrollbar {
+    width: 9px !important;
+    height: 9px !important;
+    display: block !important;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f2fcf2 !important;
+    border-left: 1px solid #c0c9c3 !important;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #8da396 !important;
+    border-radius: 4px !important;
+    border: 2px solid #f2fcf2 !important;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #174c3c !important;
+  }
+
+  /* Zero-Flicker Content Switching Animation */
+  .owner-desktop-panel,
+  .owner-mobile-panel {
+    display: none;
+    width: 100%;
+  }
+
+  .owner-desktop-panel.active-owner-view,
+  .owner-mobile-panel.active-owner-view {
+    display: block !important;
+    animation: ownerContentFadeSlide 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes ownerContentFadeSlide {
+    0% {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Desktop Shell vs Mobile Shell Visibility */
+  #owner-desktop-shell {
+    display: block;
+  }
+  #owner-mobile-shell {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    #owner-desktop-shell {
+      display: none !important;
+    }
+    #owner-mobile-shell {
+      display: flex !important;
+      flex-direction: column;
+      min-height: 100dvh;
+      width: 100%;
+    }
+  }
+
+  /* Tablet Mode Proportional Scaling (768px to 1120px) */
+  @media (min-width: 768px) and (max-width: 1120px) {
+    #owner-persistent-aside,
+    #owner-desktop-shell aside,
+    body.standalone-desktop aside {
+      width: 196px !important;
+    }
+    #owner-desktop-content,
+    #owner-desktop-shell .pl-\[230px\],
+    body.standalone-desktop .pl-\[230px\],
+    body.standalone-desktop .pl-60 {
+      padding-left: 196px !important;
+    }
+    #owner-persistent-header,
+    #owner-desktop-shell header.left-\[230px\],
+    body.standalone-desktop header.left-[230px],
+    body.standalone-desktop header.left-60 {
+      left: 196px !important;
+      padding-left: 1.25rem !important;
+      padding-right: 1.25rem !important;
+    }
+    #owner-desktop-main,
+    #owner-desktop-shell main,
+    body.standalone-desktop main {
+      padding-left: 1.25rem !important;
+      padding-right: 1.25rem !important;
+    }
+    .min-w-\[620px\] {
+      min-width: 100% !important;
+      overflow-x: auto;
+    }
+  }
+</style></head><body class="standalone-desktop bg-surface font-body-md text-on-surface antialiased"><aside id="owner-persistent-aside" class="fixed left-0 top-[76px] h-[calc(100vh-76px)] w-[230px] bg-surface-container-lowest border-r border-outline-variant z-40 flex flex-col justify-between select-none">
+    <div class="flex flex-col">
+      <div class="px-space-md pt-5 pb-2">
+        <span class="font-label-sm text-[10px] uppercase tracking-wider text-outline font-bold">Portal Navigation</span>
+      </div>
+      <nav id="owner-desktop-nav" class="flex flex-col gap-1 py-1 px-2.5">
+        <a class="owner-nav-link flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl border-l-4 border-transparent text-sm font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors cursor-pointer" data-owner-tab="dashboard" href="desktop-dashboard.html"><svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg><span>Dashboard</span></a>
+        <a class="owner-nav-link flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl border-l-4 border-transparent text-sm font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors cursor-pointer" data-owner-tab="bookings" href="desktop-bookings.html"><svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg><span>Bookings &amp; Calendar</span></a>
+        <a class="owner-nav-link flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl border-l-4 border-transparent text-sm font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors cursor-pointer" data-owner-tab="customers" href="desktop-customers.html"><svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg><span>Customers</span></a>
+        <a aria-current="page" class="owner-nav-link flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl border-l-4 border-[#174c3c] text-sm font-semibold bg-[#174c3c]/10 text-[#174c3c] transition-colors cursor-pointer" data-owner-tab="settings" href="desktop-settings.html"><svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span>Settings</span></a>
+        <a class="owner-nav-link flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl border-l-4 border-transparent text-sm font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors cursor-pointer" data-owner-tab="ai" href="desktop-ai.html"><svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg><span>AI Management</span></a>
+      </nav>
+    </div>
+    <div class="p-space-md border-t border-outline-variant bg-surface-container-lowest">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-[#174c3c] text-[#F8F7F2] font-bold flex items-center justify-center text-xs shadow-sm shrink-0">
+          AM
+        </div>
+        <div class="flex flex-col min-w-0 flex-1">
+          <span class="font-label-md text-xs font-bold text-on-surface truncate">Alex Morgan</span>
+          <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider truncate">Owner &amp; Arborist</span>
+        </div>
+      </div>
+      <div class="mt-2.5 pt-2 border-t border-outline-variant/40 flex items-center justify-between text-[10px] text-outline">
+        <div class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <span class="font-medium">System Active</span>
+        </div>
+        <span class="font-mono">v2.4.1</span>
+      </div>
+    </div>
+  </aside><div class="pl-[230px]"><header id="owner-persistent-header" class="fixed top-0 left-0 right-0 h-[76px] bg-[#174c3c]/95 backdrop-blur-md border-b border-white/10 z-50 px-4 sm:px-6 lg:px-8 flex items-center justify-between select-none shadow-md text-white">
+  <div class="flex items-center gap-3">
+    <a href="../index.html" class="flex items-center gap-3 group cursor-pointer" title="Return to Public Site">
+      <img alt="ARBORIST Tree Surgeon Care and Removal Services Logo" class="h-10 sm:h-11 w-auto object-contain drop-shadow transition-transform group-hover:scale-105" src="../assets/logo.png">
+      <div class="flex flex-col justify-center">
+        <span class="font-headline-md text-base sm:text-xl md:text-2xl tracking-tight text-[#F8F7F2] font-extrabold leading-none uppercase">ARBORIST</span>
+        <span class="font-label-sm text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-[#8EAD91] font-bold mt-0.5 sm:mt-1">CARE &amp; REMOVAL</span>
+      </div>
+    </a>
+    <div class="hidden sm:block h-6 w-px bg-white/20 ml-1 sm:ml-2"></div>
+    <span class="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[#b8eed8] font-label-sm text-[11px] font-bold uppercase tracking-wider">
+      Owner Portal
+    </span>
+  </div>
+
+  <div class="hidden md:flex items-center px-4 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md shadow-inner text-white/90">
+    <span class="font-headline-sm text-sm font-bold text-white tracking-wide">Settings</span>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <a href="desktop-ai.html" class="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-[#F8F7F2] font-label-sm text-xs sm:text-sm font-semibold flex items-center gap-1.5 shadow-sm transition-all hover:scale-105 cursor-pointer" title="Open AI Assistant">
+      <span class="text-[#f0bf64] text-xs">✦</span>
+      <span>Ask AI</span>
+    </a>
+    <div class="relative flex items-center justify-center">
+      <button class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-[#F8F7F2] transition-colors cursor-pointer" type="button" title="Notifications">
+        <svg class="w-[19px] h-[19px] text-[#F8F7F2] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      </button>
+      <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#f0bf64] ring-2 ring-[#174c3c]"></span>
+    </div>
+    <div class="h-6 w-px bg-white/20 mx-0.5"></div>
+    <a href="../index.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-[#F8F7F2] font-label-sm text-xs font-semibold transition-all shadow-sm cursor-pointer" title="View Public Website">
+      <svg class="w-4 h-4 text-[#8EAD91] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      <span>Public Site</span>
+    </a>
+  </div>
+</header><main class="relative pt-[76px] min-h-screen bg-surface px-space-xl py-space-xl" pb-28>
+      <div id="desktop-view-settings" class="owner-desktop-panel " data-tab-panel="settings">
+        <div class="flex flex-col w-full pb-20">
+          <!-- Page Header with Demarcation Line -->
+          <div class="flex flex-col gap-2 mb-8 pb-6 border-b border-outline-variant/50">
+            <div class="flex flex-wrap items-baseline justify-between gap-4">
+              <div>
+                <h2 class="font-display-serif text-3xl sm:text-4xl text-on-surface tracking-tight font-bold">Settings</h2>
+                <p class="font-body-md text-sm sm:text-base text-on-surface-variant max-w-2xl mt-1">
+                  Manage your business profile, service catalog, booking parameters, and operational AI dispatch rules.
+                </p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/60 text-secondary text-xs font-semibold shadow-2xs">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  All Systems Online
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Two-Column Layout -->
+          <div class="flex flex-col lg:flex-row gap-8 items-start">
+            <!-- Left Internal Section Navigation -->
+            <aside class="w-full lg:w-[240px] shrink-0 sticky top-[92px] z-20 space-y-4">
+              <nav class="bg-surface-container-lowest rounded-2xl p-2 border border-outline-variant/60 shadow-xs flex flex-col gap-1" id="settings-nav">
+                <a class="settings-nav-item flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl font-label-md text-sm transition-all duration-150 border-l-4 border-[#174c3c] bg-[#174c3c]/10 text-[#174c3c] font-bold" data-target="business-info" href="#business-info">
+                  <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                  <span class="truncate">Business Info</span>
+                </a>
+                <a class="settings-nav-item flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl font-label-md text-sm transition-all duration-150 border-l-4 border-transparent text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-medium" data-target="services" href="#services">
+                  <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879a3 3 0 11-4.242-4.242 3 3 0 014.242 0zM12 12L9.121 9.121a3 3 0 10-4.242 4.242 3 3 0 004.242 0z"/></svg>
+                  <span class="truncate">Services</span>
+                </a>
+                <a class="settings-nav-item flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl font-label-md text-sm transition-all duration-150 border-l-4 border-transparent text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-medium" data-target="booking-settings" href="#booking-settings">
+                  <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                  <span class="truncate">Booking Rules</span>
+                </a>
+                <a class="settings-nav-item flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl font-label-md text-sm transition-all duration-150 border-l-4 border-transparent text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-medium" data-target="ai-settings" href="#ai-settings">
+                  <svg class="w-5 h-5 shrink-0 text-[#d8a950]" fill="currentColor" viewBox="0 0 24 24"><path d="m19 9 1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z"/></svg>
+                  <span class="truncate">AI Assistant</span>
+                </a>
+                <a class="settings-nav-item flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl font-label-md text-sm transition-all duration-150 border-l-4 border-transparent text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-medium" data-target="notifications" href="#notifications">
+                  <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                  <span class="truncate">Notifications</span>
+                </a>
+                <a class="settings-nav-item flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl font-label-md text-sm transition-all duration-150 border-l-4 border-transparent text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-medium" data-target="account" href="#account">
+                  <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                  <span class="truncate">Account &amp; Security</span>
+                </a>
+              </nav>
+
+              <!-- Quick Status Dossier Card -->
+              <div class="hidden lg:flex flex-col p-4 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs gap-2.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#174c3c]">STORAGE &amp; SYNC</span>
+                  <span class="font-label-sm text-xs text-secondary font-bold">99.4%</span>
+                </div>
+                <div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+                  <div class="bg-[#174c3c] h-full rounded-full" style="width: 72%;"></div>
+                </div>
+                <span class="font-body-sm text-[11px] text-on-surface-variant">Last synced 6 minutes ago via ArborCloud</span>
+              </div>
+            </aside>
+
+            <!-- Right Main Settings Content Area -->
+            <div class="flex-1 w-full space-y-8">
+              
+              <!-- SECTION 1: BUSINESS INFORMATION -->
+              <section class="scroll-mt-24 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 p-6 lg:p-8 shadow-xs space-y-6" id="business-info">
+                <!-- Section Header with Demarcation Line -->
+                <div class="flex flex-col gap-1 pb-4 border-b border-outline-variant/40">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-11 h-11 rounded-xl bg-[#174c3c]/10 text-[#174c3c] flex items-center justify-center shrink-0 border border-[#174c3c]/20 shadow-xs">
+  <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+</div>
+<h2 class="font-headline-md text-2xl lg:text-[28px] text-on-surface font-extrabold tracking-tight">Business Information</h2>
+                  </div>
+                  <p class="font-body-sm text-sm text-on-surface-variant ml-11">
+                    Your public business details, legal identity, and operations schedule for clients and municipal permits.
+                  </p>
+                </div>
+
+                <!-- Business Logo Row (Highlighted Card) -->
+                <div class="flex flex-wrap items-center justify-between gap-4 p-4 bg-surface-container-low/40 rounded-xl border border-outline-variant/60 shadow-2xs">
+                  <div class="flex items-center gap-4">
+                    <img alt="ARBORIST Logo" class="h-12 w-auto object-contain drop-shadow shrink-0" src="../assets/logo.png">
+                    <div class="flex flex-col">
+                      <div class="flex items-center gap-2">
+                        <span class="font-headline-sm text-base text-on-surface font-bold">ARBORIST Care &amp; Removal</span>
+                        <span class="px-2 py-0.5 rounded-full bg-secondary-container/60 text-[#174c3c] text-[10px] font-bold uppercase tracking-wider">Verified ISA</span>
+                      </div>
+                      <span class="font-body-sm text-outline text-xs mt-0.5">Highgate Horticultural Operations • Est. 2014 • Master Arborist Registry #8492</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button class="px-3.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/60 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors shadow-2xs" type="button">
+                      Change Logo
+                    </button>
+                    <button class="p-1.5 rounded-lg border border-transparent hover:border-outline-variant/40 hover:bg-surface-container-high transition-colors" type="button" title="Remove Logo">
+                      <svg class="w-4 h-4 shrink-0 text-outline hover:text-error" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Grid of Demarcated Fields -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Field 1 -->
+                  <div class="flex flex-col gap-1.5 p-4 rounded-xl border border-outline-variant/80 bg-white hover:border-[#174c3c]/40 focus-within:border-[#174c3c] focus-within:ring-2 focus-within:ring-[#174c3c]/15 transition-all shadow-xs">
+  <label class="text-[10px] font-extrabold uppercase tracking-widest text-[#174c3c] block" for="biz-name">BUSINESS NAME</label>
+  <input class="w-full bg-transparent text-on-surface font-headline-sm text-base lg:text-[17px] font-bold focus:outline-none tracking-tight" id="biz-name" type="text" value="ARBORIST Care &amp; Removal">
+</div>
+                  <!-- Field 2 -->
+                  <div class="flex flex-col gap-1.5 p-3.5 rounded-xl border border-outline-variant/60 bg-surface-container-low/20 focus-within:border-primary-container focus-within:bg-white focus-within:ring-2 focus-within:ring-primary-container/10 transition-all shadow-2xs">
+                    <label class="font-label-sm text-[11px] text-outline uppercase tracking-wider font-bold" for="biz-phone">Phone Number</label>
+                    <input class="w-full bg-transparent text-on-surface font-body-md text-sm font-semibold focus:outline-none" id="biz-phone" type="text" value="(555) 019-2834">
+                  </div>
+                  <!-- Field 3 -->
+                  <div class="flex flex-col gap-1.5 p-4 rounded-xl border border-outline-variant/80 bg-white hover:border-[#174c3c]/40 focus-within:border-[#174c3c] focus-within:ring-2 focus-within:ring-[#174c3c]/15 transition-all shadow-xs">
+  <label class="text-[10px] font-extrabold uppercase tracking-widest text-[#174c3c] block" for="biz-email">EMAIL ADDRESS</label>
+  <input class="w-full bg-transparent text-on-surface font-headline-sm text-base lg:text-[17px] font-bold focus:outline-none tracking-tight" id="biz-email" type="email" value="dispatch@arborist-care.com">
+</div>
+                  <!-- Field 4 -->
+                  <div class="flex flex-col gap-1.5 p-4 rounded-xl border border-outline-variant/80 bg-white hover:border-[#174c3c]/40 focus-within:border-[#174c3c] focus-within:ring-2 focus-within:ring-[#174c3c]/15 transition-all shadow-xs">
+  <label class="text-[10px] font-extrabold uppercase tracking-widest text-[#174c3c] block" for="biz-address">BUSINESS ADDRESS</label>
+  <input class="w-full bg-transparent text-on-surface font-headline-sm text-base lg:text-[17px] font-bold focus:outline-none tracking-tight" id="biz-address" type="text" value="24 Woodland Road, Highgate, London NW3">
+</div>
+                </div>
+
+                <!-- Service Coverage Areas Box -->
+                <div class="p-4 rounded-xl border border-outline-variant/60 bg-surface-container-low/20 space-y-2.5 shadow-2xs">
+                  <div class="flex items-center justify-between">
+                    <span class="font-label-sm text-[11px] text-outline uppercase tracking-wider font-bold">Service Coverage Areas</span>
+                    <span class="font-label-sm text-xs text-secondary font-semibold">3 Active Municipalities</span>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-2 pt-0.5">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/60 text-on-surface text-xs font-medium shadow-2xs">
+                      <svg class="w-3.5 h-3.5 shrink-0 text-secondary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                      <span>North London</span>
+                      <button class="hover:text-error ml-1 transition-colors" type="button"><svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/60 text-on-surface text-xs font-medium shadow-2xs">
+                      <svg class="w-3.5 h-3.5 shrink-0 text-secondary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                      <span>Hertfordshire</span>
+                      <button class="hover:text-error ml-1 transition-colors" type="button"><svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/60 text-on-surface text-xs font-medium shadow-2xs">
+                      <svg class="w-3.5 h-3.5 shrink-0 text-secondary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                      <span>Essex</span>
+                      <button class="hover:text-error ml-1 transition-colors" type="button"><svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+                    </span>
+                    <button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 text-primary-container text-xs font-semibold hover:bg-surface-container-high transition-colors" type="button">
+                      <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                      <span>Add Area</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Opening Hours Highlight Box -->
+                <div class="flex flex-wrap items-center justify-between gap-4 p-4 bg-surface-container-low/40 rounded-xl border border-outline-variant/60 shadow-2xs">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-primary-container flex items-center justify-center shrink-0 shadow-2xs">
+                      <svg class="w-5 h-5 shrink-0 text-[#174c3c]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <div class="flex flex-col">
+                      <span class="font-label-md text-sm text-on-surface font-bold">Standard Operating Hours</span>
+                      <span class="font-body-sm text-on-surface-variant text-xs mt-0.5">
+                        Mon–Fri: 8:00 AM – 5:00 PM &nbsp;•&nbsp; Sat: 9:00 AM – 2:00 PM &nbsp;•&nbsp; Sun: Emergency Dispatch Only
+                      </span>
+                    </div>
+                  </div>
+                  <button class="px-3.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/60 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors shadow-2xs" type="button">
+                    Edit Hours
+                  </button>
+                </div>
+
+                <!-- Section Bottom Action Demarcation -->
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-outline-variant/40">
+                  <button class="px-4 py-2 rounded-lg font-label-md text-xs font-medium text-outline hover:text-on-surface transition-colors" type="button">Discard</button>
+                  <button class="px-5 py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-xs font-bold shadow-sm hover:opacity-95 transition-all" type="button">Save Changes</button>
+                </div>
+              </section>
+
+              <!-- SECTION 2: SERVICES -->
+              <section class="scroll-mt-24 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 p-6 lg:p-8 shadow-xs space-y-6" id="services">
+                <div class="flex flex-wrap items-start justify-between gap-4 pb-4 border-b border-outline-variant/40">
+                  <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-11 h-11 rounded-xl bg-[#174c3c]/10 text-[#174c3c] flex items-center justify-center shrink-0 border border-[#174c3c]/20 shadow-xs">
+  <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879a3 3 0 11-4.242-4.242 3 3 0 014.242 0zM12 12L9.121 9.121a3 3 0 10-4.242 4.242 3 3 0 004.242 0z"/></svg>
+</div>
+<h2 class="font-headline-md text-2xl lg:text-[28px] text-on-surface font-extrabold tracking-tight">Services Catalog</h2>
+                    </div>
+                    <p class="font-body-sm text-sm text-on-surface-variant ml-11">
+                      Manage active arborist services, public booking pricing, and visible website offerings.
+                    </p>
+                  </div>
+                  <button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-xs font-bold shadow-sm hover:opacity-95 transition-all" type="button">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                    <span>Add New Service</span>
+                  </button>
+                </div>
+
+                <!-- Service List Container with Demarcated Rows -->
+                <div class="rounded-xl border border-outline-variant/60 bg-surface-container-lowest divide-y divide-outline-variant/40 overflow-hidden shadow-2xs">
+                  <!-- Service 1: Tree Removal -->
+                  <div class="p-4 bg-surface-container-low/40 space-y-4 transition-all">
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                      <div class="flex items-center gap-4">
+                        <img alt="Tree Removal Service" class="w-14 h-14 rounded-xl object-cover shrink-0 shadow-2xs border border-outline-variant/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0sHr5yw2KMD8nJfjReURTf-YOl4bz9W3qEFqLqQQbIuznuX5BA_UKR1QCVeKnTzNEl41DRXtNa-szj8L2IGDv8T-mqlWPGK_cKnh42Ytz544Kr9ZpjANXVsF8I3ptPNbIPf93LA3TSPEK2JkMNcbQRQFJYHGGIHMD50ud17cW07Kifd0AWKA9P4C9tctweapTwh3FAuSY0tJHVHiyjXF34OHpf4Q9s90SBEtiPT7VFl1wgc-SXe6EBXZxP9hdj6GkgA">
+                        <div class="flex flex-col">
+                          <div class="flex items-center gap-2">
+                            <span class="font-headline-sm text-base text-on-surface font-bold">Tree Removal</span>
+                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container/60 text-[#174c3c] text-[10px] font-bold">
+                              <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                              Visible on Website
+                            </span>
+                          </div>
+                          <span class="font-body-sm text-outline text-xs mt-0.5">Controlled dismantling • Hazardous extraction • Non-invasive ground rigging</span>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <span class="font-label-sm uppercase tracking-wider text-outline px-2.5 py-1 bg-surface-container border border-outline-variant/40 rounded-md text-[10px] font-bold">Editing Mode</span>
+                      </div>
+                    </div>
+
+                    <!-- Focused Inline Drawer -->
+                    <div class="p-4 bg-white rounded-xl border border-outline-variant/60 shadow-2xs space-y-4">
+                      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
+                        <div class="flex flex-col gap-1.5 p-3.5 rounded-xl border border-outline-variant/80 bg-white shadow-xs">
+  <label class="text-[10px] font-extrabold uppercase tracking-widest text-[#174c3c] block">SERVICE NAME</label>
+  <input class="w-full bg-transparent text-on-surface font-headline-sm text-base font-bold focus:outline-none mt-1 tracking-tight" type="text" value="Tree Removal">
+</div>
+                        <div class="flex flex-col gap-1.5 p-3.5 rounded-xl border border-outline-variant/80 bg-white shadow-xs">
+  <label class="text-[10px] font-extrabold uppercase tracking-widest text-[#174c3c] block">STANDARD BOOKING BASE</label>
+  <input class="w-full bg-transparent text-on-surface font-headline-sm text-base font-bold focus:outline-none mt-1 tracking-tight" type="text" value="Site Survey + Custom Rigging Quote">
+</div>
+                        <div class="flex flex-col gap-1.5 p-3.5 rounded-xl border border-outline-variant/80 bg-white shadow-xs">
+  <label class="text-[10px] font-extrabold uppercase tracking-widest text-[#174c3c] block">ASSET PHOTO</label>
+                          <div class="flex items-center gap-2">
+                            <button class="px-2.5 py-1 rounded bg-surface-container border border-outline-variant/50 font-label-md text-[11px] font-semibold text-primary-container hover:bg-surface-container-high transition-colors" type="button">
+                              Change Image
+                            </button>
+                            <span class="font-body-sm text-outline text-[11px]">1024x1024 spec</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex flex-col gap-1.5 p-3.5 rounded-xl border border-outline-variant/80 bg-white shadow-xs">
+  <label class="text-[10px] font-extrabold uppercase tracking-widest text-[#174c3c] block">PUBLIC SERVICE DOSSIER DESCRIPTION</label>
+  <textarea class="w-full bg-transparent text-on-surface font-body-md text-sm font-medium focus:outline-none resize-none mt-1 leading-relaxed" rows="2">Controlled felling and precision dismantling of hazardous or oversized trees using surgical rigging systems.</textarea>
+</div>
+                      <div class="flex flex-wrap items-center justify-between gap-4 pt-1">
+                        <div class="flex items-center gap-4">
+                          <label class="flex items-center gap-2 cursor-pointer">
+                            <input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-0 accent-primary-container" type="checkbox">
+                            <span class="font-label-md text-xs text-on-surface font-semibold">Show on Website</span>
+                          </label>
+                          <a class="inline-flex items-center gap-1 font-label-md text-xs text-primary-container hover:underline" href="../index.html#services" target="_blank">
+                            <span>Preview</span>
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                          </a>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <button class="px-3 py-1.5 rounded-lg text-outline hover:text-on-surface font-label-md text-xs" type="button">Cancel</button>
+                          <button class="px-4 py-1.5 rounded-lg bg-primary-container text-on-primary font-label-md text-xs font-bold shadow-2xs" type="button">Save Service</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Service 2: Tree Pruning -->
+                  <div class="p-4 flex flex-wrap items-center justify-between gap-4 hover:bg-surface-container-low/30 transition-colors">
+                    <div class="flex items-center gap-4">
+                      <img alt="Tree Pruning Service" class="w-12 h-12 rounded-xl object-cover shrink-0 shadow-2xs border border-outline-variant/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9UoRCXRR-axB4xNDrE4NQ0eYZoTWVRKQ6gmetvHB4Y8o0PWJ3UrHWKSZOev1uCmL7uOxJfuiOB_Rz_Pb-ueQ-HjrvHloST3J7t6CmHfqGR3oQS1HoPsO8Pw4GEYQzAgMpq3Te45QoTRuKBJnFYwHGOOuRx4W6kv6cr6rquWeiLDdj7JKuzVtiZHk4TnHAn0-XFvmIiY1d1zRgEUorAXOVL3S5rLXijphU5FY68O7mBFTfQbTcYEdOreavUzXHxs2NsQ">
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-2">
+                          <span class="font-headline-sm text-sm text-on-surface font-bold">Tree Pruning</span>
+                          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/50 text-[#174c3c] text-[10px] font-bold">
+                            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                            Visible on Website
+                          </span>
+                        </div>
+                        <span class="font-body-sm text-outline text-xs mt-0.5">Canopy thinning, crown lifting, deadwood mitigation</span>
+                      </div>
+                    </div>
+                    <button class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors" type="button">Edit</button>
+                  </div>
+
+                  <!-- Service 3: Stump Grinding -->
+                  <div class="p-4 flex flex-wrap items-center justify-between gap-4 hover:bg-surface-container-low/30 transition-colors">
+                    <div class="flex items-center gap-4">
+                      <img alt="Stump Grinding Service" class="w-12 h-12 rounded-xl object-cover shrink-0 shadow-2xs border border-outline-variant/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbILGo3cLCesr3sJYn0TSI6xjuAH77hU9C5YQe454FnDNA6yphupDy0aL5Wfp9cEAYJOhwybwCQ_JDJ-CKdpcIgAAE--wWFGRIZ9JGtsXnvlX6nBWRfxidTYvlllFO3n7hmQkQGR9jg_4ivtGGKtpWLbe7TexTUSVHXPRHeqqLO6i3kTciJAJL3YBjdgxzPvgQHW7coX9LNQ8JWy-TmYV0Eq3K_p4PTdavAWGGlfeniA0EiVGLCuuUe6aTFo5zA9DC4w">
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-2">
+                          <span class="font-headline-sm text-sm text-on-surface font-bold">Stump Grinding</span>
+                          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/50 text-[#174c3c] text-[10px] font-bold">
+                            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                            Visible on Website
+                          </span>
+                        </div>
+                        <span class="font-body-sm text-outline text-xs mt-0.5">Below-grade root eradication and lawn restoration</span>
+                      </div>
+                    </div>
+                    <button class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors" type="button">Edit</button>
+                  </div>
+
+                  <!-- Service 4: Emergency Tree Work -->
+                  <div class="p-4 flex flex-wrap items-center justify-between gap-4 hover:bg-surface-container-low/30 transition-colors">
+                    <div class="flex items-center gap-4">
+                      <img alt="Emergency Tree Work" class="w-12 h-12 rounded-xl object-cover shrink-0 shadow-2xs border border-outline-variant/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5X9iFZisDD3N5GijhXZ4onmoMJIcbzVbfh1jCWFTOMNzQwfWv8g7MVyQuH8k827nskjawHrl_JMp_5S-oPRPAp4hXeuIVwv1fhiIGOWiKEoic1KvZlNnlmgx0QmrCdW5tzS1CzP9gdesyx9likFQJtKbzDodSt_NzSVExcO205V1b_ZQPAOwZ-2TOR7r4jWjrvk1b7TO9cUQaIlMhmGdalgERpgbZ4_aPkarc8_UgiSB8lxhBigVqz89b6TOLhiAiow">
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-2">
+                          <span class="font-headline-sm text-sm text-on-surface font-bold">Emergency Tree Work</span>
+                          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container/50 text-[#174c3c] text-[10px] font-bold">
+                            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                            Visible on Website
+                          </span>
+                          <span class="px-2 py-0.5 rounded-full bg-[#f0bf64]/30 text-[#593f00] text-[10px] font-bold">24/7 Priority</span>
+                        </div>
+                        <span class="font-body-sm text-outline text-xs mt-0.5">Storm damage clearance and immediate structural stabilization</span>
+                      </div>
+                    </div>
+                    <button class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors" type="button">Edit</button>
+                  </div>
+
+                  <!-- Service 5: Tree Health Assessment -->
+                  <div class="p-4 flex flex-wrap items-center justify-between gap-4 hover:bg-surface-container-low/30 transition-colors">
+                    <div class="flex items-center gap-4">
+                      <img alt="Tree Health Assessment" class="w-12 h-12 rounded-xl object-cover shrink-0 shadow-2xs border border-outline-variant/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDv51hh4PnZmSBx_ThtChsXfEEbxHyqASDXZ_6YWUt6p5IfrhLSYiqKDO_CkTkAmSNl25YEZ38urwqFslnpvOpwVHNmjMFvLkOlXKBWWJL94CBjnUxF9Nv854AxjyxxOAhAgM2-Cl40uEwtDAgw_Auv154W_M_DQK6Izp83qpgNgGlIoXF5GsnBKIqjnrIsu9v9RdclyJboVKj4tvziUbf39if7g5BA5CVtJOhksQpj0bOE_6IGJvpD1IopdFEKZEFFA">
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-2">
+                          <span class="font-headline-sm text-sm text-on-surface font-bold">Tree Health Assessment</span>
+                          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container/50 text-[#174c3c] text-[10px] font-bold">
+                            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                            Visible on Website
+                          </span>
+                        </div>
+                        <span class="font-body-sm text-outline text-xs mt-0.5">Decay diagnostics, sonic tomograph reports, conservation advice</span>
+                      </div>
+                    </div>
+                    <button class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors" type="button">Edit</button>
+                  </div>
+                </div>
+              </section>
+
+              <!-- SECTION 3: BOOKING SETTINGS -->
+              <section class="scroll-mt-24 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 p-6 lg:p-8 shadow-xs space-y-6" id="booking-settings">
+                <div class="flex flex-col gap-1 pb-4 border-b border-outline-variant/40">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-11 h-11 rounded-xl bg-[#174c3c]/10 text-[#174c3c] flex items-center justify-center shrink-0 border border-[#174c3c]/20 shadow-xs">
+  <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+</div>
+<h2 class="font-headline-md text-2xl lg:text-[28px] text-on-surface font-extrabold tracking-tight">Booking Rules &amp; Operations</h2>
+                  </div>
+                  <p class="font-body-sm text-sm text-on-surface-variant ml-11">
+                    Control appointment availability, lead time, and booking approval workflows.
+                  </p>
+                </div>
+
+                <!-- 4 Highlighted Parameter Boxes -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Default Duration -->
+                  <div class="p-4 rounded-xl border border-outline-variant/60 bg-surface-container-low/30 flex flex-col justify-between gap-3 shadow-2xs">
+                    <div class="flex items-start justify-between">
+                      <div class="flex flex-col">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#174c3c] block">DEFAULT DURATION</span>
+<span class="font-headline-sm text-base lg:text-[17px] font-bold text-on-surface mt-1 block tracking-tight">60 Minutes</span>
+                        <span class="font-body-sm text-outline text-xs mt-0.5">Standard initial site appraisal</span>
+                      </div>
+                      <button class="px-3 py-1 rounded-lg bg-surface-container-lowest border border-outline-variant/60 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors shadow-2xs" type="button">
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Working Days -->
+                  <div class="p-4 rounded-xl border border-outline-variant/60 bg-surface-container-low/30 flex flex-col justify-between gap-3 shadow-2xs">
+                    <div class="flex items-start justify-between">
+                      <div class="flex flex-col">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#174c3c] block">WORKING DAYS</span>
+<span class="font-headline-sm text-base lg:text-[17px] font-bold text-on-surface mt-1 block tracking-tight">Monday – Saturday</span>
+                        <span class="font-body-sm text-outline text-xs mt-0.5">6 active dispatch days per week</span>
+                      </div>
+                      <button class="px-3 py-1 rounded-lg bg-surface-container-lowest border border-outline-variant/60 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors shadow-2xs" type="button">
+                        Manage
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Cancellation Policy -->
+                  <div class="p-4 rounded-xl border border-outline-variant/60 bg-surface-container-low/30 flex flex-col justify-between gap-3 shadow-2xs">
+                    <div class="flex items-start justify-between">
+                      <div class="flex flex-col">
+                        <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider font-bold">Cancellation Policy</span>
+                        <span class="font-headline-sm text-base text-on-surface font-bold mt-1">24-hour notice required</span>
+                        <span class="font-body-sm text-outline text-xs mt-0.5">Permit deposit forfeit if canceled &lt; 24h</span>
+                      </div>
+                      <button class="px-3 py-1 rounded-lg bg-surface-container-lowest border border-outline-variant/60 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors shadow-2xs" type="button">
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Initial Assessment Fee -->
+                  <div class="p-4 rounded-xl border border-outline-variant/60 bg-surface-container-low/30 flex flex-col justify-between gap-3 shadow-2xs">
+                    <div class="flex items-start justify-between">
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-2">
+                          <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider font-bold">Initial Assessment</span>
+                          <span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold">Free</span>
+                        </div>
+                        <span class="font-headline-sm text-base text-on-surface font-bold mt-1">Free On-Site Assessment</span>
+                        <span class="font-body-sm text-outline text-xs mt-0.5">Includes preliminary visual defect check</span>
+                      </div>
+                      <button class="px-3 py-1 rounded-lg bg-surface-container-lowest border border-outline-variant/60 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors shadow-2xs" type="button">
+                        Change
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Booking Confirmation Selector (Demarcated Box) -->
+                <div class="p-5 rounded-xl border border-outline-variant/60 bg-surface-container-low/20 space-y-3 shadow-2xs">
+                  <div>
+                    <span class="font-label-md text-sm text-on-surface font-bold">Booking Approval Mode</span>
+                    <p class="font-body-sm text-outline text-xs mt-0.5">Choose whether appointments are verified automatically or triaged by lead arborist.</p>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                    <label class="flex items-start gap-3 p-3.5 rounded-xl border border-primary-container/40 bg-white cursor-pointer shadow-2xs">
+                      <input checked="" class="mt-0.5 accent-primary-container" name="approval_mode" type="radio">
+                      <div class="flex flex-col">
+                        <span class="font-label-md text-xs text-on-surface font-bold">Owner Approval Required</span>
+                        <span class="font-body-sm text-outline text-[11px] mt-0.5">Review client tree scope, photos, and location before confirming.</span>
+                      </div>
+                    </label>
+                    <label class="flex items-start gap-3 p-3.5 rounded-xl border border-outline-variant/50 bg-white/70 hover:bg-white cursor-pointer shadow-2xs transition-colors">
+                      <input class="mt-0.5 accent-primary-container" name="approval_mode" type="radio">
+                      <div class="flex flex-col">
+                        <span class="font-label-md text-xs text-on-surface font-bold">Automatic Confirmation</span>
+                        <span class="font-body-sm text-outline text-[11px] mt-0.5">Auto-book if slot is clear on calendar. Recommended for basic pruning.</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Blocked Dates summary (Demarcated Box) -->
+                <div class="p-4 rounded-xl border border-outline-variant/60 bg-surface-container-low/30 flex flex-wrap items-center justify-between gap-4 shadow-2xs">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-primary-container flex items-center justify-center shrink-0 shadow-2xs">
+                      <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </div>
+                    <div class="flex flex-col">
+                      <span class="font-label-md text-sm text-on-surface font-bold">Unavailable &amp; Blocked Dates</span>
+                      <span class="font-body-sm text-on-surface-variant text-xs mt-0.5">3 upcoming dates blocked (Council Holiday, Annual Equipment Service)</span>
+                    </div>
+                  </div>
+                  <button class="px-3.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/60 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors shadow-2xs" type="button">
+                    Manage Dates
+                  </button>
+                </div>
+              </section>
+
+              <!-- SECTION 4: AI SETTINGS -->
+              <section class="scroll-mt-24 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 p-6 lg:p-8 shadow-xs space-y-6" id="ai-settings">
+                <div class="flex flex-wrap items-start justify-between gap-4 pb-4 border-b border-outline-variant/40">
+                  <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-11 h-11 rounded-xl bg-[#d8a950]/15 text-[#9a6a12] flex items-center justify-center shrink-0 border border-[#d8a950]/30 shadow-xs">
+  <svg class="w-6 h-6 shrink-0 text-[#9a6a12]" fill="currentColor" viewBox="0 0 24 24"><path d="m19 9 1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z"/></svg>
+</div>
+<h2 class="font-headline-md text-2xl lg:text-[28px] text-on-surface font-extrabold tracking-tight">AI Settings &amp; Botanical Knowledge</h2>
+                    </div>
+                    <p class="font-body-sm text-sm text-on-surface-variant ml-11">
+                      Configure how the Arborist AI assistant answers customer inquiries and triages tree hazards.
+                    </p>
+                  </div>
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/50 border border-outline-variant/40 text-[#174c3c] text-xs font-bold shadow-2xs">
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    Gemini powered engine
+                  </span>
+                </div>
+
+                <!-- AI Parameters Container with Demarcated Rows -->
+                <div class="rounded-xl border border-outline-variant/60 bg-surface-container-lowest divide-y divide-outline-variant/40 overflow-hidden shadow-2xs">
+                  <!-- Assistant Name -->
+                  <div class="p-4 flex flex-wrap items-center justify-between gap-4 hover:bg-surface-container-low/20 transition-colors">
+                    <div class="flex items-center gap-3.5">
+                      <div class="w-9 h-9 rounded-xl bg-surface-container border border-outline-variant/40 text-primary-container flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 shrink-0 text-[#d8a950]" fill="currentColor" viewBox="0 0 24 24"><path d="m19 9 1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z"/></svg>
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider font-bold">Assistant Name</span>
+                        <span class="font-headline-sm text-sm text-on-surface font-bold">Arborist AI Assistant</span>
+                      </div>
+                    </div>
+                    <button class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors" type="button">Edit</button>
+                  </div>
+
+                  <!-- Business Knowledge Base -->
+                  <div class="p-4 flex flex-wrap items-center justify-between gap-4 hover:bg-surface-container-low/20 transition-colors">
+                    <div class="flex items-center gap-3.5">
+                      <div class="w-9 h-9 rounded-xl bg-surface-container border border-outline-variant/40 text-primary-container flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider font-bold">Business Knowledge Base</span>
+                        <span class="font-headline-sm text-sm text-on-surface font-bold">24 documents &amp; care protocols loaded</span>
+                        <span class="font-body-sm text-outline text-[11px] mt-0.5">BS3998 British standards, tree protection orders, municipal council bylaws</span>
+                      </div>
+                    </div>
+                    <button class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors" type="button">Manage</button>
+                  </div>
+
+                  <!-- FAQs -->
+                  <div class="p-4 flex flex-wrap items-center justify-between gap-4 hover:bg-surface-container-low/20 transition-colors">
+                    <div class="flex items-center gap-3.5">
+                      <div class="w-9 h-9 rounded-xl bg-surface-container border border-outline-variant/40 text-primary-container flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider font-bold">Frequently Asked Questions</span>
+                        <span class="font-headline-sm text-sm text-on-surface font-bold">12 active FAQs enabled</span>
+                        <span class="font-body-sm text-outline text-[11px] mt-0.5">TPO permissions, seasonal pruning windows, waste mulch haulage</span>
+                      </div>
+                    </div>
+                    <button class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors" type="button">Edit FAQs</button>
+                  </div>
+
+                  <!-- Available Services -->
+                  <div class="p-4 flex flex-wrap items-center justify-between gap-4 hover:bg-surface-container-low/20 transition-colors">
+                    <div class="flex items-center gap-3.5">
+                      <div class="w-9 h-9 rounded-xl bg-surface-container border border-outline-variant/40 text-primary-container flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879a3 3 0 11-4.242-4.242 3 3 0 014.242 0zM12 12L9.121 9.121a3 3 0 10-4.242 4.242 3 3 0 004.242 0z"/></svg>
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider font-bold">Available Services in AI</span>
+                        <span class="font-headline-sm text-sm text-on-surface font-bold">5 core services enabled for quoting</span>
+                      </div>
+                    </div>
+                    <button class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors" type="button">Manage</button>
+                  </div>
+
+                  <!-- Booking Permissions -->
+                  <div class="p-4 flex flex-wrap items-center justify-between gap-4 hover:bg-surface-container-low/20 transition-colors">
+                    <div class="flex items-center gap-3.5">
+                      <div class="w-9 h-9 rounded-xl bg-surface-container border border-outline-variant/40 text-primary-container flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider font-bold">Booking Permissions</span>
+                        <span class="font-headline-sm text-sm text-on-surface font-bold">Collect details and recommend appointment slots</span>
+                      </div>
+                    </div>
+                    <button class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors" type="button">Configure</button>
+                  </div>
+
+                  <!-- Human Escalation -->
+                  <div class="p-4 flex flex-wrap items-center justify-between gap-4 hover:bg-surface-container-low/20 transition-colors">
+                    <div class="flex items-center gap-3.5">
+                      <div class="w-9 h-9 rounded-xl bg-surface-container border border-outline-variant/40 text-primary-container flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                      </div>
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-2">
+                          <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider font-bold">Human Escalation Protocol</span>
+                          <span class="px-2 py-0.5 rounded-full bg-secondary-container/50 text-[#174c3c] text-[10px] font-bold">Enabled</span>
+                        </div>
+                        <span class="font-headline-sm text-sm text-on-surface font-bold mt-0.5">Instantly alerts lead arborist on severe hazards or powerline proximity</span>
+                      </div>
+                    </div>
+                    <button class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/50 font-label-md text-xs font-semibold text-primary-container hover:bg-surface-container-high transition-colors" type="button">Configure</button>
+                  </div>
+                </div>
+              </section>
+
+              <!-- SECTION 5: NOTIFICATIONS -->
+              <section class="scroll-mt-24 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 p-6 lg:p-8 shadow-xs space-y-6" id="notifications">
+                <div class="flex flex-col gap-1 pb-4 border-b border-outline-variant/40">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-11 h-11 rounded-xl bg-[#174c3c]/10 text-[#174c3c] flex items-center justify-center shrink-0 border border-[#174c3c]/20 shadow-xs">
+  <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+</div>
+<h2 class="font-headline-md text-2xl lg:text-[28px] text-on-surface font-extrabold tracking-tight">Notifications &amp; Alerts</h2>
+                  </div>
+                  <p class="font-body-sm text-sm text-on-surface-variant ml-11">
+                    Choose which operational updates you receive via SMS, email, and live portal push.
+                  </p>
+                </div>
+
+                <div class="space-y-3">
+                  <!-- Notification 1 -->
+                  <div class="flex items-center justify-between p-4 rounded-xl border border-outline-variant/60 bg-surface-container-low/30 gap-4 hover:bg-surface-container-low/50 transition-colors shadow-2xs">
+                    <div class="flex flex-col gap-0.5 max-w-xl">
+                      <span class="font-label-md text-sm text-on-surface font-bold">New Booking Alerts</span>
+                      <p class="font-body-sm text-on-surface-variant text-xs">Receive immediate SMS &amp; email alerts whenever a new estimate is requested or booked on your portal.</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer shrink-0">
+                      <input checked="" class="sr-only peer" type="checkbox">
+                      <div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-on-primary peer-checked:bg-primary-container after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-primary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                    </label>
+                  </div>
+
+                  <!-- Notification 2 -->
+                  <div class="flex items-center justify-between p-4 rounded-xl border border-outline-variant/60 bg-surface-container-low/30 gap-4 hover:bg-surface-container-low/50 transition-colors shadow-2xs">
+                    <div class="flex flex-col gap-0.5 max-w-xl">
+                      <span class="font-label-md text-sm text-on-surface font-bold">Appointment Reminders</span>
+                      <p class="font-body-sm text-on-surface-variant text-xs">24-hour and 2-hour dispatch reminders for scheduled tree surgery visits and safety checkups.</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer shrink-0">
+                      <input checked="" class="sr-only peer" type="checkbox">
+                      <div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-on-primary peer-checked:bg-primary-container after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-primary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                    </label>
+                  </div>
+
+                  <!-- Notification 3 -->
+                  <div class="flex items-center justify-between p-4 rounded-xl border border-outline-variant/60 bg-surface-container-low/30 gap-4 hover:bg-surface-container-low/50 transition-colors shadow-2xs">
+                    <div class="flex flex-col gap-0.5 max-w-xl">
+                      <span class="font-label-md text-sm text-on-surface font-bold">Customer Enquiry Alerts</span>
+                      <p class="font-body-sm text-on-surface-variant text-xs">Get notified when high-priority hazards or storm-damaged branches are reported via AI triage chat.</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer shrink-0">
+                      <input checked="" class="sr-only peer" type="checkbox">
+                      <div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-on-primary peer-checked:bg-primary-container after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-primary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-end pt-2 border-t border-outline-variant/40">
+                  <button class="px-5 py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-xs font-bold shadow-sm hover:opacity-95 transition-all" type="button">
+                    Save Preferences
+                  </button>
+                </div>
+              </section>
+
+              <!-- SECTION 6: ACCOUNT & SECURITY -->
+              <section class="scroll-mt-24 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 p-6 lg:p-8 shadow-xs space-y-6" id="account">
+                <div class="flex flex-col gap-1 pb-4 border-b border-outline-variant/40">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-11 h-11 rounded-xl bg-[#174c3c]/10 text-[#174c3c] flex items-center justify-center shrink-0 border border-[#174c3c]/20 shadow-xs">
+  <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+</div>
+<h2 class="font-headline-md text-2xl lg:text-[28px] text-on-surface font-extrabold tracking-tight">Account &amp; Security</h2>
+                  </div>
+                  <p class="font-body-sm text-sm text-on-surface-variant ml-11">
+                    Manage your owner credentials, authorized arborist seats, and security keys.
+                  </p>
+                </div>
+
+                <div class="rounded-xl border border-outline-variant/60 bg-surface-container-lowest divide-y divide-outline-variant/40 overflow-hidden shadow-2xs">
+                  <!-- Profile Info Row -->
+                  <a class="flex items-center justify-between p-4 hover:bg-surface-container-low/30 transition-colors group cursor-pointer" href="#">
+                    <div class="flex items-center gap-4">
+                      <div class="w-10 h-10 rounded-full bg-[#174c3c] text-white flex items-center justify-center font-bold text-xs shadow-2xs">
+                        AM
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="font-label-md text-sm text-on-surface font-bold group-hover:text-primary-container transition-colors">Profile Information</span>
+                        <span class="font-body-sm text-outline text-xs mt-0.5">Alex Morgan &nbsp;•&nbsp; alex@arborist-care.com &nbsp;•&nbsp; Primary Owner</span>
+                      </div>
+                    </div>
+                    <span class="material-symbols-outlined text-outline group-hover:text-on-surface text-[20px] transition-transform group-hover:translate-x-0.5">chevron_right</span>
+                  </a>
+
+                  <!-- Password Row -->
+                  <a class="flex items-center justify-between p-4 hover:bg-surface-container-low/30 transition-colors group cursor-pointer" href="#">
+                    <div class="flex items-center gap-4">
+                      <div class="w-10 h-10 rounded-xl bg-surface-container border border-outline-variant/40 text-primary-container flex items-center justify-center shadow-2xs">
+                        <span class="material-symbols-outlined text-[20px]">key</span>
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="font-label-md text-sm text-on-surface font-bold group-hover:text-primary-container transition-colors">Change Password</span>
+                        <span class="font-body-sm text-outline text-xs mt-0.5">Last updated 4 months ago • Rated Strong (Argon2id hashing)</span>
+                      </div>
+                    </div>
+                    <span class="material-symbols-outlined text-outline group-hover:text-on-surface text-[20px] transition-transform group-hover:translate-x-0.5">chevron_right</span>
+                  </a>
+
+                  <!-- Two-Factor Security -->
+                  <a class="flex items-center justify-between p-4 hover:bg-surface-container-low/30 transition-colors group cursor-pointer" href="#">
+                    <div class="flex items-center gap-4">
+                      <div class="w-10 h-10 rounded-xl bg-surface-container border border-outline-variant/40 text-secondary flex items-center justify-center shadow-2xs">
+                        <span class="material-symbols-outlined text-[20px]">shield</span>
+                      </div>
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-2">
+                          <span class="font-label-md text-sm text-on-surface font-bold group-hover:text-primary-container transition-colors">Two-Factor Authentication</span>
+                          <span class="px-2 py-0.5 rounded-full bg-secondary-container/60 text-[#174c3c] text-[10px] font-bold">Enabled</span>
+                        </div>
+                        <span class="font-body-sm text-outline text-xs mt-0.5">Configured via Authenticator App (RFC 6238 TOTP)</span>
+                      </div>
+                    </div>
+                    <span class="material-symbols-outlined text-outline group-hover:text-on-surface text-[20px] transition-transform group-hover:translate-x-0.5">chevron_right</span>
+                  </a>
+                </div>
+
+                <!-- Sign Out Action -->
+                <div class="pt-2 flex items-center justify-between text-xs text-outline">
+                  <span>Session authenticated via Master Arborist Token</span>
+                  <button class="font-label-md text-xs font-bold text-error hover:underline transition-colors" type="button">
+                    Sign Out All Devices
+                  </button>
+                </div>
+              </section>
+
+            </div>
+          </div>
+        </div>
+      </div>
+</main></div>
+
+</body></html>

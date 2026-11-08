@@ -1,0 +1,26 @@
+{
+  "name": "arborist-tree-care",
+  "version": "1.0.0",
+  "description": "Ultra-luxury, high-conversion Tree Care & Arborist SaaS platform with interactive before/after showcases, AI live voice diagnostics, and multi-step dispatch booking.",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve . -p 3000",
+    "dev": "serve . -p 3000",
+    "preview": "serve . -p 3000",
+    "build": "echo 'Static build ready - zero build step required'"
+  },
+  "keywords": [
+    "arborist",
+    "tree-care",
+    "tree-surgery",
+    "saas",
+    "voice-ai",
+    "tailwind",
+    "luxury-web"
+  ],
+  "author": "Waeilo",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

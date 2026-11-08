@@ -1,0 +1,671 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Manrope:wght@200..800&amp;family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary": "#ffffff", "on-background": "#151e18", "inverse-on-surface": "#e9f3ea", "surface-variant": "#dbe5dc", "on-primary-container": "#87bba7", "on-secondary-fixed": "#05210e", "on-tertiary": "#ffffff", "primary": "#003527", "on-error-container": "#93000a", "on-surface": "#151e18", "primary-fixed-dim": "#9dd2bc", "tertiary-container": "#593f00", "secondary": "#48654d", "on-primary-fixed-variant": "#1b4f3f", "inverse-surface": "#29332c", "on-secondary-container": "#4e6b53", "on-primary-fixed": "#002117", "on-tertiary-fixed": "#271900", "tertiary-fixed-dim": "#f0bf64", "secondary-fixed-dim": "#afcfb1", "outline": "#707974", "surface": "#f2fcf2", "on-surface-variant": "#404945", "primary-fixed": "#b8eed8", "outline-variant": "#c0c9c3", "surface-container-highest": "#dbe5dc", "surface-container-lowest": "#ffffff", "background": "#f2fcf2", "primary-container": "#174c3c", "surface-container-high": "#e1ebe1", "tertiary-fixed": "#ffdea6", "surface-container": "#e6f1e7", "surface-dim": "#d3ddd3", "error": "#ba1a1a", "surface-bright": "#f2fcf2", "on-error": "#ffffff", "secondary-container": "#caebcc", "surface-container-low": "#ecf6ed", "inverse-primary": "#9dd2bc", "tertiary": "#3d2a00", "on-secondary": "#ffffff", "on-secondary-fixed-variant": "#314d36", "error-container": "#ffdad6", "secondary-fixed": "#caebcc", "on-tertiary-fixed-variant": "#5e4200", "surface-tint": "#356856", "on-tertiary-container": "#d8a950" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "margin": "1.25rem", "gutter": "1.5rem", "margin-lg": "4rem", "margin-md": "2.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "space-3xl": "6rem", "space-xl": "2.5rem", "space-2xl": "4rem", "gutter-lg": "2rem", "space-md": "1rem" }, "fontFamily": { "body-sm": ["DM Sans"], "body-lg": ["DM Sans"], "headline-sm": ["Manrope"], "label-lg": ["Manrope"], "display-lg": ["Noto Serif"], "headline-lg": ["Noto Serif"], "headline-lg-mobile": ["Noto Serif"], "headline-md": ["Manrope"], "label-sm": ["Manrope"], "label-md": ["Manrope"], "body-md": ["DM Sans"], "display-lg-mobile": ["Noto Serif"] }, "fontSize": { "body-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.04em", "fontWeight": "700" }], "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "400" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }], "body-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }], "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; } body { overscroll-behavior: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }
+.material-symbols-light {
+  font-family: 'Material Symbols Outlined';
+  font-weight: 200;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 1;
+  display: inline-block;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+</style><style>
+  /* ==========================================================================
+     VISIBLE LUXURY SCROLLBAR + PROPORTIONAL TABLET/DESKTOP + ZERO-FLICKER SHELL
+     ========================================================================== */
+  html {
+    overflow-y: scroll !important;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #8da396 #f2fcf2;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-y: visible !important;
+    overscroll-behavior: auto !important;
+  }
+
+  /* Visible luxury custom scrollbar for desktop & mouse drag */
+  ::-webkit-scrollbar {
+    width: 9px !important;
+    height: 9px !important;
+    display: block !important;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f2fcf2 !important;
+    border-left: 1px solid #c0c9c3 !important;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #8da396 !important;
+    border-radius: 4px !important;
+    border: 2px solid #f2fcf2 !important;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #174c3c !important;
+  }
+
+  /* Zero-Flicker Content Switching Animation */
+  .owner-desktop-panel,
+  .owner-mobile-panel {
+    display: none;
+    width: 100%;
+  }
+
+  .owner-desktop-panel.active-owner-view,
+  .owner-mobile-panel.active-owner-view {
+    display: block !important;
+    animation: ownerContentFadeSlide 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes ownerContentFadeSlide {
+    0% {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Desktop Shell vs Mobile Shell Visibility */
+  #owner-desktop-shell {
+    display: block;
+  }
+  #owner-mobile-shell {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    #owner-desktop-shell {
+      display: none !important;
+    }
+    #owner-mobile-shell {
+      display: flex !important;
+      flex-direction: column;
+      min-height: 100dvh;
+      width: 100%;
+    }
+  }
+
+  /* Tablet Mode Proportional Scaling (768px to 1120px) */
+  @media (min-width: 768px) and (max-width: 1120px) {
+    #owner-persistent-aside,
+    #owner-desktop-shell aside,
+    body.standalone-desktop aside {
+      width: 196px !important;
+    }
+    #owner-desktop-content,
+    #owner-desktop-shell .pl-\[230px\],
+    body.standalone-desktop .pl-\[230px\],
+    body.standalone-desktop .pl-60 {
+      padding-left: 196px !important;
+    }
+    #owner-persistent-header,
+    #owner-desktop-shell header.left-\[230px\],
+    body.standalone-desktop header.left-[230px],
+    body.standalone-desktop header.left-60 {
+      left: 196px !important;
+      padding-left: 1.25rem !important;
+      padding-right: 1.25rem !important;
+    }
+    #owner-desktop-main,
+    #owner-desktop-shell main,
+    body.standalone-desktop main {
+      padding-left: 1.25rem !important;
+      padding-right: 1.25rem !important;
+    }
+    .min-w-\[620px\] {
+      min-width: 100% !important;
+      overflow-x: auto;
+    }
+  }
+</style></head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 w-full z-50 pt-safe bg-[#174c3c]/95 backdrop-blur-md border-b border-white/10 shadow-md text-white">
+  <div class="h-16 px-4 flex items-center justify-between">
+    <a href="../index.html" class="flex items-center gap-2 group cursor-pointer" title="Return to Public Site">
+      <img alt="ARBORIST Logo" class="h-8 w-auto object-contain drop-shadow" src="../assets/logo.png">
+      <div class="flex flex-col justify-center">
+        <span class="font-headline-md text-sm sm:text-base tracking-tight text-[#F8F7F2] font-extrabold leading-none uppercase">ARBORIST</span>
+        <span class="font-label-sm text-[8px] tracking-[0.18em] uppercase text-[#8EAD91] font-bold mt-0.5">CARE &amp; REMOVAL</span>
+      </div>
+      <span class="ml-1 px-1.5 py-0.5 rounded bg-white/10 text-[9px] text-[#b8eed8] font-bold uppercase tracking-wider">Owner</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <a href="mobile-ai.html" class="px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-[#F8F7F2] font-label-sm text-[11px] font-semibold flex items-center gap-1 cursor-pointer">
+        <span class="text-[#f0bf64] text-xs">✦</span>
+        <span>Ask AI</span>
+      </a>
+      <button class="relative w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/90" title="Notifications">
+        <svg class="w-[19px] h-[19px] text-[#F8F7F2] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+        <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#f0bf64] ring-2 ring-[#174c3c]"></span>
+      </button>
+      <a href="../index.html" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/90 hover:bg-white/20 transition-colors" title="View Public Website">
+        <svg class="w-4 h-4 text-[#8EAD91] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      </a>
+    </div>
+  </div>
+</header><main class="flex flex-col relative w-full pt-16 pb-20 bg-surface min-h-screen"><div class="flex flex-col w-full pb-28 px-margin">
+<!-- Top Page Header -->
+<section class="flex items-center justify-between pt-space-md pb-space-sm">
+<div class="flex flex-col">
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight leading-tight">Customers</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Your customer directory.</p>
+</div>
+<button aria-label="Add Customer" class="w-[42px] h-[42px] rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-md active:scale-95 transition-transform duration-150" id="add-customer-btn">
+<span class="material-symbols-outlined text-[24px]">add</span>
+</button>
+</section>
+<!-- Specimen Ambient Status Highlight (Botanical Heritage Touch) -->
+<div class="my-space-xs rounded-xl bg-surface-container-low p-space-sm flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">ISA Certified Estate Protocol</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Active Cadence</span>
+</div>
+<!-- Search Bar with AI Search Pill Trigger -->
+<div class="mt-space-sm mb-space-md">
+<div class="h-[54px] w-full rounded-2xl bg-surface-container-lowest px-4 flex items-center justify-between shadow-sm shadow-primary/5">
+<div class="flex items-center gap-space-sm flex-1 min-w-0 pr-2">
+<span class="material-symbols-outlined text-outline text-[22px]">search</span>
+<input class="bg-transparent border-0 outline-none w-full font-body-md text-body-md text-on-surface placeholder:text-outline text-ellipsis" id="directory-search-input" placeholder="Search customers..." type="text">
+</div>
+<button aria-label="Find with AI" class="flex items-center gap-1.5 py-1.5 px-3 rounded-xl bg-surface-container-low text-primary active:bg-surface-variant transition-colors" id="open-ai-search" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">auto_awesome</span>
+<span class="font-label-sm text-label-sm font-bold tracking-wide">AI Finder</span>
+</button>
+</div>
+</div>
+<!-- Sorting & Filter Row -->
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface">All Customers</span>
+<span class="bg-surface-container text-primary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full" id="customer-counter">146</span>
+</div>
+<button class="bg-surface-container-lowest px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm text-on-surface hover:bg-surface-container-low transition-colors" id="open-sort-btn" type="button">
+<span class="font-label-md text-label-md" id="current-sort-label">Newest</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</button>
+</div>
+<!-- Customer Cards Stack -->
+<div class="flex flex-col gap-3" id="customer-list">
+<!-- Customer 1 -->
+<div class="customer-card w-full rounded-2xl bg-surface-container-lowest p-3.5 shadow-sm active:scale-[0.99] transition-transform duration-150 cursor-pointer flex items-center justify-between gap-3" data-date="Today" data-name="Sarah Williams" data-service="Tree Assessment">
+<div class="w-[46px] h-[46px] rounded-xl bg-[#E2ECE3] text-primary flex items-center justify-center font-headline-sm text-label-lg flex-shrink-0">
+    SW
+  </div>
+<div class="flex flex-col min-w-0 flex-1">
+<!-- Top line: Customer name on left, date on right -->
+<div class="flex items-center justify-between gap-2">
+<h2 class="font-headline-sm text-body-md font-semibold text-on-surface truncate">Sarah Williams</h2>
+<span class="text-[11px] font-label-sm text-outline font-normal flex-shrink-0">Today</span>
+</div>
+<!-- Second line: single subtle borderless thin phone icon + phone number on left, service badge on right -->
+<div class="flex items-center justify-between gap-2 mt-1">
+<div class="flex items-center gap-1.5 min-w-0 text-[#7B8A7E]">
+<svg class="w-3.5 h-3.5 text-[#8E9B90] flex-shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+</svg>
+<span class="font-body-sm text-[13px] text-outline tracking-tight truncate">(555) 012-8472</span>
+</div>
+<div class="flex items-center gap-1 flex-shrink-0">
+<span class="inline-flex items-center gap-1.5 bg-surface-container-low text-primary px-2 py-0.5 rounded-md font-label-sm text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+          Tree Assessment
+        </span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Customer 2 -->
+<div class="customer-card w-full rounded-2xl bg-surface-container-lowest p-3.5 shadow-sm active:scale-[0.99] transition-transform duration-150 cursor-pointer flex items-center justify-between gap-3" data-date="Yesterday" data-name="James Carter" data-service="Tree Removal">
+<div class="w-[46px] h-[46px] rounded-xl bg-[#FDF5E2] text-tertiary-container flex items-center justify-center font-headline-sm text-label-lg flex-shrink-0">
+    JC
+  </div>
+<div class="flex flex-col min-w-0 flex-1">
+<!-- Top line -->
+<div class="flex items-center justify-between gap-2">
+<h2 class="font-headline-sm text-body-md font-semibold text-on-surface truncate">James Carter</h2>
+<span class="text-[11px] font-label-sm text-outline font-normal flex-shrink-0">Yesterday</span>
+</div>
+<!-- Second line -->
+<div class="flex items-center justify-between gap-2 mt-1">
+<div class="flex items-center gap-1.5 min-w-0 text-[#7B8A7E]">
+<svg class="w-3.5 h-3.5 text-[#8E9B90] flex-shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+</svg>
+<span class="font-body-sm text-[13px] text-outline tracking-tight truncate">(555) 018-2391</span>
+</div>
+<div class="flex items-center gap-1 flex-shrink-0">
+<span class="inline-flex items-center gap-1.5 bg-surface-container text-secondary px-2 py-0.5 rounded-md font-label-sm text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          Tree Removal
+        </span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Customer 3 -->
+<div class="customer-card w-full rounded-2xl bg-surface-container-lowest p-3.5 shadow-sm active:scale-[0.99] transition-transform duration-150 cursor-pointer flex items-center justify-between gap-3" data-date="Oct 19" data-name="Emma Johnson" data-service="Storm Damage Inspection">
+<div class="w-[46px] h-[46px] rounded-xl bg-[#FCEEE3] text-[#9E4D1B] flex items-center justify-center font-headline-sm text-label-lg flex-shrink-0">
+    EJ
+  </div>
+<div class="flex flex-col min-w-0 flex-1">
+<!-- Top line -->
+<div class="flex items-center justify-between gap-2">
+<h2 class="font-headline-sm text-body-md font-semibold text-on-surface truncate">Emma Johnson</h2>
+<span class="text-[11px] font-label-sm text-outline font-normal flex-shrink-0">Oct 19</span>
+</div>
+<!-- Second line -->
+<div class="flex items-center justify-between gap-2 mt-1">
+<div class="flex items-center gap-1.5 min-w-0 text-[#7B8A7E]">
+<svg class="w-3.5 h-3.5 text-[#8E9B90] flex-shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+</svg>
+<span class="font-body-sm text-[13px] text-outline tracking-tight truncate">(555) 017-4820</span>
+</div>
+<div class="flex items-center gap-1 flex-shrink-0">
+<span class="inline-flex items-center gap-1.5 bg-tertiary-fixed/30 text-on-tertiary-fixed-variant px-2 py-0.5 rounded-md font-label-sm text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim"></span>
+          Storm Damage
+        </span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Customer 4 -->
+<div class="customer-card w-full rounded-2xl bg-surface-container-lowest p-3.5 shadow-sm active:scale-[0.99] transition-transform duration-150 cursor-pointer flex items-center justify-between gap-3" data-date="Oct 16" data-name="Robert Brown" data-service="Stump Grinding">
+<div class="w-[46px] h-[46px] rounded-xl bg-[#E6EEF5] text-[#264A6E] flex items-center justify-center font-headline-sm text-label-lg flex-shrink-0">
+    RB
+  </div>
+<div class="flex flex-col min-w-0 flex-1">
+<!-- Top line -->
+<div class="flex items-center justify-between gap-2">
+<h2 class="font-headline-sm text-body-md font-semibold text-on-surface truncate">Robert Brown</h2>
+<span class="text-[11px] font-label-sm text-outline font-normal flex-shrink-0">Oct 16</span>
+</div>
+<!-- Second line -->
+<div class="flex items-center justify-between gap-2 mt-1">
+<div class="flex items-center gap-1.5 min-w-0 text-[#7B8A7E]">
+<svg class="w-3.5 h-3.5 text-[#8E9B90] flex-shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+</svg>
+<span class="font-body-sm text-[13px] text-outline tracking-tight truncate">(555) 014-6208</span>
+</div>
+<div class="flex items-center gap-1 flex-shrink-0">
+<span class="inline-flex items-center gap-1.5 bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded-md font-label-sm text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+          Stump Grinding
+        </span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Customer 5 -->
+<div class="customer-card w-full rounded-2xl bg-surface-container-lowest p-3.5 shadow-sm active:scale-[0.99] transition-transform duration-150 cursor-pointer flex items-center justify-between gap-3" data-date="Oct 12" data-name="Olivia Lewis" data-service="Tree Pruning">
+<div class="w-[46px] h-[46px] rounded-xl bg-[#E7EFE6] text-primary flex items-center justify-center font-headline-sm text-label-lg flex-shrink-0">
+    OL
+  </div>
+<div class="flex flex-col min-w-0 flex-1">
+<!-- Top line -->
+<div class="flex items-center justify-between gap-2">
+<h2 class="font-headline-sm text-body-md font-semibold text-on-surface truncate">Olivia Lewis</h2>
+<span class="text-[11px] font-label-sm text-outline font-normal flex-shrink-0">Oct 12</span>
+</div>
+<!-- Second line -->
+<div class="flex items-center justify-between gap-2 mt-1">
+<div class="flex items-center gap-1.5 min-w-0 text-[#7B8A7E]">
+<svg class="w-3.5 h-3.5 text-[#8E9B90] flex-shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+</svg>
+<span class="font-body-sm text-[13px] text-outline tracking-tight truncate">(555) 019-3571</span>
+</div>
+<div class="flex items-center gap-1 flex-shrink-0">
+<span class="inline-flex items-center gap-1.5 bg-surface-container-low text-primary px-2 py-0.5 rounded-md font-label-sm text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+          Tree Pruning
+        </span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Customer 6 -->
+<div class="customer-card w-full rounded-2xl bg-surface-container-lowest p-3.5 shadow-sm active:scale-[0.99] transition-transform duration-150 cursor-pointer flex items-center justify-between gap-3" data-date="Oct 08" data-name="David Miller" data-service="Crown Thinning &amp; Deadwood">
+<div class="w-[46px] h-[46px] rounded-xl bg-[#E0EFE6] text-[#175438] flex items-center justify-center font-headline-sm text-label-lg flex-shrink-0">
+    DM
+  </div>
+<div class="flex flex-col min-w-0 flex-1">
+<!-- Top line -->
+<div class="flex items-center justify-between gap-2">
+<h2 class="font-headline-sm text-body-md font-semibold text-on-surface truncate">David Miller</h2>
+<span class="text-[11px] font-label-sm text-outline font-normal flex-shrink-0">Oct 08</span>
+</div>
+<!-- Second line -->
+<div class="flex items-center justify-between gap-2 mt-1">
+<div class="flex items-center gap-1.5 min-w-0 text-[#7B8A7E]">
+<svg class="w-3.5 h-3.5 text-[#8E9B90] flex-shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+</svg>
+<span class="font-body-sm text-[13px] text-outline tracking-tight truncate">(555) 011-9432</span>
+</div>
+<div class="flex items-center gap-1 flex-shrink-0">
+<span class="inline-flex items-center gap-1.5 bg-secondary-container text-on-secondary-fixed-variant px-2 py-0.5 rounded-md font-label-sm text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          Crown Thinning
+        </span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State when filtering returns nothing -->
+<div class="hidden flex-col items-center justify-center py-12 px-4 text-center" id="no-results">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-outline mb-3">
+<span class="material-symbols-outlined text-[32px]">nature_people</span>
+</div>
+<h3 class="font-headline-sm text-body-md font-semibold text-on-surface">No patrons matched</h3>
+<p class="font-body-sm text-body-sm text-outline mt-1 max-w-[240px]">Try refining your search terms or use natural language in the AI Finder.</p>
+</div>
+<!-- Interactive Toast Notification -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 bg-inverse-surface text-inverse-on-surface px-4 py-2.5 rounded-xl shadow-xl flex items-center gap-2.5 transition-all duration-300 opacity-0 pointer-events-none translate-y-3" id="action-toast">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]" id="toast-icon">check_circle</span>
+<span class="font-label-md text-label-md" id="toast-message">Opening Customer Dossier...</span>
+</div>
+<!-- AI Finder Full Modal / Overlay -->
+<div class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex-col justify-end" id="ai-modal">
+<div class="w-full bg-surface-container-lowest rounded-t-3xl p-5 shadow-2xl flex flex-col max-h-[85vh] transition-transform transform translate-y-full duration-300" id="ai-modal-content">
+<div class="w-12 h-1 bg-surface-variant rounded-full mx-auto mb-4"></div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Find with AI</h2>
+<p class="font-body-sm text-body-sm text-outline">Describe the customer or estate concern</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant" id="close-ai-modal">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="my-4">
+<textarea class="w-full p-3.5 rounded-xl bg-surface-container-low font-body-md text-body-md text-on-surface placeholder:text-outline border-0 focus:outline-none focus:ring-0" id="ai-prompt-input" placeholder="The customer who asked about an oak tree last week..." rows="3"></textarea>
+</div>
+<div class="flex flex-col gap-2 mb-5">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Quick prompts</span>
+<div class="flex flex-wrap gap-2">
+<button class="ai-chip px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-variant active:scale-95 transition-all" type="button">
+            Oak tree storm inquiry
+          </button>
+<button class="ai-chip px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-variant active:scale-95 transition-all" type="button">
+            Stump grinding quote
+          </button>
+<button class="ai-chip px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-variant active:scale-95 transition-all" type="button">
+            Heritage Redwood permit
+          </button>
+</div>
+</div>
+<button class="w-full py-3.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-transform" id="run-ai-search">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+        Find Customer
+      </button>
+</div>
+</div>
+<!-- Sort Selection Bottom Sheet -->
+<div class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex-col justify-end" id="sort-modal">
+<div class="w-full bg-surface-container-lowest rounded-t-3xl p-5 shadow-2xl flex flex-col transition-transform transform translate-y-full duration-300" id="sort-modal-content">
+<div class="w-12 h-1 bg-surface-variant rounded-full mx-auto mb-4"></div>
+<div class="flex items-center justify-between pb-3 border-b border-surface-container">
+<h3 class="font-headline-sm text-body-lg font-bold text-on-surface">Sort Directory</h3>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant" id="close-sort-modal">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="flex flex-col py-2">
+<button class="sort-option w-full py-3 px-2 flex items-center justify-between text-left" data-sort="Newest">
+<span class="font-body-md text-body-md text-on-surface font-medium">Newest First</span>
+<span class="material-symbols-outlined text-primary text-[20px] check-icon">check</span>
+</button>
+<button class="sort-option w-full py-3 px-2 flex items-center justify-between text-left" data-sort="Oldest">
+<span class="font-body-md text-body-md text-on-surface font-medium">Oldest First</span>
+<span class="material-symbols-outlined text-transparent text-[20px] check-icon">check</span>
+</button>
+<button class="sort-option w-full py-3 px-2 flex items-center justify-between text-left" data-sort="Name A-Z">
+<span class="font-body-md text-body-md text-on-surface font-medium">Name (A–Z)</span>
+<span class="material-symbols-outlined text-transparent text-[20px] check-icon">check</span>
+</button>
+<button class="sort-option w-full py-3 px-2 flex items-center justify-between text-left" data-sort="Recently Active">
+<span class="font-body-md text-body-md text-on-surface font-medium">Recently Active</span>
+<span class="material-symbols-outlined text-transparent text-[20px] check-icon">check</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Add Customer Drawer Modal -->
+<div class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex-col justify-end" id="add-modal">
+<div class="w-full bg-surface-container-lowest rounded-t-3xl p-5 shadow-2xl flex flex-col max-h-[85vh] transition-transform transform duration-300 translate-y-0" id="add-modal-content">
+<div class="w-12 h-1 bg-surface-variant rounded-full mx-auto mb-4"></div>
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">New Customer</h2>
+<p class="font-body-sm text-body-sm text-outline">Add property owner or estate curator</p>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant" id="close-add-modal">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-3.5 mb-5 overflow-y-auto">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1">Full Name</label>
+<input class="w-full p-3 rounded-xl bg-surface-container-low font-body-md text-body-md text-on-surface border-0 focus:outline-none" id="new-name" placeholder="e.g. Eleanor Vance" type="text">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1">Phone Number</label>
+<input class="w-full p-3 rounded-xl bg-surface-container-low font-body-md text-body-md text-on-surface border-0 focus:outline-none" id="new-phone" placeholder="(555) 000-0000" type="tel">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1">Initial Service Need</label>
+<select class="w-full p-3 rounded-xl bg-surface-container-low font-body-md text-body-md text-on-surface border-0 focus:outline-none" id="new-service">
+<option>Heritage Tree Assessment</option>
+<option>Canopy Pruning &amp; Shaping</option>
+<option>Tree Removal Assessment</option>
+<option>Root Barrier Protection</option>
+</select>
+</div>
+</div>
+<button class="w-full py-3.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-transform" id="save-customer-btn">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+        Save to Directory
+      </button>
+</div>
+</div>
+</div>
+<script>
+(function() {
+  // Elements
+  const searchInput = document.getElementById('directory-search-input');
+  const customerCards = document.querySelectorAll('.customer-card');
+  const noResults = document.getElementById('no-results');
+  const toast = document.getElementById('action-toast');
+  const toastMsg = document.getElementById('toast-message');
+  const customerCounter = document.getElementById('customer-counter');
+  
+  // AI Modal
+  const openAiBtn = document.getElementById('open-ai-search');
+  const aiModal = document.getElementById('ai-modal');
+  const aiModalContent = document.getElementById('ai-modal-content');
+  const closeAiBtn = document.getElementById('close-ai-modal');
+  const runAiBtn = document.getElementById('run-ai-search');
+  const aiInput = document.getElementById('ai-prompt-input');
+  const aiChips = document.querySelectorAll('.ai-chip');
+
+  // Sort Modal
+  const openSortBtn = document.getElementById('open-sort-btn');
+  const sortModal = document.getElementById('sort-modal');
+  const sortModalContent = document.getElementById('sort-modal-content');
+  const closeSortBtn = document.getElementById('close-sort-modal');
+  const sortOptions = document.querySelectorAll('.sort-option');
+  const currentSortLabel = document.getElementById('current-sort-label');
+
+  // Add Customer Modal
+  const addCustomerBtn = document.getElementById('add-customer-btn');
+  const addModal = document.getElementById('add-modal');
+  const addModalContent = document.getElementById('add-modal-content');
+  const closeAddBtn = document.getElementById('close-add-modal');
+  const saveCustomerBtn = document.getElementById('save-customer-btn');
+
+  function showToast(text) {
+    if (!toast) return;
+    toastMsg.textContent = text;
+    toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+    toast.classList.add('opacity-100', 'translate-y-0');
+    setTimeout(() => {
+      toast.classList.remove('opacity-100', 'translate-y-0');
+      toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+    }, 2400);
+  }
+
+  // Filter Cards
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const val = e.target.value.toLowerCase().trim();
+      let visibleCount = 0;
+      customerCards.forEach(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        const service = card.getAttribute('data-service').toLowerCase();
+        if (name.includes(val) || service.includes(val)) {
+          card.classList.remove('hidden');
+          card.classList.add('flex');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+          card.classList.remove('flex');
+        }
+      });
+      if (customerCounter) customerCounter.textContent = visibleCount;
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+        noResults.classList.add('flex');
+      } else {
+        noResults.classList.add('hidden');
+        noResults.classList.remove('flex');
+      }
+    });
+  }
+
+  // Customer Card click micro-interaction
+  customerCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const name = card.getAttribute('data-name');
+      showToast(`Loading portfolio for ${name}...`);
+    });
+  });
+
+  // Modal helpers
+  function openDrawer(modal, content) {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+      content.classList.remove('translate-y-full');
+      content.classList.add('translate-y-0');
+    }, 10);
+  }
+
+  function closeDrawer(modal, content) {
+    content.classList.remove('translate-y-0');
+    content.classList.add('translate-y-full');
+    setTimeout(() => {
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }, 280);
+  }
+
+  // AI Modal Listeners
+  if (openAiBtn && aiModal) {
+    openAiBtn.addEventListener('click', () => openDrawer(aiModal, aiModalContent));
+    closeAiBtn.addEventListener('click', () => closeDrawer(aiModal, aiModalContent));
+    aiModal.addEventListener('click', (e) => {
+      if (e.target === aiModal) closeDrawer(aiModal, aiModalContent);
+    });
+
+    aiChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        aiInput.value = chip.textContent.trim();
+        aiInput.focus();
+      });
+    });
+
+    runAiBtn.addEventListener('click', () => {
+      const query = aiInput.value.trim();
+      closeDrawer(aiModal, aiModalContent);
+      if (query) {
+        showToast(`AI matched: Emma Johnson & Sarah Williams`);
+        if (searchInput) {
+          searchInput.value = 'Emma';
+          searchInput.dispatchEvent(new Event('input'));
+        }
+      }
+    });
+  }
+
+  // Sort Modal Listeners
+  if (openSortBtn && sortModal) {
+    openSortBtn.addEventListener('click', () => openDrawer(sortModal, sortModalContent));
+    closeSortBtn.addEventListener('click', () => closeDrawer(sortModal, sortModalContent));
+    sortModal.addEventListener('click', (e) => {
+      if (e.target === sortModal) closeDrawer(sortModal, sortModalContent);
+    });
+
+    sortOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        sortOptions.forEach(o => o.querySelector('.check-icon').classList.replace('text-primary', 'text-transparent'));
+        opt.querySelector('.check-icon').classList.replace('text-transparent', 'text-primary');
+        const sortType = opt.getAttribute('data-sort');
+        currentSortLabel.textContent = sortType;
+        closeDrawer(sortModal, sortModalContent);
+        showToast(`Sorted directory by ${sortType}`);
+      });
+    });
+  }
+
+  // Add Customer Modal Listeners
+  if (addCustomerBtn && addModal) {
+    addCustomerBtn.addEventListener('click', () => openDrawer(addModal, addModalContent));
+    closeAddBtn.addEventListener('click', () => closeDrawer(addModal, addModalContent));
+    addModal.addEventListener('click', (e) => {
+      if (e.target === addModal) closeDrawer(addModal, addModalContent);
+    });
+
+    saveCustomerBtn.addEventListener('click', () => {
+      const name = document.getElementById('new-name').value;
+      if (name) {
+        closeDrawer(addModal, addModalContent);
+        showToast(`Added ${name} to directory`);
+        document.getElementById('new-name').value = '';
+        document.getElementById('new-phone').value = '';
+      } else {
+        showToast('Please enter customer full name');
+      }
+    });
+  }
+})();
+</script></main><nav id="owner-persistent-mobile-nav" class="fixed bottom-0 inset-x-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(23,76,60,0.06)]"><div class="flex justify-around items-center h-16 px-space-xs"><a  class="owner-mobile-nav-link flex flex-col items-center justify-center gap-0.5 min-w-[44px] min-h-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" data-owner-tab="dashboard" href="mobile-dashboard.html" ><span class="material-symbols-outlined text-[21px]">dashboard</span><span class="font-label-sm text-[10px] tracking-wider uppercase">Dashboard</span></a><a  class="owner-mobile-nav-link flex flex-col items-center justify-center gap-0.5 min-w-[44px] min-h-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" data-owner-tab="bookings" href="mobile-bookings.html" ><span class="material-symbols-outlined text-[21px]">calendar_today</span><span class="font-label-sm text-[10px] tracking-wider uppercase">Bookings</span></a><a aria-current="page" class="owner-mobile-nav-link flex flex-col items-center justify-center gap-0.5 min-w-[44px] min-h-[44px] flex-1 transition-colors text-primary-container font-label-md font-bold cursor-pointer" data-owner-tab="customers" href="mobile-customers.html" ><span class="material-symbols-outlined text-[21px]">group</span><span class="font-label-sm text-[10px] tracking-wider uppercase">Customers</span></a><a  class="owner-mobile-nav-link flex flex-col items-center justify-center gap-0.5 min-w-[44px] min-h-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" data-owner-tab="ai" href="mobile-ai.html" ><span class="material-symbols-outlined text-[21px]">auto_awesome</span><span class="font-label-sm text-[10px] tracking-wider uppercase">AI Assist</span></a><a  class="owner-mobile-nav-link flex flex-col items-center justify-center gap-0.5 min-w-[44px] min-h-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" data-owner-tab="settings" href="mobile-settings.html" ><span class="material-symbols-outlined text-[21px]">settings</span><span class="font-label-sm text-[10px] tracking-wider uppercase">Settings</span></a></div></nav>
+
+
+</body></html>

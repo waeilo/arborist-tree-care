@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Manrope:wght@200..800&amp;family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"primary-fixed-dim":"#9dd2bc","on-error-container":"#93000a","primary-fixed":"#b8eed8","error-container":"#ffdad6","on-secondary-fixed-variant":"#314d36","inverse-primary":"#9dd2bc","surface-container-high":"#e1ebe1","primary":"#003527","on-tertiary-container":"#d8a950","on-background":"#151e18","secondary-fixed":"#caebcc","surface-container-highest":"#dbe5dc","background":"#f2fcf2","secondary-fixed-dim":"#afcfb1","tertiary":"#3d2a00","tertiary-fixed":"#ffdea6","inverse-surface":"#29332c","on-primary-container":"#87bba7","inverse-on-surface":"#e9f3ea","on-tertiary-fixed":"#271900","tertiary-fixed-dim":"#f0bf64","on-surface":"#151e18","on-secondary":"#ffffff","primary-container":"#174c3c","on-primary-fixed":"#002117","surface-variant":"#dbe5dc","surface-tint":"#356856","surface":"#f2fcf2","on-tertiary":"#ffffff","surface-container-low":"#ecf6ed","surface-container-lowest":"#ffffff","on-primary":"#ffffff","surface-container":"#e6f1e7","outline-variant":"#c0c9c3","tertiary-container":"#593f00","surface-bright":"#f2fcf2","on-surface-variant":"#404945","on-error":"#ffffff","surface-dim":"#d3ddd3","error":"#ba1a1a","on-secondary-container":"#4e6b53","secondary-container":"#caebcc","secondary":"#48654d","on-primary-fixed-variant":"#1b4f3f","on-tertiary-fixed-variant":"#5e4200","outline":"#707974","on-secondary-fixed":"#05210e"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-md":"2.5rem","gutter":"1.5rem","space-lg":"1.5rem","space-xl":"2.5rem","margin":"1.25rem","margin-lg":"4rem","space-3xl":"6rem","space-sm":"0.5rem","gutter-lg":"2rem","space-md":"1rem","space-xs":"0.25rem","space-2xl":"4rem"},"fontFamily":{"headline-lg-mobile":["Noto Serif"],"label-lg":["Manrope"],"label-sm":["Manrope"],"label-md":["Manrope"],"display-lg":["Noto Serif"],"body-lg":["DM Sans"],"headline-sm":["Manrope"],"body-md":["DM Sans"],"headline-md":["Manrope"],"display-lg-mobile":["Noto Serif"],"headline-lg":["Noto Serif"],"body-sm":["DM Sans"]},"fontSize":{"headline-lg-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.04em","fontWeight":"700"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"400"}],"body-lg":["18px",{"lineHeight":"28px","letterSpacing":"0em","fontWeight":"400"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"0em","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.01em","fontWeight":"400"}],"headline-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.015em","fontWeight":"400"}],"body-sm":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"400"}]}}}}</script><style>
+  /* ==========================================================================
+     VISIBLE LUXURY SCROLLBAR + PROPORTIONAL TABLET/DESKTOP + ZERO-FLICKER SHELL
+     ========================================================================== */
+  html {
+    overflow-y: scroll !important;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #8da396 #f2fcf2;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-y: visible !important;
+    overscroll-behavior: auto !important;
+  }
+
+  /* Visible luxury custom scrollbar for desktop & mouse drag */
+  ::-webkit-scrollbar {
+    width: 9px !important;
+    height: 9px !important;
+    display: block !important;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f2fcf2 !important;
+    border-left: 1px solid #c0c9c3 !important;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #8da396 !important;
+    border-radius: 4px !important;
+    border: 2px solid #f2fcf2 !important;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #174c3c !important;
+  }
+
+  /* Zero-Flicker Content Switching Animation */
+  .owner-desktop-panel,
+  .owner-mobile-panel {
+    display: none;
+    width: 100%;
+  }
+
+  .owner-desktop-panel.active-owner-view,
+  .owner-mobile-panel.active-owner-view {
+    display: block !important;
+    animation: ownerContentFadeSlide 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes ownerContentFadeSlide {
+    0% {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Desktop Shell vs Mobile Shell Visibility */
+  #owner-desktop-shell {
+    display: block;
+  }
+  #owner-mobile-shell {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    #owner-desktop-shell {
+      display: none !important;
+    }
+    #owner-mobile-shell {
+      display: flex !important;
+      flex-direction: column;
+      min-height: 100dvh;
+      width: 100%;
+    }
+  }
+
+  /* Tablet Mode Proportional Scaling (768px to 1120px) */
+  @media (min-width: 768px) and (max-width: 1120px) {
+    #owner-persistent-aside,
+    #owner-desktop-shell aside,
+    body.standalone-desktop aside {
+      width: 196px !important;
+    }
+    #owner-desktop-content,
+    #owner-desktop-shell .pl-\[230px\],
+    body.standalone-desktop .pl-\[230px\],
+    body.standalone-desktop .pl-60 {
+      padding-left: 196px !important;
+    }
+    #owner-persistent-header,
+    #owner-desktop-shell header.left-\[230px\],
+    body.standalone-desktop header.left-[230px],
+    body.standalone-desktop header.left-60 {
+      left: 196px !important;
+      padding-left: 1.25rem !important;
+      padding-right: 1.25rem !important;
+    }
+    #owner-desktop-main,
+    #owner-desktop-shell main,
+    body.standalone-desktop main {
+      padding-left: 1.25rem !important;
+      padding-right: 1.25rem !important;
+    }
+    .min-w-\[620px\] {
+      min-width: 100% !important;
+      overflow-x: auto;
+    }
+  }
+</style></head><body class="standalone-desktop bg-background font-body-md text-on-surface"><aside id="owner-persistent-aside" class="fixed left-0 top-[76px] h-[calc(100vh-76px)] w-[230px] bg-surface-container-lowest border-r border-outline-variant z-40 flex flex-col justify-between select-none">
+    <div class="flex flex-col">
+      <div class="px-space-md pt-5 pb-2">
+        <span class="font-label-sm text-[10px] uppercase tracking-wider text-outline font-bold">Portal Navigation</span>
+      </div>
+      <nav id="owner-desktop-nav" class="flex flex-col gap-1 py-1 px-2.5">
+        <a class="owner-nav-link flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl border-l-4 border-transparent text-sm font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors cursor-pointer" data-owner-tab="dashboard" href="desktop-dashboard.html"><svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg><span>Dashboard</span></a>
+        <a class="owner-nav-link flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl border-l-4 border-transparent text-sm font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors cursor-pointer" data-owner-tab="bookings" href="desktop-bookings.html"><svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg><span>Bookings &amp; Calendar</span></a>
+        <a class="owner-nav-link flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl border-l-4 border-transparent text-sm font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors cursor-pointer" data-owner-tab="customers" href="desktop-customers.html"><svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg><span>Customers</span></a>
+        <a class="owner-nav-link flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl border-l-4 border-transparent text-sm font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors cursor-pointer" data-owner-tab="settings" href="desktop-settings.html"><svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span>Settings</span></a>
+        <a aria-current="page" class="owner-nav-link flex items-center gap-3 pl-3.5 pr-3 py-2.5 rounded-r-xl border-l-4 border-[#174c3c] text-sm font-semibold bg-[#174c3c]/10 text-[#174c3c] transition-colors cursor-pointer" data-owner-tab="ai" href="desktop-ai.html"><svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg><span>AI Management</span></a>
+      </nav>
+    </div>
+    <div class="p-space-md border-t border-outline-variant bg-surface-container-lowest">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-[#174c3c] text-[#F8F7F2] font-bold flex items-center justify-center text-xs shadow-sm shrink-0">
+          AM
+        </div>
+        <div class="flex flex-col min-w-0 flex-1">
+          <span class="font-label-md text-xs font-bold text-on-surface truncate">Alex Morgan</span>
+          <span class="font-label-sm text-[10px] text-outline uppercase tracking-wider truncate">Owner &amp; Arborist</span>
+        </div>
+      </div>
+      <div class="mt-2.5 pt-2 border-t border-outline-variant/40 flex items-center justify-between text-[10px] text-outline">
+        <div class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <span class="font-medium">System Active</span>
+        </div>
+        <span class="font-mono">v2.4.1</span>
+      </div>
+    </div>
+  </aside><div class="pl-60"><header id="owner-persistent-header" class="fixed top-0 left-0 right-0 h-[76px] bg-[#174c3c]/95 backdrop-blur-md border-b border-white/10 z-50 px-4 sm:px-6 lg:px-8 flex items-center justify-between select-none shadow-md text-white">
+  <div class="flex items-center gap-3">
+    <a href="../index.html" class="flex items-center gap-3 group cursor-pointer" title="Return to Public Site">
+      <img alt="ARBORIST Tree Surgeon Care and Removal Services Logo" class="h-10 sm:h-11 w-auto object-contain drop-shadow transition-transform group-hover:scale-105" src="../assets/logo.png">
+      <div class="flex flex-col justify-center">
+        <span class="font-headline-md text-base sm:text-xl md:text-2xl tracking-tight text-[#F8F7F2] font-extrabold leading-none uppercase">ARBORIST</span>
+        <span class="font-label-sm text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-[#8EAD91] font-bold mt-0.5 sm:mt-1">CARE &amp; REMOVAL</span>
+      </div>
+    </a>
+    <div class="hidden sm:block h-6 w-px bg-white/20 ml-1 sm:ml-2"></div>
+    <span class="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[#b8eed8] font-label-sm text-[11px] font-bold uppercase tracking-wider">
+      Owner Portal
+    </span>
+  </div>
+
+  <div class="hidden md:flex items-center px-4 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md shadow-inner text-white/90">
+    <span class="font-headline-sm text-sm font-bold text-white tracking-wide">AI Management</span>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <a href="desktop-ai.html" class="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-[#F8F7F2] font-label-sm text-xs sm:text-sm font-semibold flex items-center gap-1.5 shadow-sm transition-all hover:scale-105 cursor-pointer" title="Open AI Assistant">
+      <span class="text-[#f0bf64] text-xs">✦</span>
+      <span>Ask AI</span>
+    </a>
+    <div class="relative flex items-center justify-center">
+      <button class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-[#F8F7F2] transition-colors cursor-pointer" type="button" title="Notifications">
+        <svg class="w-[19px] h-[19px] text-[#F8F7F2] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      </button>
+      <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#f0bf64] ring-2 ring-[#174c3c]"></span>
+    </div>
+    <div class="h-6 w-px bg-white/20 mx-0.5"></div>
+    <a href="../index.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-[#F8F7F2] font-label-sm text-xs font-semibold transition-all shadow-sm cursor-pointer" title="View Public Website">
+      <svg class="w-4 h-4 text-[#8EAD91] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      <span>Public Site</span>
+    </a>
+  </div>
+</header><main class="w-full pt-16 bg-background px-gutter-lg py-space-lg" pb-28><div class="flex flex-col w-full">
+<!-- Top Meta Strip -->
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container-low text-primary-container">
+<span class="material-symbols-outlined text-[19px]">psychology</span>
+</span>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-primary tracking-tight">Autonomous Operational Agent</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time ISA workflow supervision, scheduling arbitration, and estate dispatch controls.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+        Model: ArbEngine v4.2
+      </span>
+<div class="h-4 w-px bg-surface-container-high"></div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Sync: Nominal</span>
+</div>
+</div>
+<!-- Primary Grid Layout (70 / 30) -->
+<div class="grid grid-cols-12 gap-gutter-lg items-start">
+<!-- LEFT COLUMN: AI CONVERSATION AREA (~70% = 8 cols) -->
+<section class="col-span-12 lg:col-span-8 flex flex-col gap-space-md">
+<!-- Workspace Container -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_2px_12px_rgba(23,76,60,0.04)] p-space-lg flex flex-col justify-between min-h-[760px]">
+<!-- Header -->
+<div>
+<div class="flex items-center justify-between pb-space-md bg-surface-container-lowest">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary-container shadow-xs">
+<span class="material-symbols-outlined text-[22px]">auto_awesome</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Arborist AI Assistant</h2>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container font-label-sm text-label-sm">ISA Certified Logic</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ready to arbitrate appointments, client dossiers, &amp; field protocols</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span>Reset Thread</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+</div>
+</div>
+<div class="h-px w-full bg-surface-container-high my-space-xs"></div>
+</div>
+<!-- Chat Stream Body -->
+<div class="flex flex-col gap-space-lg py-space-md overflow-y-auto pr-1">
+<!-- Historical Collapsed Item (Context & Depth) -->
+<div class="bg-surface-container-low/70 rounded-lg p-space-sm">
+<div class="flex items-center justify-between cursor-pointer" onclick="document.getElementById('prev-history-drawer').classList.toggle('hidden')">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">history</span>
+<span class="font-label-md text-label-md text-on-surface">Prior Exchange: Schedule Audit (Tomorrow, Oct 22)</span>
+<span class="font-body-sm text-body-sm text-outline">· 3 bookings resolved</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">expand_more</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex flex-col gap-1.5" id="prev-history-drawer">
+<div class="flex items-center justify-between bg-surface-container-lowest px-3 py-2 rounded">
+<div class="flex items-center gap-3">
+<span class="font-label-md text-label-md text-primary font-bold">09:00 AM</span>
+<span class="font-body-sm text-body-sm text-on-surface">Oak Hazard Assessment — Sarah Williams (Blackwood Estate)</span>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline">View Dossier</button>
+</div>
+<div class="flex items-center justify-between bg-surface-container-lowest px-3 py-2 rounded">
+<div class="flex items-center gap-3">
+<span class="font-label-md text-label-md text-primary font-bold">11:30 AM</span>
+<span class="font-body-sm text-body-sm text-on-surface">Canopy Thinning &amp; Crown Lift — James Carter (Fairview Run)</span>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline">View Dossier</button>
+</div>
+<div class="flex items-center justify-between bg-surface-container-lowest px-3 py-2 rounded">
+<div class="flex items-center gap-3">
+<span class="font-label-md text-label-md text-primary font-bold">02:00 PM</span>
+<span class="font-body-sm text-body-sm text-on-surface">Emergency Micro-Triage / Root Decay — Emma Johnson</span>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline">View Dossier</button>
+</div>
+</div>
+</div>
+<!-- Message 1: AI Assistant Welcome -->
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-xs">
+<span class="material-symbols-outlined text-[17px]">forest</span>
+</div>
+<div class="flex flex-col gap-space-xs max-w-xl">
+<div class="bg-surface-container-low rounded-xl rounded-tl-none p-space-md text-on-surface font-body-md text-body-md shadow-xs">
+                Greetings Alex. I have completed routine tree registry syncs with county arbor records. I can audit upcoming site diagnostics, pull specimen health history, or adjust booking availability. What is on your agenda?
+              </div>
+<!-- Quick action chips -->
+<div class="flex flex-wrap gap-1.5 pt-1">
+<button class="px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-primary-container font-label-md text-label-md transition-colors shadow-xs" type="button">
+                  Today's Assessments (4)
+                </button>
+<button class="px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-primary-container font-label-md text-label-md transition-colors shadow-xs" type="button">
+                  Pending Storm Requests
+                </button>
+<button class="px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-primary-container font-label-md text-label-md transition-colors shadow-xs" type="button">
+                  Locate Estate Record
+                </button>
+<button class="px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-primary-container font-label-md text-label-md transition-colors shadow-xs" type="button">
+                  Block Time Window
+                </button>
+</div>
+<span class="font-body-sm text-body-sm text-outline pl-1">10:40 AM · ArbEngine Autonomous Router</span>
+</div>
+</div>
+<!-- Message 2: Owner Prompt (Right Aligned) -->
+<div class="flex items-end justify-end gap-space-sm">
+<div class="flex flex-col items-end gap-1 max-w-md">
+<div class="bg-primary-container text-on-primary rounded-xl rounded-tr-none px-space-md py-3 font-body-md text-body-md shadow-sm">
+                Block Friday afternoon.
+              </div>
+<div class="flex items-center gap-1.5 pr-1 font-body-sm text-body-sm text-outline">
+<span>10:42 AM</span>
+<span>·</span>
+<span class="material-symbols-outlined text-[13px] text-secondary">done_all</span>
+<span>Delivered</span>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-xs">
+<span class="material-symbols-outlined text-[16px]">person</span>
+</div>
+</div>
+<!-- Message 3: AI Response & Proposed Action -->
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-xs">
+<span class="material-symbols-outlined text-[17px]">forest</span>
+</div>
+<div class="flex flex-col gap-space-sm max-w-xl">
+<div class="bg-surface-container-low rounded-xl rounded-tl-none p-space-md text-on-surface font-body-md text-body-md shadow-xs">
+                Understood. I have drafted an immediate calendar override for Friday, October 23, between 1:00 PM and 5:00 PM. No existing confirmed bookings conflict with this window.
+              </div>
+<!-- ACTION PROPOSAL CARD -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-md shadow-primary/5">
+<!-- Amber / Gold indicator ribbon -->
+<div class="w-full h-1 bg-on-tertiary-container rounded-t -mt-space-md -mx-space-md mb-space-md" style="width: calc(100% + 2rem);"></div>
+<div class="flex items-start justify-between gap-space-sm mb-space-xs">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[17px]">event_busy</span>
+</span>
+<span class="font-label-lg text-label-lg text-on-surface">Block Field Calendar Window</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed-dim/30 text-on-tertiary-fixed font-label-sm text-label-sm">
+                    Permission Requested
+                  </span>
+</div>
+<div class="bg-surface-container-low rounded p-3 mb-space-sm">
+<div class="flex items-center gap-2 font-headline-sm text-headline-sm text-primary">
+<span class="material-symbols-outlined text-[20px] text-primary-container">calendar_month</span>
+<span>Friday, October 23 · 1:00 PM – 5:00 PM</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                    System will flag 4 standard 60-minute dispatch slots as private arborist reserve. Online portal booking and partner broker inquiries will show time as strictly unavailable.
+                  </p>
+</div>
+<div class="grid grid-cols-2 gap-space-xs text-body-sm font-body-sm text-on-surface-variant mb-space-md bg-surface-container-lowest py-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span>Public Engine Override</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span>No Client Displacements</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span>Crew Auto-Routing Paused</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span>Logged to Audit Trail</span>
+</div>
+</div>
+<!-- Action Button Row -->
+<div class="flex items-center gap-space-sm pt-space-xs">
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Approve &amp; Block</span>
+</button>
+<button class="px-4 py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-colors" type="button">
+                    Modify Details
+                  </button>
+<button class="ml-auto px-3 py-2 text-on-surface-variant hover:text-error font-label-md text-label-md transition-colors" type="button">
+                    Reject Proposal
+                  </button>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-outline pl-1">10:43 AM · Awaiting Authorized Confirmation</span>
+</div>
+</div>
+</div>
+<!-- AI Chat Input Bar -->
+<div class="pt-space-md">
+<div class="bg-surface-container-low rounded-xl p-2 flex items-center gap-space-xs shadow-xs focus-within:bg-surface-container-lowest focus-within:shadow-[0_4px_16px_rgba(23,76,60,0.08)] transition-all">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title="Attach specimen image or diagnostic sheet" type="button">
+<span class="material-symbols-outlined text-[20px]">attach_file</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title="Insert ISA assessment template" type="button">
+<span class="material-symbols-outlined text-[20px]">dataset</span>
+</button>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none px-2" placeholder="Ask about your business, schedule, or customer records..." type="text" value=""/>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title="Voice command input" type="button">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</button>
+<button class="p-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary transition-all flex items-center justify-center shadow-xs" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+</button>
+</div>
+<div class="flex items-center justify-between px-2 pt-2">
+<span class="font-body-sm text-body-sm text-outline">Press <kbd class="px-1 py-0.5 rounded bg-surface-container text-on-surface-variant text-[11px]">Enter</kbd> to dispatch instructions</span>
+<span class="font-body-sm text-body-sm text-outline">Encrypted &amp; Governed by ArborOS Protocol</span>
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT COLUMN: RECENT AI ACTIONS & APPROVALS PANEL (~30% = 4 cols) -->
+<aside class="col-span-12 lg:col-span-4 flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_2px_12px_rgba(23,76,60,0.04)] p-space-lg flex flex-col min-h-[760px] justify-between">
+<div>
+<!-- Panel Header -->
+<div class="flex items-start justify-between pb-space-sm">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Recent AI Actions</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Your operations log and governance approvals.</p>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<!-- Segmented Filter Control -->
+<div class="mt-space-sm p-1 bg-surface-container rounded-lg flex items-center text-label-md font-label-md">
+<button class="flex-1 py-1 rounded bg-surface-container-lowest text-primary font-bold shadow-xs text-center transition-all" type="button">
+              All (4)
+            </button>
+<button class="flex-1 py-1 rounded text-on-surface-variant hover:text-on-surface text-center transition-all" type="button">
+              Pending (1)
+            </button>
+<button class="flex-1 py-1 rounded text-on-surface-variant hover:text-on-surface text-center transition-all" type="button">
+              Resolved (3)
+            </button>
+</div>
+<!-- Activity List -->
+<div class="mt-space-lg flex flex-col gap-space-sm">
+<!-- Item 1: Pending Approval -->
+<div class="p-space-sm rounded-lg bg-surface-container-low transition-all">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[17px]">event_busy</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">Block Friday Afternoon</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed-dim/40 text-on-tertiary-fixed font-label-sm text-label-sm shrink-0">
+                      Pending
+                    </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Oct 23, 1:00 PM – 5:00 PM</span>
+<div class="flex items-center justify-between mt-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline">Just now</span>
+<a class="inline-flex items-center gap-1 font-label-sm text-label-sm text-primary font-bold hover:underline" href="#">
+<span>Review in chat</span>
+<span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2: Completed Appointment Rescheduled -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest hover:bg-surface-container-low transition-all">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[17px]">event_repeat</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">Appointment Rescheduled</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/50 text-primary-container font-label-sm text-label-sm shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-[11px]">check</span>
+<span>Approved</span>
+</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Moved David Miller to Thu 2:00 PM</span>
+<div class="flex items-center justify-between mt-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline">Yesterday, 3:15 PM</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Signature: AM</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3: Customer Search Completed -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest hover:bg-surface-container-low transition-all">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[17px]">manage_search</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">Customer Query Run</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm shrink-0">
+                      Completed
+                    </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">"Clients with storm damaged heritage oaks" (8 records)</span>
+<div class="flex items-center justify-between mt-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline">Yesterday, 11:20 AM</span>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">Export List</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 4: Daily Inquiry Summary -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest hover:bg-surface-container-low transition-all">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[17px]">summarize</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">Daily Inquiry Digest</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm shrink-0">
+                      Completed
+                    </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Synthesized 6 incoming portal leads &amp; permit requests</span>
+<div class="flex items-center justify-between mt-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline">Oct 20, 5:30 PM</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Archived</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Safeguard & Human Governance Banner -->
+<div class="mt-space-lg pt-space-md">
+<div class="bg-surface-container-low rounded-xl p-space-sm flex items-start gap-space-sm shadow-xs">
+<span class="material-symbols-outlined text-primary-container text-[20px] mt-0.5">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">Owner Governance Active</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 leading-relaxed">
+                Autonomous system alterations to client agreements, price estimates, and crew assignments require explicit verification.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div></main></div></body></html>
