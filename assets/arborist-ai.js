@@ -315,15 +315,112 @@ CRITICAL ROLE BOUNDARIES:
       return `${monthStr} ${dayNum}, ${yearNum} · ${timeStr}`;
     }
 
+    isGenericTitle(title) {
+      if (!title || typeof title !== 'string') return true;
+      const lower = title.toLowerCase().trim();
+      const generics = [
+        'tree care consultation',
+        'new consultation',
+        'hello',
+        'hi',
+        'hey',
+        'good morning',
+        'good afternoon',
+        'hi there',
+        'general inquiry',
+        'inspection booking request'
+      ];
+      return generics.includes(lower) || lower.length < 5;
+    }
+
+    refineSessionTitle(session, userText, photoPreviewUrl, replyText, slotInfo) {
+      // Aggregate texts across user messages to identify true subject matter
+      const priorTexts = (session.messages || [])
+        .filter(m => m.role === 'user')
+        .map(m => m.text)
+        .join(' ');
+      const combined = (priorTexts + ' ' + (userText || '')).toLowerCase();
+
+      const hasPhoto = Boolean(photoPreviewUrl) || (session.messages || []).some(m => m.photoPreviewUrl);
+
+      // 1. High-priority clinical & hazard patterns
+      if (combined.includes('oak') && (combined.includes('fung') || combined.includes('bark') || combined.includes('flare') || combined.includes('white') || combined.includes('mushroom'))) {
+        return "Oak Tree Fungal Infection Diagnosis";
+      }
+      if (combined.includes('oak') && (combined.includes('storm') || combined.includes('lean') || combined.includes('crack') || combined.includes('split') || combined.includes('garage') || combined.includes('limb'))) {
+        return "Storm-Damaged Oak Limb Triage";
+      }
+      if (combined.includes('pine') && (combined.includes('lean') || combined.includes('needle') || combined.includes('dead') || combined.includes('beetle'))) {
+        return "Pine Tree Decline & Hazard Assessment";
+      }
+      if (combined.includes('birch') && (combined.includes('dead') || combined.includes('rot') || combined.includes('borer'))) {
+        return "Birch Health & Decay Evaluation";
+      }
+      if (combined.includes('maple') && (combined.includes('cable') || combined.includes('prun') || combined.includes('split') || combined.includes('tar'))) {
+        return "Maple Canopy Care & Cabling";
+      }
+      if (combined.includes('wire') || combined.includes('power line') || combined.includes('utility') || combined.includes('cable line')) {
+        return "High-Voltage Utility Line Clearance";
+      }
+      if (combined.includes('garage') || combined.includes('roof') || combined.includes('gutter') || combined.includes('house')) {
+        return "Structural Roof & Building Clearance";
+      }
+      if (combined.includes('storm') || combined.includes('gale') || combined.includes('wind') || combined.includes('tornado')) {
+        return "Emergency Storm Damage Inspection";
+      }
+      if (combined.includes('fung') || combined.includes('conk') || combined.includes('bracket') || combined.includes('mushroom') || combined.includes('rot')) {
+        return "Fungal Root Flare & Decay Diagnosis";
+      }
+      if (combined.includes('lean') || combined.includes('tilt') || combined.includes('angle') || combined.includes('heaving')) {
+        return "Unstable Leaning Tree Triage";
+      }
+      if (combined.includes('hollow') || combined.includes('cavity') || combined.includes('hole')) {
+        return "Hollow Trunk Structural Integrity Scan";
+      }
+      if (combined.includes('dead branch') || combined.includes('deadwood') || combined.includes('dead limb') || combined.includes('snag')) {
+        return "Deadwood Canopy Sanitation";
+      }
+      if (combined.includes('stump') || combined.includes('grind')) {
+        return "Stump Grinding & Root Extraction";
+      }
+      if (combined.includes('prun') || combined.includes('trim') || combined.includes('crown') || combined.includes('thin') || combined.includes('lopping')) {
+        return "Formative Crown Pruning & Thinning";
+      }
+      if (combined.includes('remov') || combined.includes('fell') || combined.includes('take down')) {
+        return "Controlled Precision Tree Removal";
+      }
+      if (combined.includes('tpo') || combined.includes('permit') || combined.includes('council') || combined.includes('conservation')) {
+        return "Municipal Tree Preservation (TPO) Permit";
+      }
+
+      // 2. Scheduled slot detected
+      if (slotInfo && (slotInfo.label || slotInfo.rawSlot)) {
+        return `Arborist Inspection · ${slotInfo.label || slotInfo.rawSlot}`;
+      }
+
+      // 3. Photo consultation
+      if (hasPhoto) {
+        return "Canopy Photo Diagnostic Review";
+      }
+
+      // 4. Fallback to basic keywords if title is generic
+      if (this.isGenericTitle(session.title) && userText) {
+        return this.generateTitle(userText);
+      }
+
+      return session.title || "Tree Care Consultation";
+    }
+
     recordTurn(userText, photoPreviewUrl, replyText, cleanText, slotInfo) {
       const session = this.getActiveSession();
       const now = Date.now();
 
-      if ((!session.messages || session.messages.length === 0) && userText) {
-        session.title = this.generateTitle(userText);
-      }
-
       if (!session.messages) session.messages = [];
+
+      const initialTitle = (!session.title || this.isGenericTitle(session.title)) 
+        ? (this.generateTitle(userText || '') || "Tree Care Consultation")
+        : session.title;
+      session.title = initialTitle;
 
       if (userText || photoPreviewUrl) {
         session.messages.push({
@@ -352,6 +449,13 @@ CRITICAL ROLE BOUNDARIES:
           session.slotLabel = slot.label || slot.rawSlot;
         }
         session.snippet = clean.slice(0, 150) + (clean.length > 150 ? '...' : '');
+      }
+
+      // Refine session title as conversation develops (up to message 8 or if still generic)
+      const msgCount = (session.messages || []).length;
+      if (msgCount <= 8 || this.isGenericTitle(session.title)) {
+        const detectedSlot = slotInfo !== undefined ? slotInfo : (replyText ? this.detectSlotProposal(replyText) : null);
+        session.title = this.refineSessionTitle(session, userText, photoPreviewUrl, replyText, detectedSlot);
       }
 
       session.updatedAt = now + 1;
